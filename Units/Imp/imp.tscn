@@ -35,7 +35,7 @@ animations = [{
 "texture": ExtResource("6_ynbhj")
 }],
 "loop": 0,
-"name": &"die",
+"name": &"death",
 "speed": 8.0
 }, {
 "frames": [{
@@ -43,7 +43,7 @@ animations = [{
 "texture": ExtResource("7_pn80v")
 }],
 "loop": 0,
-"name": &"hurt",
+"name": &"pain",
 "speed": 6.0
 }, {
 "frames": [{
@@ -59,16 +59,10 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_qekat")
 }],
-"loop": 1,
+"loop": 2,
 "name": &"walk",
 "speed": 8.0
 }]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bweo"]
-albedo_color = Color(0.9044261, 0.97879964, 0.4355593, 1)
-
-[sub_resource type="PrismMesh" id="PrismMesh_mi230"]
-size = Vector3(0.25, 0.6, 0.25)
 
 [node name="Imp" type="CharacterBody3D" unique_id=720720936]
 script = ExtResource("1_1a77f")
@@ -78,21 +72,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_mi230")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1157267504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9958652, 0)
 pixel_size = 0.032
 billboard = 2
 shaded = true
 alpha_cut = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_muglv")
-animation = &"walk"
+animation = &"pain"
 autoplay = "walk"
 
 [node name="SightRayCast" type="RayCast3D" parent="." unique_id=749873919]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98139644, 0)
 target_position = Vector3(0, 0, -15)
-
-[node name="FacingIndicator" type="MeshInstance3D" parent="." unique_id=1899742247]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.53283, -0.43357295)
-material_override = SubResource("StandardMaterial3D_7bweo")
-cast_shadow = 0
-mesh = SubResource("PrismMesh_mi230")

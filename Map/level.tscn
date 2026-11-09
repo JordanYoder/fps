@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b8k0law6povir" path="res://Player/player.tscn" id="6_gx3xr"]
 [ext_resource type="Material" uid="uid://dyxkjrvcg0nyw" path="res://Assets/Materials/CRATE_1N.tres" id="7_yx7kw"]
 [ext_resource type="PackedScene" uid="uid://c4nnaocj3w11g" path="res://Units/ShotgunGuy/shotgun_guy.tscn" id="8_yx7kw"]
+[ext_resource type="PackedScene" uid="uid://0onaj45fiy6h" path="res://Units/Imp/imp.tscn" id="9_xamrb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gx3xr"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -8208,3 +8209,6 @@ collision_mode = 1
 
 [node name="ShotgunGuy" parent="." unique_id=1767135162 instance=ExtResource("8_yx7kw")]
 transform = Transform3D(-0.105783224, 0, 0.99438924, 0, 1, 0, -0.99438924, 0, -0.105783224, 34.485218, 1.3753794, -4.1777)
+
+[node name="Imp" parent="." unique_id=720720936 instance=ExtResource("9_xamrb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.359688, 0.5, -0.024330199)
