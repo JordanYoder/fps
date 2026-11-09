@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://d4ptm6q0talj"]
+
+[ext_resource type="Script" uid="uid://so521phpo1rq" path="res://Weapons/weapon_data.gd" id="1_m4ky1"]
+[ext_resource type="PackedScene" uid="uid://74kkocilsyik" path="res://Weapons/Guns3D/shotgun3d.tscn" id="2_4xd0j"]
+
+[resource]
+script = ExtResource("1_m4ky1")
+weapon_name = "Shotgun3d"
+weapon_mesh_scene = ExtResource("2_4xd0j")
+model_position = Vector3(0, -0.5, -0.45)
+model_rotation_degrees = Vector3(180, 180, 180)
+model_scale = Vector3(0.75, 0.72, 0.5)
+metadata/_custom_type_script = "uid://so521phpo1rq"

@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dej2rkft5vg1d"]
+
+[ext_resource type="Texture2D" uid="uid://b52sbrmb2bdfx" path="res://Assets/Weapons/Chaingun/CHGGA0.png" id="1_13hsk"]
+[ext_resource type="Texture2D" uid="uid://c62lkmesybk1x" path="res://Assets/Weapons/Chaingun/CHGGB0.png" id="2_aence"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_13hsk")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_13hsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aence")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 9.0
+}]

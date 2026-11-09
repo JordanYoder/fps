@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://cka3e70w4u8qm"]
+
+[ext_resource type="Script" uid="uid://so521phpo1rq" path="res://Weapons/weapon_data.gd" id="1_0we7s"]
+[ext_resource type="SpriteFrames" uid="uid://bdei0oqo5pdpm" path="res://Weapons/Guns2D/Chaingun/chaingun_flash_frames.tres" id="1_lsyw1"]
+[ext_resource type="SpriteFrames" uid="uid://dej2rkft5vg1d" path="res://Weapons/Guns2D/Chaingun/chaingun_frames.tres" id="3_5lx7c"]
+
+[resource]
+script = ExtResource("1_0we7s")
+weapon_name = "Chaingun"
+damage_per_pellet = 12
+pellet_count = 1
+spread_degrees = 3.0
+automatic = true
+weapon_frames = ExtResource("3_5lx7c")
+muzzle_flash_frames = ExtResource("1_lsyw1")
+sprite_offsets = {
+"CHGGA0": Vector2(103, 160),
+"CHGGB0": Vector2(103, 160)
+}
+flash_offsets = Array[Vector2]([Vector2(121, 145), Vector2(119, 130)])
+metadata/_custom_type_script = "uid://so521phpo1rq"

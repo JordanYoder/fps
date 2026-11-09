@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://d36rsv8c57ac"]
+
+[ext_resource type="Texture2D" uid="uid://bfem7ejiarkdc" path="res://Assets/Weapons/Pistol/PISFA0.png" id="1_gxibc"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gxibc")
+}],
+"loop": 0,
+"name": &"flash",
+"speed": 8.0
+}]

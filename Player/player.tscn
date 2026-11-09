@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://b8k0law6povir"]
+
+[ext_resource type="Script" uid="uid://cvi8668klp7xm" path="res://Player/player.gd" id="1_3qydi"]
+[ext_resource type="Script" uid="uid://d0qlkgikd8lcq" path="res://Weapons/weapon_manager.gd" id="2_gwnis"]
+[ext_resource type="Script" uid="uid://so521phpo1rq" path="res://Weapons/weapon_data.gd" id="3_fhl08"]
+[ext_resource type="Resource" uid="uid://deeb318e1w1em" path="res://Weapons/Guns2D/Pistol/pistol.tres" id="4_vtle1"]
+[ext_resource type="Resource" uid="uid://jjigml3oywcm" path="res://Weapons/Guns2D/Shotgun/shotgun.tres" id="5_vtle1"]
+[ext_resource type="Resource" uid="uid://cka3e70w4u8qm" path="res://Weapons/Guns2D/Chaingun/chaingun.tres" id="6_od3ui"]
+[ext_resource type="Resource" uid="uid://d4ptm6q0talj" path="res://Weapons/Guns3D/shotgun3d.tres" id="7_vtle1"]
+[ext_resource type="PackedScene" uid="uid://cn6ea7vbhptc" path="res://Weapons/bullet_decal.tscn" id="8_od3ui"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
+radius = 0.4
+height = 1.8
+
+[node name="Player" type="CharacterBody3D" unique_id=1156047605 groups=["player"]]
+script = ExtResource("1_3qydi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1551787127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_mi230")
+
+[node name="Head" type="Node3D" parent="." unique_id=1216509101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=240908581]
+fov = 90.0
+
+[node name="WeaponHolder3D" type="Node3D" parent="Head/Camera3D" unique_id=1795764594]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head" unique_id=1378319624]
+target_position = Vector3(0, 0, -50)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=773479134]
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD" unique_id=1966661791]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="ColorRect" parent="HUD/CenterContainer" unique_id=523775708 groups=["player"]]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.26666668, 1, 0.26666668, 1)
+
+[node name="WeaponManager" type="Control" parent="HUD" unique_id=1336217630]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_gwnis")
+weapons = Array[ExtResource("3_fhl08")]([ExtResource("4_vtle1"), ExtResource("5_vtle1"), ExtResource("6_od3ui"), ExtResource("7_vtle1")])
+wall_decal_scene = ExtResource("8_od3ui")
+
+[node name="WeaponSprite" type="AnimatedSprite2D" parent="HUD/WeaponManager" unique_id=432965689]
+animation = &""
+centered = false
+
+[node name="MuzzleFlash" type="AnimatedSprite2D" parent="HUD/WeaponManager" unique_id=765480942]
+animation = &""
+centered = false

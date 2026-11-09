@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://deeb318e1w1em"]
+
+[ext_resource type="Script" uid="uid://so521phpo1rq" path="res://Weapons/weapon_data.gd" id="1_script"]
+[ext_resource type="SpriteFrames" uid="uid://e7rg3a1vn2va" path="res://Weapons/Guns2D/Pistol/pistol_frames.tres" id="2_wframes"]
+[ext_resource type="SpriteFrames" uid="uid://d36rsv8c57ac" path="res://Weapons/Guns2D/Pistol/pistol_flash_frames.tres" id="3_fframes"]
+
+[resource]
+script = ExtResource("1_script")
+weapon_name = "Pistol"
+damage_per_pellet = 15
+pellet_count = 1
+spread_degrees = 1.5
+weapon_frames = ExtResource("2_wframes")
+muzzle_flash_frames = ExtResource("3_fframes")
+sprite_offsets = {
+"PISGA0": Vector2(124, 150),
+"PISGB0": Vector2(124, 130),
+"PISGC0": Vector2(125, 138),
+"PISGE0": Vector2(126, 135)
+}
+flash_offsets = Array[Vector2]([Vector2(155, 114)])
+metadata/_custom_type_script = "uid://so521phpo1rq"

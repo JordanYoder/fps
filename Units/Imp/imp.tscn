@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://0onaj45fiy6h"]
+
+[ext_resource type="Script" uid="uid://jb7im51hiee2" path="res://Units/Imp/imp.gd" id="1_1a77f"]
+[ext_resource type="Texture2D" uid="uid://bd802i8hn4ui6" path="res://Assets/Sprites/Imp/TROOA1.png" id="1_agnr0"]
+[ext_resource type="Texture2D" uid="uid://dshqn65i3hldg" path="res://Assets/Sprites/Imp/TROOB1.png" id="2_82lbk"]
+[ext_resource type="Texture2D" uid="uid://i30u184q1a3d" path="res://Assets/Sprites/Imp/TROOI0.png" id="2_wabq2"]
+[ext_resource type="Texture2D" uid="uid://b5v376yvfrxvc" path="res://Assets/Sprites/Imp/TROOJ0.png" id="3_il0io"]
+[ext_resource type="Texture2D" uid="uid://bt4e464dsebdj" path="res://Assets/Sprites/Imp/TROOC1.png" id="3_p7fwp"]
+[ext_resource type="Texture2D" uid="uid://ciqe3heyq6iqd" path="res://Assets/Sprites/Imp/TROOK0.png" id="4_a5jgd"]
+[ext_resource type="Texture2D" uid="uid://cystfuslvay3y" path="res://Assets/Sprites/Imp/TROOD1.png" id="4_qekat"]
+[ext_resource type="Texture2D" uid="uid://t8t2ar0o8rmq" path="res://Assets/Sprites/Imp/TROOL0.png" id="5_e3eqn"]
+[ext_resource type="Texture2D" uid="uid://bxmbejg2vv8sd" path="res://Assets/Sprites/Imp/TROOM0.png" id="6_ynbhj"]
+[ext_resource type="Texture2D" uid="uid://dumr1rfx82lo4" path="res://Assets/Sprites/Imp/TROOH1.png" id="7_pn80v"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_muglv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wabq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_il0io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a5jgd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e3eqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ynbhj")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pn80v")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_agnr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_82lbk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p7fwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qekat")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bweo"]
+albedo_color = Color(0.9044261, 0.97879964, 0.4355593, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_mi230"]
+size = Vector3(0.25, 0.6, 0.25)
+
+[node name="Imp" type="CharacterBody3D" unique_id=720720936]
+script = ExtResource("1_1a77f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=968512841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_mi230")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1157267504]
+pixel_size = 0.032
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_muglv")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="SightRayCast" type="RayCast3D" parent="." unique_id=749873919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -15)
+
+[node name="FacingIndicator" type="MeshInstance3D" parent="." unique_id=1899742247]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.53283, -0.43357295)
+material_override = SubResource("StandardMaterial3D_7bweo")
+cast_shadow = 0
+mesh = SubResource("PrismMesh_mi230")

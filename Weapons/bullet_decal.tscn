@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cn6ea7vbhptc"]
+
+[ext_resource type="Script" uid="uid://54qxcpfw01je" path="res://Weapons/bullet_decal.gd" id="1_otvv7"]
+
+[sub_resource type="Gradient" id="Gradient_otvv7"]
+offsets = PackedFloat32Array(0.13181019, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.12447148, 0.12447148, 0.12447148, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_otvv7"]
+gradient = SubResource("Gradient_otvv7")
+fill = 1
+fill_from = Vector2(0.508547, 0.46581197)
+fill_to = Vector2(1, 0.1)
+
+[node name="BulletDecal" type="Decal" unique_id=704466176]
+size = Vector3(0.24, 0.24, 0.24)
+texture_albedo = SubResource("GradientTexture2D_otvv7")
+script = ExtResource("1_otvv7")

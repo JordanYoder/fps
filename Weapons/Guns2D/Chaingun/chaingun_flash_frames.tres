@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bdei0oqo5pdpm"]
+
+[ext_resource type="Texture2D" uid="uid://bxhn0w3a0tlrs" path="res://Assets/Weapons/Chaingun/CHGFA0.png" id="1_nbs1m"]
+[ext_resource type="Texture2D" uid="uid://cir6i7qx4ojyh" path="res://Assets/Weapons/Chaingun/CHGFB0.png" id="2_r66au"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nbs1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r66au")
+}],
+"loop": 0,
+"name": &"flash",
+"speed": 9.0
+}]

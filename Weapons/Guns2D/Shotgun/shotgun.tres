@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://jjigml3oywcm"]
+
+[ext_resource type="SpriteFrames" uid="uid://ckg77qoybdsul" path="res://Weapons/Guns2D/Shotgun/shotgun_flash_frames.tres" id="1_c1iyo"]
+[ext_resource type="Script" uid="uid://so521phpo1rq" path="res://Weapons/weapon_data.gd" id="1_qcwwl"]
+[ext_resource type="SpriteFrames" uid="uid://5mhetrk6y4a6" path="res://Weapons/Guns2D/Shotgun/shotgun_frames.tres" id="3_wcjxv"]
+
+[resource]
+script = ExtResource("1_qcwwl")
+weapon_frames = ExtResource("3_wcjxv")
+muzzle_flash_frames = ExtResource("1_c1iyo")
+metadata/_custom_type_script = "uid://so521phpo1rq"

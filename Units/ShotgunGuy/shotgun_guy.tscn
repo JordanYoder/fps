@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://c4nnaocj3w11g"]
+
+[ext_resource type="Script" uid="uid://cmaepp8la271" path="res://Units/ShotgunGuy/shotgun_guy.gd" id="1_fd6g1"]
+[ext_resource type="Texture2D" uid="uid://bdr51j80by4dx" path="res://Assets/Sprites/ShotgunGuy/SPOSE1.png" id="2_gge4y"]
+[ext_resource type="Texture2D" uid="uid://btp3i8gmi8wvk" path="res://Assets/Sprites/ShotgunGuy/SPOSF1.png" id="3_iyv70"]
+[ext_resource type="Texture2D" uid="uid://wlhd20yomc4q" path="res://Assets/Sprites/ShotgunGuy/SPOSH0.png" id="4_ocsai"]
+[ext_resource type="Texture2D" uid="uid://1rk61r1i6khc" path="res://Assets/Sprites/ShotgunGuy/SPOSI0.png" id="5_3p6e5"]
+[ext_resource type="Texture2D" uid="uid://dcvj4gabxk06m" path="res://Assets/Sprites/ShotgunGuy/SPOSJ0.png" id="6_kg748"]
+[ext_resource type="Texture2D" uid="uid://rilf2riey6bn" path="res://Assets/Sprites/ShotgunGuy/SPOSK0.png" id="7_a1ixp"]
+[ext_resource type="Texture2D" uid="uid://cwafb5i8121a3" path="res://Assets/Sprites/ShotgunGuy/SPOSL0.png" id="8_5u6xn"]
+[ext_resource type="Texture2D" uid="uid://d37636dgbevfd" path="res://Assets/Sprites/ShotgunGuy/SPOSA1.png" id="9_deip3"]
+[ext_resource type="Texture2D" uid="uid://dehfpdiqmawtb" path="res://Assets/Sprites/ShotgunGuy/SPOSG1.png" id="10_lm7kv"]
+[ext_resource type="Texture2D" uid="uid://6f5ngs6lxn4w" path="res://Assets/Sprites/ShotgunGuy/SPOSB1.png" id="11_jig40"]
+[ext_resource type="Texture2D" uid="uid://b7mvlbgugcuw5" path="res://Assets/Sprites/ShotgunGuy/SPOSC1.png" id="12_4rulf"]
+[ext_resource type="Texture2D" uid="uid://bx02od6e3oak7" path="res://Assets/Sprites/ShotgunGuy/SPOSD1.png" id="13_28t1u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mi230"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gge4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iyv70")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ocsai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3p6e5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kg748")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_a1ixp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5u6xn")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_deip3")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_lm7kv")
+}],
+"loop": 0,
+"name": &"pain",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_jig40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4rulf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_28t1u")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="ShotgunGuy" type="CharacterBody3D" unique_id=1767135162]
+script = ExtResource("1_fd6g1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1285187756]
+shape = SubResource("CapsuleShape3D_mi230")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=644720666]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.22494656, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_mi230")
+animation = &"pain"
+autoplay = "idle"
+
+[node name="AttackRay" type="RayCast3D" parent="." unique_id=962951447]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 0, 0, 0)
