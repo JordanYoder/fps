@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt4e464dsebdj"
-path.s3tc="res://.godot/imported/TROOC1.png-53f97cc3b4ba90c6d6bcc9f0822e6198.s3tc.ctex"
+uid="uid://bd802i8hn4ui6"
+path.s3tc="res://.godot/imported/TROOA1.png-9e46ba2780ba42930fde0c2d0ce112d7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Sprites/Imp/TROOC1.png"
-dest_files=["res://.godot/imported/TROOC1.png-53f97cc3b4ba90c6d6bcc9f0822e6198.s3tc.ctex"]
+source_file="res://Assets/Sprites/Imp/Anim_Walk/Front/TROOA1.png"
+dest_files=["res://.godot/imported/TROOA1.png-9e46ba2780ba42930fde0c2d0ce112d7.s3tc.ctex"]
 
 [params]
 

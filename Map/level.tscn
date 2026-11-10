@@ -8138,42 +8138,42 @@ mesh_data = SubResource("Resource_fm31d")
 collision_mode = 2
 
 [node name="UBPipe" type="MeshInstance3D" parent="Architecture" unique_id=1274836378]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.5, 2.9590602)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.5, 5.95906)
 mesh = SubResource("ArrayMesh_jpkhj")
 script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_ekuna")
 collision_mode = 2
 
 [node name="UBPipe2" type="MeshInstance3D" parent="Architecture" unique_id=390985774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.5, -2.5409398)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.5, -6.54094)
 mesh = SubResource("ArrayMesh_5qv4k")
 script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_4454n")
 collision_mode = 2
 
 [node name="UBPipe3" type="MeshInstance3D" parent="Architecture" unique_id=16551393]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.5, -2.5409398)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.5, -6.54094)
 mesh = SubResource("ArrayMesh_eqv2r")
 script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_nhvys")
 collision_mode = 2
 
 [node name="UBPipe4" type="MeshInstance3D" parent="Architecture" unique_id=362037427]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.5, 2.4590602)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.5, 5.95906)
 mesh = SubResource("ArrayMesh_lcjnc")
 script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_72bjq")
 collision_mode = 2
 
 [node name="UBPipe5" type="MeshInstance3D" parent="Architecture" unique_id=1616315509]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0.5, 2.4590602)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0.5, 5.95906)
 mesh = SubResource("ArrayMesh_qt0cx")
 script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_ej4es")
 collision_mode = 2
 
 [node name="UBPipe6" type="MeshInstance3D" parent="Architecture" unique_id=614145664]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0.5, -2.5409398)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0.5, -5.54094)
 mesh = SubResource("ArrayMesh_1yrva")
 script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_o2mfk")

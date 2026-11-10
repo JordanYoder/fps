@@ -1,16 +1,32 @@
 [gd_scene format=3 uid="uid://0onaj45fiy6h"]
 
 [ext_resource type="Script" uid="uid://jb7im51hiee2" path="res://Units/Imp/imp.gd" id="1_1a77f"]
-[ext_resource type="Texture2D" uid="uid://bd802i8hn4ui6" path="res://Assets/Sprites/Imp/TROOA1.png" id="1_agnr0"]
-[ext_resource type="Texture2D" uid="uid://dshqn65i3hldg" path="res://Assets/Sprites/Imp/TROOB1.png" id="2_82lbk"]
+[ext_resource type="Texture2D" uid="uid://bd802i8hn4ui6" path="res://Assets/Sprites/Imp/Anim_Walk/Front/TROOA1.png" id="1_agnr0"]
+[ext_resource type="Texture2D" uid="uid://dshqn65i3hldg" path="res://Assets/Sprites/Imp/Anim_Walk/Front/TROOB1.png" id="2_82lbk"]
 [ext_resource type="Texture2D" uid="uid://i30u184q1a3d" path="res://Assets/Sprites/Imp/TROOI0.png" id="2_wabq2"]
 [ext_resource type="Texture2D" uid="uid://b5v376yvfrxvc" path="res://Assets/Sprites/Imp/TROOJ0.png" id="3_il0io"]
-[ext_resource type="Texture2D" uid="uid://bt4e464dsebdj" path="res://Assets/Sprites/Imp/TROOC1.png" id="3_p7fwp"]
+[ext_resource type="Texture2D" uid="uid://bt4e464dsebdj" path="res://Assets/Sprites/Imp/Anim_Walk/Front/TROOC1.png" id="3_p7fwp"]
 [ext_resource type="Texture2D" uid="uid://ciqe3heyq6iqd" path="res://Assets/Sprites/Imp/TROOK0.png" id="4_a5jgd"]
-[ext_resource type="Texture2D" uid="uid://cystfuslvay3y" path="res://Assets/Sprites/Imp/TROOD1.png" id="4_qekat"]
+[ext_resource type="Texture2D" uid="uid://cystfuslvay3y" path="res://Assets/Sprites/Imp/Anim_Walk/Front/TROOD1.png" id="4_qekat"]
 [ext_resource type="Texture2D" uid="uid://t8t2ar0o8rmq" path="res://Assets/Sprites/Imp/TROOL0.png" id="5_e3eqn"]
 [ext_resource type="Texture2D" uid="uid://bxmbejg2vv8sd" path="res://Assets/Sprites/Imp/TROOM0.png" id="6_ynbhj"]
-[ext_resource type="Texture2D" uid="uid://dumr1rfx82lo4" path="res://Assets/Sprites/Imp/TROOH1.png" id="7_pn80v"]
+[ext_resource type="Texture2D" uid="uid://dumr1rfx82lo4" path="res://Assets/Sprites/Imp/Pain/TROOH1.png" id="7_pn80v"]
+[ext_resource type="Texture2D" uid="uid://b6wk7pyouyqyv" path="res://Assets/Sprites/Imp/Anim_Walk/FrontLeft/TROOA2A8.png" id="12_aryba"]
+[ext_resource type="Texture2D" uid="uid://4djront6no8v" path="res://Assets/Sprites/Imp/Anim_Walk/FrontLeft/TROOB2B8.png" id="13_kqbxg"]
+[ext_resource type="Texture2D" uid="uid://djdpi88f8pbbk" path="res://Assets/Sprites/Imp/Anim_Walk/FrontLeft/TROOC2C8.png" id="14_sxd2h"]
+[ext_resource type="Texture2D" uid="uid://3jtehk5dft4e" path="res://Assets/Sprites/Imp/Anim_Walk/FrontLeft/TROOD2D8.png" id="15_8d8j8"]
+[ext_resource type="Texture2D" uid="uid://yfim6x1ylp5j" path="res://Assets/Sprites/Imp/Anim_Walk/Left/TROOA3A7.png" id="16_uqk3q"]
+[ext_resource type="Texture2D" uid="uid://c5rkmsawfrqc5" path="res://Assets/Sprites/Imp/Anim_Walk/Left/TROOB3B7.png" id="17_n8obo"]
+[ext_resource type="Texture2D" uid="uid://bhpove250p1xy" path="res://Assets/Sprites/Imp/Anim_Walk/Left/TROOC3C7.png" id="18_5esns"]
+[ext_resource type="Texture2D" uid="uid://ccdlvlf7e1vko" path="res://Assets/Sprites/Imp/Anim_Walk/Left/TROOD3D7.png" id="19_117ax"]
+[ext_resource type="Texture2D" uid="uid://c8n7mc44a3bwc" path="res://Assets/Sprites/Imp/Anim_Walk/BackLeft/TROOA4A6.png" id="20_im7di"]
+[ext_resource type="Texture2D" uid="uid://crsp1rib3mu1o" path="res://Assets/Sprites/Imp/Anim_Walk/BackLeft/TROOB4B6.png" id="21_tmn8t"]
+[ext_resource type="Texture2D" uid="uid://cbhixu0eqw356" path="res://Assets/Sprites/Imp/Anim_Walk/BackLeft/TROOC4C6.png" id="22_i62c8"]
+[ext_resource type="Texture2D" uid="uid://citqdwxxjcgi3" path="res://Assets/Sprites/Imp/Anim_Walk/BackLeft/TROOD4D6.png" id="23_2t2s3"]
+[ext_resource type="Texture2D" uid="uid://ccdydr8cwrqan" path="res://Assets/Sprites/Imp/Anim_Walk/Back/TROOA5.png" id="24_im7di"]
+[ext_resource type="Texture2D" uid="uid://bo65i7ujuhaol" path="res://Assets/Sprites/Imp/Anim_Walk/Back/TROOB5.png" id="25_tmn8t"]
+[ext_resource type="Texture2D" uid="uid://cyrf6uucln628" path="res://Assets/Sprites/Imp/Anim_Walk/Back/TROOC5.png" id="26_i62c8"]
+[ext_resource type="Texture2D" uid="uid://m25wmj0vrod6" path="res://Assets/Sprites/Imp/Anim_Walk/Back/TROOD5.png" id="27_2t2s3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
 radius = 0.4
@@ -60,7 +76,75 @@ animations = [{
 "texture": ExtResource("4_qekat")
 }],
 "loop": 2,
-"name": &"walk",
+"name": &"walk_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_aryba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_kqbxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_sxd2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8d8j8")
+}],
+"loop": 0,
+"name": &"walk_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_uqk3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_n8obo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_5esns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_117ax")
+}],
+"loop": 0,
+"name": &"walk_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_im7di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_tmn8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_i62c8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_2t2s3")
+}],
+"loop": 0,
+"name": &"walk_4",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_im7di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_tmn8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_i62c8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_2t2s3")
+}],
+"loop": 0,
+"name": &"walk_5",
 "speed": 8.0
 }]
 
@@ -71,7 +155,7 @@ script = ExtResource("1_1a77f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_mi230")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1157267504]
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=1157267504]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9958652, 0)
 pixel_size = 0.032
 billboard = 2
@@ -79,8 +163,7 @@ shaded = true
 alpha_cut = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_muglv")
-animation = &"pain"
-autoplay = "walk"
+animation = &"death"
 
 [node name="SightRayCast" type="RayCast3D" parent="." unique_id=749873919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98139644, 0)
