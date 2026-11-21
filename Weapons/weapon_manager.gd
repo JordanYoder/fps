@@ -13,11 +13,6 @@ var current_index: int = 0
 var can_shoot: bool = true
 var bob_time: float = 0.0
 var raycast: RayCast3D
-var weapon_holder_3d: Node3D
-var current_3d_instance: Node3D = null
-var current_3d_anim: AnimationPlayer = null
-var recoil_offset: Vector3 = Vector3.ZERO
-var recoil_pitch: float = 0.0
 
 func _ready() -> void:
 	weapon_sprite.frame_changed.connect(_align_weapon_sprite)
@@ -26,9 +21,8 @@ func _ready() -> void:
 	muzzle_flash.frame_changed.connect(_align_muzzle_flash)
 	muzzle_flash.animation_finished.connect(_on_muzzle_flash_finished)
 
-func setup(player_raycast: RayCast3D, holder_3d: Node3D = null) -> void:
+func setup(player_raycast: RayCast3D) -> void:
 	raycast = player_raycast
-	weapon_holder_3d = holder_3d
 	if not weapons.is_empty():
 		equip_weapon(0)
 
@@ -47,30 +41,12 @@ func equip_weapon(index: int) -> void:
 	can_shoot = true
 	muzzle_flash.visible = false
 
-	# Clean up previous 3D model
-	if is_instance_valid(current_3d_instance):
-		current_3d_instance.queue_free()
-		current_3d_instance = null
-		current_3d_anim = null
-
-	# Branch: 3D Weapon vs 2D Sprite Weapon
-	if current_weapon.weapon_mesh_scene and weapon_holder_3d:
-		weapon_sprite.visible = false
-		current_3d_instance = current_weapon.weapon_mesh_scene.instantiate() as Node3D
-		weapon_holder_3d.add_child(current_3d_instance)
-		current_3d_instance.position = current_weapon.model_position
-		current_3d_instance.rotation_degrees = current_weapon.model_rotation_degrees
-		current_3d_instance.scale = current_weapon.model_scale
-		current_3d_anim = current_3d_instance.find_child("AnimationPlayer", true, false) as AnimationPlayer
-		if current_3d_anim and current_3d_anim.has_animation("idle"):
-			current_3d_anim.play("idle")
-	else:
-		weapon_sprite.visible = true
-		weapon_sprite.sprite_frames = current_weapon.weapon_frames
-		if current_weapon.muzzle_flash_frames:
-			muzzle_flash.sprite_frames = current_weapon.muzzle_flash_frames
-		weapon_sprite.play("idle")
-		_align_weapon_sprite()
+	weapon_sprite.visible = true
+	weapon_sprite.sprite_frames = current_weapon.weapon_frames
+	if current_weapon.muzzle_flash_frames:
+		muzzle_flash.sprite_frames = current_weapon.muzzle_flash_frames
+	weapon_sprite.play("idle")
+	_align_weapon_sprite()
 
 func try_fire() -> void:
 	if not can_shoot or not current_weapon or not raycast:
@@ -78,28 +54,11 @@ func try_fire() -> void:
 
 	can_shoot = false
 
-	if is_instance_valid(current_3d_instance):
-		# Trigger procedural kickback
-		recoil_offset = current_weapon.recoil_kickback
-		recoil_pitch = current_weapon.recoil_rot_degrees
-
-		# Use AnimationPlayer if present, otherwise use cooldown timer
-		if current_3d_anim and current_3d_anim.has_animation("shoot"):
-			current_3d_anim.stop()
-			current_3d_anim.play("shoot")
-			get_tree().create_timer(current_3d_anim.current_animation_length).timeout.connect(
-				func(): can_shoot = true
-			)
-		else:
-			get_tree().create_timer(current_weapon.fire_rate_cooldown).timeout.connect(
-				func(): can_shoot = true
-			)
-	else:
-		weapon_sprite.play("shoot")
-		if current_weapon.muzzle_flash_frames:
-			muzzle_flash.visible = true
-			muzzle_flash.play("flash")
-			_align_muzzle_flash()
+	weapon_sprite.play("shoot")
+	if current_weapon.muzzle_flash_frames:
+		muzzle_flash.visible = true
+		muzzle_flash.play("flash")
+		_align_muzzle_flash()
 
 	# Hitscan Raycast Loop
 	for i in range(current_weapon.pellet_count):
@@ -126,27 +85,6 @@ func update_bob(delta: float, horiz_speed: float, on_floor: bool) -> void:
 		bob_time += delta * 9.0
 	else:
 		bob_time = 0.0
-
-	# Update 3D Viewmodel Bob & Recoil Recovery
-	if is_instance_valid(current_3d_instance) and current_weapon:
-		recoil_offset = recoil_offset.lerp(Vector3.ZERO, delta * 14.0)
-		recoil_pitch = lerpf(recoil_pitch, 0.0, delta * 14.0)
-
-		var bob_3d := Vector3(
-			cos(bob_time) * 0.015,
-			absf(sin(bob_time)) * -0.015,
-			0.0
-		) if bob_time > 0.0 else Vector3.ZERO
-
-		var target_pos := current_weapon.model_position + bob_3d + recoil_offset
-		current_3d_instance.position = current_3d_instance.position.lerp(target_pos, delta * 16.0)
-
-		var target_rot := current_weapon.model_rotation_degrees + Vector3(recoil_pitch, 0.0, 0.0)
-		current_3d_instance.rotation_degrees = current_3d_instance.rotation_degrees.lerp(target_rot, delta * 16.0)
-		
-		# Enforce scale AFTER rotation_degrees so the Basis keeps the exact scale
-		current_3d_instance.scale = current_weapon.model_scale
-		return
 
 	# Update 2D HUD Sprite Bob
 	var vp_size := get_viewport().get_visible_rect().size

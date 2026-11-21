@@ -18,11 +18,10 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var raycast: RayCast3D = $Head/RayCast3D
 @onready var weapon_manager: Control = $HUD/WeaponManager
-@onready var weapon_holder_3d: Node3D = get_node_or_null("Head/Camera3D/WeaponHolder3D")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	weapon_manager.setup(raycast, weapon_holder_3d)
+	weapon_manager.setup(raycast)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
