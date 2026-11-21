@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djccdj35w08hs"
-path.s3tc="res://.godot/imported/frame_E.png-467313c77dbefbc6b331a2fdc0dd5245.s3tc.ctex"
+path="res://.godot/imported/frame_E.png-467313c77dbefbc6b331a2fdc0dd5245.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/sprites/imp/attack/attack_back_right/frame_E.png"
-dest_files=["res://.godot/imported/frame_E.png-467313c77dbefbc6b331a2fdc0dd5245.s3tc.ctex"]
+dest_files=["res://.godot/imported/frame_E.png-467313c77dbefbc6b331a2fdc0dd5245.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

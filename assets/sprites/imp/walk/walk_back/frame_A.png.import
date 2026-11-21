@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dk6qg1d4fx4sf"
-path.s3tc="res://.godot/imported/frame_A.png-0dd01e5a166b562e1f47be8f3337ab3e.s3tc.ctex"
+path="res://.godot/imported/frame_A.png-0dd01e5a166b562e1f47be8f3337ab3e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/sprites/imp/walk/walk_back/frame_A.png"
-dest_files=["res://.godot/imported/frame_A.png-0dd01e5a166b562e1f47be8f3337ab3e.s3tc.ctex"]
+dest_files=["res://.godot/imported/frame_A.png-0dd01e5a166b562e1f47be8f3337ab3e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

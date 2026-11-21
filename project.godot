@@ -24,7 +24,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/unibuilder/plugin.cfg")
+enabled=PackedStringArray("res://addons/sprite_import_settings/plugin.cfg", "res://addons/unibuilder/plugin.cfg")
 
 [input]
 
