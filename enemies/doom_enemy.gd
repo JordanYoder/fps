@@ -28,6 +28,17 @@ var attack_check_timer: float = 0.0
 var reaction_cooldown: float = 0.0
 var state_token: int = 0
 
+# Direction the monster's body faces (horizontal). Drives which of the 8 sprite views is shown.
+var facing_dir: Vector3 = Vector3.FORWARD
+# Base animation name without direction suffix, e.g. "walk".
+var current_base_anim: String = ""
+
+# Sprite view suffixes, indexed by 45-degree sector of the camera's position relative to the
+# monster's facing: 0 = camera in front, positive = camera toward the monster's left side.
+const VIEW_SUFFIXES: Array[String] = [
+	"front", "front_left", "left", "back_left", "back", "back_right", "right", "front_right"
+]
+
 @onready var anim_sprite: AnimatedSprite3D = get_node_or_null("Sprite3D") as AnimatedSprite3D
 @onready var collision_shape: CollisionShape3D = get_node_or_null("CollisionShape3D") as CollisionShape3D
 
@@ -46,10 +57,16 @@ const DIRS_8: Array[Vector3] = [
 
 func _ready() -> void:
 	health = max_health
+	# Fall back to searching by type so the node names don't matter
 	if not anim_sprite:
-		anim_sprite = find_child("*", true, false) as AnimatedSprite3D
+		anim_sprite = _find_child_of_type("AnimatedSprite3D") as AnimatedSprite3D
 	if not collision_shape:
-		collision_shape = find_child("*", true, false) as CollisionShape3D
+		collision_shape = _find_child_of_type("CollisionShape3D") as CollisionShape3D
+
+	var initial_forward := -global_transform.basis.z
+	initial_forward.y = 0.0
+	if initial_forward.length_squared() > 0.001:
+		facing_dir = initial_forward.normalized()
 
 	target = get_tree().get_first_node_in_group("player")
 	if not target:
@@ -61,9 +78,60 @@ func _ready() -> void:
 		anim_sprite.offset = Vector2.ZERO
 		anim_sprite.frame_changed.connect(_align_sprite_to_floor)
 		anim_sprite.animation_changed.connect(_align_sprite_to_floor)
-		if anim_sprite.sprite_frames and anim_sprite.sprite_frames.has_animation("idle"):
-			anim_sprite.play("idle")
+		_play_anim("idle")
 		_align_sprite_to_floor()
+
+func _find_child_of_type(type_name: String) -> Node:
+	var found := find_children("*", type_name, true, false)
+	return found[0] if not found.is_empty() else null
+
+func _process(_delta: float) -> void:
+	_update_directional_anim()
+
+# Plays a base animation ("walk", "attack", ...). If the SpriteFrames has 8-direction versions
+# (e.g. "walk_front", "walk_left"), the right one is picked each frame from the camera angle;
+# otherwise the plain base animation is used.
+func _play_anim(base: String) -> void:
+	current_base_anim = base
+	_update_directional_anim(true)
+
+func _get_view_suffix() -> String:
+	var camera := get_viewport().get_camera_3d()
+	if not camera:
+		return "front"
+	var to_cam := camera.global_position - global_position
+	to_cam.y = 0.0
+	if to_cam.length_squared() < 0.0001:
+		return "front"
+	var left := Vector3.UP.cross(facing_dir)
+	var angle := atan2(to_cam.dot(left), to_cam.dot(facing_dir))
+	var sector := posmod(roundi(angle / (PI / 4.0)), 8)
+	return VIEW_SUFFIXES[sector]
+
+func _update_directional_anim(restart: bool = false) -> void:
+	if not anim_sprite or not anim_sprite.sprite_frames or current_base_anim.is_empty():
+		return
+	var frames := anim_sprite.sprite_frames
+	var anim_name := current_base_anim + "_" + _get_view_suffix()
+	if not frames.has_animation(anim_name):
+		anim_name = current_base_anim
+		if not frames.has_animation(anim_name):
+			return
+
+	if restart:
+		anim_sprite.play(anim_name)
+		return
+	if anim_sprite.animation == anim_name:
+		return
+
+	# Camera moved to a different view: swap sprites without restarting the cycle
+	var was_playing := anim_sprite.is_playing()
+	var frame := anim_sprite.frame
+	var progress := anim_sprite.frame_progress
+	anim_sprite.play(anim_name)
+	anim_sprite.set_frame_and_progress(mini(frame, frames.get_frame_count(anim_name) - 1), progress)
+	if not was_playing:
+		anim_sprite.pause()
 
 func _align_sprite_to_floor() -> void:
 	if not anim_sprite or not anim_sprite.sprite_frames:
@@ -125,15 +193,14 @@ func _wake_up() -> void:
 	if state == State.IDLE:
 		state = State.CHASE
 		_pick_new_chase_dir()
-		if anim_sprite:
-			anim_sprite.play("walk")
+		_play_anim("walk")
 
 func _process_chase(delta: float) -> void:
 	if not is_instance_valid(target):
 		return
 
-	if anim_sprite and anim_sprite.animation != "walk":
-		anim_sprite.play("walk")
+	if current_base_anim != "walk":
+		_play_anim("walk")
 
 	var dist := global_position.distance_to(target.global_position)
 
@@ -182,6 +249,16 @@ func _pick_new_chase_dir() -> void:
 
 	move_dir = valid_dirs.pick_random() if not valid_dirs.is_empty() else to_target
 	move_timer = randf_range(0.45, 1.1)
+	# Like Doom, the monster's body turns to face the way it walks
+	facing_dir = move_dir.normalized()
+
+func _face_target() -> void:
+	if not is_instance_valid(target):
+		return
+	var to_target := target.global_position - global_position
+	to_target.y = 0.0
+	if to_target.length_squared() > 0.0001:
+		facing_dir = to_target.normalized()
 
 func _is_dir_blocked(dir: Vector3) -> bool:
 	var space_state := get_world_3d().direct_space_state
@@ -213,8 +290,9 @@ func _start_attack(is_melee: bool) -> void:
 	state_token += 1
 	var my_token := state_token
 
+	_face_target()
+	_play_anim("attack")
 	if anim_sprite:
-		anim_sprite.play("attack")
 		anim_sprite.frame = 0
 		anim_sprite.pause()
 
@@ -222,7 +300,7 @@ func _start_attack(is_melee: bool) -> void:
 	if state_token != my_token or state == State.DEAD:
 		return
 
-	if anim_sprite and anim_sprite.sprite_frames.get_frame_count("attack") > 1:
+	if anim_sprite and anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation) > 1:
 		anim_sprite.frame = 1
 
 	# Calls the child monster's custom attack implementation
@@ -238,8 +316,7 @@ func _start_attack(is_melee: bool) -> void:
 	reaction_cooldown = post_attack_cooldown
 	state = State.CHASE
 	_pick_new_chase_dir()
-	if anim_sprite:
-		anim_sprite.play("walk")
+	_play_anim("walk")
 
 # Virtual methods to be overridden by ShotgunGuy, Imp, etc.
 func _perform_melee_attack() -> void:
@@ -270,8 +347,7 @@ func take_damage(amount: int, attacker: Node3D = null) -> void:
 		state = State.PAIN
 		state_token += 1
 		var my_token := state_token
-		if anim_sprite:
-			anim_sprite.play("pain")
+		_play_anim("pain")
 
 		await get_tree().create_timer(0.25).timeout
 		if state_token != my_token or state == State.DEAD:
@@ -280,13 +356,13 @@ func take_damage(amount: int, attacker: Node3D = null) -> void:
 		reaction_cooldown = 0.0
 		state = State.CHASE
 		_pick_new_chase_dir()
+
 func _die() -> void:
 	state = State.DEAD
 	state_token += 1
 	velocity = Vector3.ZERO
-	if anim_sprite:
-		anim_sprite.play("death")
-		_align_sprite_to_floor()
+	_play_anim("death")
+	_align_sprite_to_floor()
 	if collision_shape:
 		collision_shape.set_deferred("disabled", true)
 	get_tree().create_timer(30.0).timeout.connect(queue_free)

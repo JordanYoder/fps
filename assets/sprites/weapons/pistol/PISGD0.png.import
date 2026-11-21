@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdghcx0we1e5h"
-path="res://.godot/imported/PISGD0.png-04c7dccabd820761712175cd7bc92305.ctex"
+path="res://.godot/imported/PISGD0.png-06fbac056f8c950687f9714263d4c796.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/weapons/pistol/PISGD0.png"
-dest_files=["res://.godot/imported/PISGD0.png-04c7dccabd820761712175cd7bc92305.ctex"]
+dest_files=["res://.godot/imported/PISGD0.png-06fbac056f8c950687f9714263d4c796.ctex"]
 
 [params]
 

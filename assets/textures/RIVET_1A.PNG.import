@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://l0chhaw2bvot"
-path="res://.godot/imported/RIVET_1A.PNG-63eaaaff347ed7fb25b3c460b959a2eb.ctex"
+path="res://.godot/imported/RIVET_1A.PNG-360ec2f965058e7d0c281b46224f4f6c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/textures/RIVET_1A.PNG"
-dest_files=["res://.godot/imported/RIVET_1A.PNG-63eaaaff347ed7fb25b3c460b959a2eb.ctex"]
+dest_files=["res://.godot/imported/RIVET_1A.PNG-360ec2f965058e7d0c281b46224f4f6c.ctex"]
 
 [params]
 

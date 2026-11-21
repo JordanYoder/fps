@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bfem7ejiarkdc"
-path="res://.godot/imported/PISFA0.png-d184403e329e940b51c9be6c8500ed9a.ctex"
+path="res://.godot/imported/PISFA0.png-794d1f8add3cc76d897b86ff76cf3810.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/weapons/pistol/PISFA0.png"
-dest_files=["res://.godot/imported/PISFA0.png-d184403e329e940b51c9be6c8500ed9a.ctex"]
+dest_files=["res://.godot/imported/PISFA0.png-794d1f8add3cc76d897b86ff76cf3810.ctex"]
 
 [params]
 

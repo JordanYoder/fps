@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://tee8re5m5u10"
-path.s3tc="res://.godot/imported/BROWN96.png-a5c854b00d78e605cced41b36a3743c9.s3tc.ctex"
+path.s3tc="res://.godot/imported/BROWN96.png-5274635b90cd47e9a30b6c1f1de4cdf3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,7 +12,7 @@ metadata={
 [deps]
 
 source_file="res://assets/textures/BROWN96.png"
-dest_files=["res://.godot/imported/BROWN96.png-a5c854b00d78e605cced41b36a3743c9.s3tc.ctex"]
+dest_files=["res://.godot/imported/BROWN96.png-5274635b90cd47e9a30b6c1f1de4cdf3.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ds3eadpxlptm"
-path="res://.godot/imported/DOORTRIM_1A.PNG-aec317b5518c1440b71a09c64bbce87d.ctex"
+path="res://.godot/imported/DOORTRIM_1A.PNG-68ae35db778bddac11b5b48e4a7be249.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/textures/DOORTRIM_1A.PNG"
-dest_files=["res://.godot/imported/DOORTRIM_1A.PNG-aec317b5518c1440b71a09c64bbce87d.ctex"]
+dest_files=["res://.godot/imported/DOORTRIM_1A.PNG-68ae35db778bddac11b5b48e4a7be249.ctex"]
 
 [params]
 

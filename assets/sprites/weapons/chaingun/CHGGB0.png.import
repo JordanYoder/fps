@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c62lkmesybk1x"
-path="res://.godot/imported/CHGGB0.png-e436a18fe8301e511635110a94304238.ctex"
+path="res://.godot/imported/CHGGB0.png-cf347b025a63221d21d153fb88fba929.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/weapons/chaingun/CHGGB0.png"
-dest_files=["res://.godot/imported/CHGGB0.png-e436a18fe8301e511635110a94304238.ctex"]
+dest_files=["res://.godot/imported/CHGGB0.png-cf347b025a63221d21d153fb88fba929.ctex"]
 
 [params]
 

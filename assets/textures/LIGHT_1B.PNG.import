@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dm3go4epat32o"
-path="res://.godot/imported/LIGHT_1B.PNG-e13a1ca60c1ee15db9a20f9286f7fcf6.ctex"
+path="res://.godot/imported/LIGHT_1B.PNG-42ba88eb18f838d6d82059c938aced90.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/textures/LIGHT_1B.PNG"
-dest_files=["res://.godot/imported/LIGHT_1B.PNG-e13a1ca60c1ee15db9a20f9286f7fcf6.ctex"]
+dest_files=["res://.godot/imported/LIGHT_1B.PNG-42ba88eb18f838d6d82059c938aced90.ctex"]
 
 [params]
 

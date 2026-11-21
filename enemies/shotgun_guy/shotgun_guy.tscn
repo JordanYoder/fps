@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://c4nnaocj3w11g"]
 
 [ext_resource type="Script" uid="uid://cmaepp8la271" path="res://enemies/shotgun_guy/shotgun_guy.gd" id="1_fd6g1"]
-[ext_resource type="Texture2D" uid="uid://bdr51j80by4dx" path="res://assets/sprites/shotgun_guy/SPOSE1.png" id="2_gge4y"]
-[ext_resource type="Texture2D" uid="uid://btp3i8gmi8wvk" path="res://assets/sprites/shotgun_guy/SPOSF1.png" id="3_iyv70"]
-[ext_resource type="Texture2D" uid="uid://wlhd20yomc4q" path="res://assets/sprites/shotgun_guy/SPOSH0.png" id="4_ocsai"]
-[ext_resource type="Texture2D" uid="uid://1rk61r1i6khc" path="res://assets/sprites/shotgun_guy/SPOSI0.png" id="5_3p6e5"]
-[ext_resource type="Texture2D" uid="uid://dcvj4gabxk06m" path="res://assets/sprites/shotgun_guy/SPOSJ0.png" id="6_kg748"]
-[ext_resource type="Texture2D" uid="uid://rilf2riey6bn" path="res://assets/sprites/shotgun_guy/SPOSK0.png" id="7_a1ixp"]
-[ext_resource type="Texture2D" uid="uid://cwafb5i8121a3" path="res://assets/sprites/shotgun_guy/SPOSL0.png" id="8_5u6xn"]
-[ext_resource type="Texture2D" uid="uid://d37636dgbevfd" path="res://assets/sprites/shotgun_guy/SPOSA1.png" id="9_deip3"]
-[ext_resource type="Texture2D" uid="uid://dehfpdiqmawtb" path="res://assets/sprites/shotgun_guy/SPOSG1.png" id="10_lm7kv"]
-[ext_resource type="Texture2D" uid="uid://6f5ngs6lxn4w" path="res://assets/sprites/shotgun_guy/SPOSB1.png" id="11_jig40"]
-[ext_resource type="Texture2D" uid="uid://b7mvlbgugcuw5" path="res://assets/sprites/shotgun_guy/SPOSC1.png" id="12_4rulf"]
-[ext_resource type="Texture2D" uid="uid://bx02od6e3oak7" path="res://assets/sprites/shotgun_guy/SPOSD1.png" id="13_28t1u"]
+[ext_resource type="Texture2D" uid="uid://csobd8a7brgvj" path="res://assets/sprites/shotgun_guy/attack_front/frame_E.png" id="2_kprcj"]
+[ext_resource type="Texture2D" uid="uid://ddtvsb27vnvoe" path="res://assets/sprites/shotgun_guy/attack_front/frame_F.png" id="3_xoqu6"]
+[ext_resource type="Texture2D" uid="uid://b6qsps38q17g" path="res://assets/sprites/shotgun_guy/death/frame_H.png" id="4_y14bv"]
+[ext_resource type="Texture2D" uid="uid://cpwkclv40g83y" path="res://assets/sprites/shotgun_guy/death/frame_I.png" id="5_wkik0"]
+[ext_resource type="Texture2D" uid="uid://dotjjfr5t5ccd" path="res://assets/sprites/shotgun_guy/death/frame_J.png" id="6_ldkcw"]
+[ext_resource type="Texture2D" uid="uid://duh8xkmc6d405" path="res://assets/sprites/shotgun_guy/death/frame_K.png" id="7_nr0qx"]
+[ext_resource type="Texture2D" uid="uid://bkwidn72a17c0" path="res://assets/sprites/shotgun_guy/death/frame_L.png" id="8_w52mg"]
+[ext_resource type="Texture2D" uid="uid://c1yg8nvbxv133" path="res://assets/sprites/shotgun_guy/walk_front/frame_A.png" id="9_3y3be"]
+[ext_resource type="Texture2D" uid="uid://dfevofjo6te2g" path="res://assets/sprites/shotgun_guy/pain_front/frame_G.png" id="10_opwwj"]
+[ext_resource type="Texture2D" uid="uid://cjluwx2jmdqly" path="res://assets/sprites/shotgun_guy/walk_front/frame_B.png" id="11_4i4ow"]
+[ext_resource type="Texture2D" uid="uid://b6up5i58obstf" path="res://assets/sprites/shotgun_guy/walk_front/frame_C.png" id="12_mwpjx"]
+[ext_resource type="Texture2D" uid="uid://cupn65d0amca0" path="res://assets/sprites/shotgun_guy/walk_front/frame_D.png" id="13_pa4w1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
 radius = 0.4
@@ -22,10 +22,10 @@ height = 1.8
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_gge4y")
+"texture": ExtResource("2_kprcj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_iyv70")
+"texture": ExtResource("3_xoqu6")
 }],
 "loop": 0,
 "name": &"attack",
@@ -33,19 +33,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_ocsai")
+"texture": ExtResource("4_y14bv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_3p6e5")
+"texture": ExtResource("5_wkik0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_kg748")
+"texture": ExtResource("6_ldkcw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_a1ixp")
+"texture": ExtResource("7_nr0qx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_5u6xn")
+"texture": ExtResource("8_w52mg")
 }],
 "loop": 0,
 "name": &"death",
@@ -53,7 +53,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_deip3")
+"texture": ExtResource("9_3y3be")
 }],
 "loop": 1,
 "name": &"idle",
@@ -61,7 +61,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_lm7kv")
+"texture": ExtResource("10_opwwj")
 }],
 "loop": 0,
 "name": &"pain",
@@ -69,13 +69,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_jig40")
+"texture": ExtResource("9_3y3be")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_4rulf")
+"texture": ExtResource("11_4i4ow")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_28t1u")
+"texture": ExtResource("12_mwpjx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_pa4w1")
 }],
 "loop": 1,
 "name": &"walk",
@@ -93,7 +96,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.22494656, 0)
 billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_mi230")
-animation = &"death"
+animation = &"walk"
 autoplay = "idle"
 
 [node name="AttackRay" type="RayCast3D" parent="." unique_id=962951447]

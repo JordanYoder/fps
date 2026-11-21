@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgca57u3n56oc"
-path="res://.godot/imported/SHTGD0.png-2040cd10e01d32e0b417b5cb493bcb00.ctex"
+path="res://.godot/imported/SHTGD0.png-3943c7cb9d85b25639c7d31dc26ab480.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/weapons/shotgun/SHTGD0.png"
-dest_files=["res://.godot/imported/SHTGD0.png-2040cd10e01d32e0b417b5cb493bcb00.ctex"]
+dest_files=["res://.godot/imported/SHTGD0.png-3943c7cb9d85b25639c7d31dc26ab480.ctex"]
 
 [params]
 
