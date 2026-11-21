@@ -91,9 +91,9 @@ func _process(_delta: float) -> void:
 # Plays a base animation ("walk", "attack", ...). If the SpriteFrames has 8-direction versions
 # (e.g. "walk_front", "walk_left"), the right one is picked each frame from the camera angle;
 # otherwise the plain base animation is used.
-func _play_anim(base: String) -> void:
+func _play_anim(base: String) -> bool:
 	current_base_anim = base
-	_update_directional_anim(true)
+	return _update_directional_anim(true)
 
 func _get_view_suffix() -> String:
 	var camera := get_viewport().get_camera_3d()
@@ -108,21 +108,22 @@ func _get_view_suffix() -> String:
 	var sector := posmod(roundi(angle / (PI / 4.0)), 8)
 	return VIEW_SUFFIXES[sector]
 
-func _update_directional_anim(restart: bool = false) -> void:
+# Returns false if the monster has no animation for current_base_anim.
+func _update_directional_anim(restart: bool = false) -> bool:
 	if not anim_sprite or not anim_sprite.sprite_frames or current_base_anim.is_empty():
-		return
+		return false
 	var frames := anim_sprite.sprite_frames
 	var anim_name := current_base_anim + "_" + _get_view_suffix()
 	if not frames.has_animation(anim_name):
 		anim_name = current_base_anim
 		if not frames.has_animation(anim_name):
-			return
+			return false
 
 	if restart:
 		anim_sprite.play(anim_name)
-		return
+		return true
 	if anim_sprite.animation == anim_name:
-		return
+		return true
 
 	# Camera moved to a different view: swap sprites without restarting the cycle
 	var was_playing := anim_sprite.is_playing()
@@ -132,6 +133,7 @@ func _update_directional_anim(restart: bool = false) -> void:
 	anim_sprite.set_frame_and_progress(mini(frame, frames.get_frame_count(anim_name) - 1), progress)
 	if not was_playing:
 		anim_sprite.pause()
+	return true
 
 func _align_sprite_to_floor() -> void:
 	if not anim_sprite or not anim_sprite.sprite_frames:
@@ -291,17 +293,26 @@ func _start_attack(is_melee: bool) -> void:
 	var my_token := state_token
 
 	_face_target()
-	_play_anim("attack")
-	if anim_sprite:
-		anim_sprite.frame = 0
+	# Attack frames are stepped manually: wind-up frames share windup_time, and the
+	# last frame is the one where the attack actually fires (e.g. 3 frames = 2 wind-up + fire).
+	var fire_frame := 0
+	if _play_anim("attack"):
 		anim_sprite.pause()
+		anim_sprite.frame = 0
+		fire_frame = maxi(anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation) - 1, 0)
+	elif anim_sprite:
+		anim_sprite.pause() # No attack animation: hold the current frame
 
-	await get_tree().create_timer(windup_time).timeout
-	if state_token != my_token or state == State.DEAD:
-		return
-
-	if anim_sprite and anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation) > 1:
-		anim_sprite.frame = 1
+	var step_time := windup_time / maxi(fire_frame, 1)
+	for i in range(1, fire_frame + 1):
+		await get_tree().create_timer(step_time).timeout
+		if state_token != my_token or state == State.DEAD:
+			return
+		anim_sprite.frame = i
+	if fire_frame == 0:
+		await get_tree().create_timer(windup_time).timeout
+		if state_token != my_token or state == State.DEAD:
+			return
 
 	# Calls the child monster's custom attack implementation
 	if is_melee:

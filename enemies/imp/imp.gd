@@ -9,6 +9,9 @@ func _ready() -> void:
 	pain_chance = 0.78 # Doom Imp = 200/256 (~78%)
 	has_melee = true
 	has_ranged = true
+	# Attack: frames E and F wind up (~0.23s each), frame G throws/claws and holds briefly
+	windup_time = 0.46
+	fire_frame_time = 0.17
 	super._ready()
 
 func _perform_melee_attack() -> void:
