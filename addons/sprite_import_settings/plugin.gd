@@ -1,8 +1,11 @@
 @tool
 extends EditorPlugin
 
-## Every texture under this folder (and its subfolders) gets the import settings below.
-const SPRITE_ROOT := "res://assets/sprites/"
+## Every texture under these folders (and their subfolders) gets the import settings below.
+const SPRITE_ROOTS: Array[String] = [
+	"res://assets/sprites/",
+	"res://assets/projectiles/",
+]
 
 const SPRITE_IMPORT_PARAMS := {
 	"compress/mode": 0, # Lossless: no color smearing on pixel art
@@ -33,16 +36,24 @@ func _exit_tree() -> void:
 func _on_resources_reimported(resources: PackedStringArray) -> void:
 	var sprites := PackedStringArray()
 	for path in resources:
-		if path.begins_with(SPRITE_ROOT):
+		if _is_sprite_path(path):
 			sprites.append(path)
 	if not sprites.is_empty():
 		# Defer so we don't start a new import while Godot is still finishing this one
 		_fix_sprites.call_deferred(sprites)
 
 
+func _is_sprite_path(path: String) -> bool:
+	for root in SPRITE_ROOTS:
+		if path.begins_with(root):
+			return true
+	return false
+
+
 func _fix_all_sprites() -> void:
 	var paths := PackedStringArray()
-	_collect_imported_files(SPRITE_ROOT, paths)
+	for root in SPRITE_ROOTS:
+		_collect_imported_files(root, paths)
 	_fix_sprites(paths)
 
 
