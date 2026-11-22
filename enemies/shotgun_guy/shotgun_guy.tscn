@@ -85,7 +85,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_v8ydh")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_back",
 "speed": 5.0
 }, {
@@ -96,7 +96,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_svna5")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_back_left",
 "speed": 5.0
 }, {
@@ -107,7 +107,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_8ctvl")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_back_right",
 "speed": 5.0
 }, {
@@ -118,7 +118,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_71ko6")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_front",
 "speed": 5.0
 }, {
@@ -129,7 +129,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_0vd26")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_front_left",
 "speed": 5.0
 }, {
@@ -140,7 +140,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_s2wmh")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_front_right",
 "speed": 5.0
 }, {
@@ -151,7 +151,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("15_bln1a")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_left",
 "speed": 5.0
 }, {
@@ -162,7 +162,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("17_2a0sx")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack_right",
 "speed": 5.0
 }, {
@@ -254,7 +254,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("35_i478c")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"pain_front",
 "speed": 5.0
 }, {
@@ -262,7 +262,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("36_x7o2c")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"pain_front_left",
 "speed": 5.0
 }, {
@@ -270,7 +270,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("37_oubi4")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"pain_front_right",
 "speed": 5.0
 }, {

@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://dyxkjrvcg0nyw" path="res://assets/materials/CRATE_1N.tres" id="7_yx7kw"]
 [ext_resource type="PackedScene" uid="uid://c4nnaocj3w11g" path="res://enemies/shotgun_guy/shotgun_guy.tscn" id="9_rtcij"]
 [ext_resource type="PackedScene" uid="uid://0onaj45fiy6h" path="res://enemies/imp/imp.tscn" id="9_xamrb"]
+[ext_resource type="PackedScene" uid="uid://d1dtlb68sy7kq" path="res://enemies/zombieman/zombieman.tscn" id="10_ukwr8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gx3xr"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -5260,3 +5261,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.359688, 0.5, -0.024330199)
 
 [node name="ShotgunGuy" parent="." unique_id=1767135162 instance=ExtResource("9_rtcij")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.274571, 1.6079929, -12.231625)
+
+[node name="Zombieman" parent="." unique_id=1585442704 instance=ExtResource("10_ukwr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.963362, 1.3849995, -17.297033)
