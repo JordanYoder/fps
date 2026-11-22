@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://21th380hjopi"]
 
 [ext_resource type="Script" uid="uid://cqkxmeonakqbg" path="res://enemies/projectiles/enemy_projectile.gd" id="1_6ery3"]
-[ext_resource type="Texture2D" uid="uid://coo8ytycytq7k" path="res://assets/projectiles/cacodemon_fireball/frame_A.png" id="2_6ery3"]
-[ext_resource type="Texture2D" uid="uid://bla6ywdi85t8p" path="res://assets/projectiles/cacodemon_fireball/frame_B.png" id="3_xd5a2"]
-[ext_resource type="Texture2D" uid="uid://bjvn36d3shgl0" path="res://assets/projectiles/cacodemon_fireball/frame_C.png" id="4_nwaqa"]
-[ext_resource type="Texture2D" uid="uid://b2h8b4p3e8xaa" path="res://assets/projectiles/cacodemon_fireball/frame_D.png" id="5_rk84b"]
-[ext_resource type="Texture2D" uid="uid://bj2x06xixkn60" path="res://assets/projectiles/cacodemon_fireball/frame_E.png" id="6_y514u"]
+[ext_resource type="Texture2D" uid="uid://coo8ytycytq7k" path="res://assets/sprites/projectiles/cacodemon_fireball/frame_A.png" id="2_6ery3"]
+[ext_resource type="Texture2D" uid="uid://bla6ywdi85t8p" path="res://assets/sprites/projectiles/cacodemon_fireball/frame_B.png" id="3_xd5a2"]
+[ext_resource type="Texture2D" uid="uid://bjvn36d3shgl0" path="res://assets/sprites/projectiles/cacodemon_fireball/frame_C.png" id="4_nwaqa"]
+[ext_resource type="Texture2D" uid="uid://b2h8b4p3e8xaa" path="res://assets/sprites/projectiles/cacodemon_fireball/frame_D.png" id="5_rk84b"]
+[ext_resource type="Texture2D" uid="uid://bj2x06xixkn60" path="res://assets/sprites/projectiles/cacodemon_fireball/frame_E.png" id="6_y514u"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mi230"]
 animations = [{

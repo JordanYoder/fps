@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://fuj1kol32kfn"]
 
-[ext_resource type="Texture2D" uid="uid://s2ap5jlyg4c" path="res://assets/projectiles/imp_fireball/frame_A.png" id="1_8myk6"]
+[ext_resource type="Texture2D" uid="uid://s2ap5jlyg4c" path="res://assets/sprites/projectiles/imp_fireball/frame_A.png" id="1_8myk6"]
 [ext_resource type="Script" uid="uid://cqkxmeonakqbg" path="res://enemies/projectiles/enemy_projectile.gd" id="1_proj"]
-[ext_resource type="Texture2D" uid="uid://crwxngy0joayl" path="res://assets/projectiles/imp_fireball/frame_B.png" id="2_2qsqs"]
-[ext_resource type="Texture2D" uid="uid://cktgu1157rum5" path="res://assets/projectiles/imp_fireball/frame_C.png" id="3_r8a5y"]
-[ext_resource type="Texture2D" uid="uid://bw0g2byr37r4o" path="res://assets/projectiles/imp_fireball/frame_D.png" id="4_1dael"]
-[ext_resource type="Texture2D" uid="uid://besqg55h3nxs3" path="res://assets/projectiles/imp_fireball/frame_E.png" id="5_k701p"]
+[ext_resource type="Texture2D" uid="uid://crwxngy0joayl" path="res://assets/sprites/projectiles/imp_fireball/frame_B.png" id="2_2qsqs"]
+[ext_resource type="Texture2D" uid="uid://cktgu1157rum5" path="res://assets/sprites/projectiles/imp_fireball/frame_C.png" id="3_r8a5y"]
+[ext_resource type="Texture2D" uid="uid://bw0g2byr37r4o" path="res://assets/sprites/projectiles/imp_fireball/frame_D.png" id="4_1dael"]
+[ext_resource type="Texture2D" uid="uid://besqg55h3nxs3" path="res://assets/sprites/projectiles/imp_fireball/frame_E.png" id="5_k701p"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mi230"]
 animations = [{
