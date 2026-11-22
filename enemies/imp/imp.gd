@@ -29,6 +29,6 @@ func _perform_ranged_attack() -> void:
 	get_tree().current_scene.add_child(fireball)
 	# Spawn slightly in front of the Imp so it starts clear of its own body, and aim at the
 	# target's chest. It flies in a straight line, so moving sideways dodges it.
-	var from := global_position + Vector3.UP * fireball_spawn_height + facing_dir * 0.5
+	var from := _get_feet_position() + Vector3.UP * fireball_spawn_height + facing_dir * 0.5
 	var aim := target.global_position + Vector3.UP * 1.0
 	fireball.launch(from, aim, self)

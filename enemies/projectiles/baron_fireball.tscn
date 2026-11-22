@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://do1ysmwfjgilf"]
+
+[ext_resource type="Script" uid="uid://cqkxmeonakqbg" path="res://enemies/projectiles/enemy_projectile.gd" id="1_cpsa3"]
+[ext_resource type="Texture2D" uid="uid://ci1q14gm0tpv3" path="res://assets/projectiles/baron_fireball/back/frame_A.png" id="2_v3akc"]
+[ext_resource type="Texture2D" uid="uid://duwjxifsn14fc" path="res://assets/projectiles/baron_fireball/back/frame_B.png" id="3_uhdyw"]
+[ext_resource type="Texture2D" uid="uid://bu4lo8x3vye5s" path="res://assets/projectiles/baron_fireball/back_left/frame_A.png" id="4_sr8sd"]
+[ext_resource type="Texture2D" uid="uid://crl27f61q30w4" path="res://assets/projectiles/baron_fireball/back_left/frame_B.png" id="5_xptjq"]
+[ext_resource type="Texture2D" uid="uid://by2algphnmhkq" path="res://assets/projectiles/baron_fireball/back_right/frame_A.png" id="6_4w3ca"]
+[ext_resource type="Texture2D" uid="uid://cfnj5bn36cb08" path="res://assets/projectiles/baron_fireball/back_right/frame_B.png" id="7_44xqe"]
+[ext_resource type="Texture2D" uid="uid://pli1r0ht8y8f" path="res://assets/projectiles/baron_fireball/front/frame_A.png" id="8_0gm1w"]
+[ext_resource type="Texture2D" uid="uid://oob0f06twbmh" path="res://assets/projectiles/baron_fireball/front/frame_B.png" id="9_yr833"]
+[ext_resource type="Texture2D" uid="uid://dox17b3ojbmj8" path="res://assets/projectiles/baron_fireball/front_left/frame_A.png" id="10_0aur7"]
+[ext_resource type="Texture2D" uid="uid://rhndlglb1xe" path="res://assets/projectiles/baron_fireball/front_left/frame_B.png" id="11_pbblr"]
+[ext_resource type="Texture2D" uid="uid://byxjlmvrjcvt6" path="res://assets/projectiles/baron_fireball/front_right/frame_A.png" id="12_7tv3g"]
+[ext_resource type="Texture2D" uid="uid://c0wrhiali3cn3" path="res://assets/projectiles/baron_fireball/front_right/frame_B.png" id="13_lt4al"]
+[ext_resource type="Texture2D" uid="uid://68s41cv8lnox" path="res://assets/projectiles/baron_fireball/left/frame_A.png" id="14_egtt4"]
+[ext_resource type="Texture2D" uid="uid://brc6cwqx0oehf" path="res://assets/projectiles/baron_fireball/left/frame_B.png" id="15_osmjy"]
+[ext_resource type="Texture2D" uid="uid://c4bv8qw7xkuxy" path="res://assets/projectiles/baron_fireball/right/frame_A.png" id="16_1tqau"]
+[ext_resource type="Texture2D" uid="uid://dn3xgnue3kdhh" path="res://assets/projectiles/baron_fireball/right/frame_B.png" id="17_k3hre"]
+[ext_resource type="Texture2D" uid="uid://csn8o6rkermoc" path="res://assets/projectiles/baron_fireball/frame_C.png" id="18_nmtah"]
+[ext_resource type="Texture2D" uid="uid://ijvkfp1p366m" path="res://assets/projectiles/baron_fireball/frame_D.png" id="19_3ukke"]
+[ext_resource type="Texture2D" uid="uid://bfcn0v1gmyts4" path="res://assets/projectiles/baron_fireball/frame_E.png" id="20_u3lef"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mi230"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v3akc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_uhdyw")
+}],
+"loop": 1,
+"name": &"fly_back",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sr8sd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xptjq")
+}],
+"loop": 1,
+"name": &"fly_back_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4w3ca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_44xqe")
+}],
+"loop": 1,
+"name": &"fly_back_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_0gm1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yr833")
+}],
+"loop": 1,
+"name": &"fly_front",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_0aur7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_pbblr")
+}],
+"loop": 1,
+"name": &"fly_front_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_7tv3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_lt4al")
+}],
+"loop": 1,
+"name": &"fly_front_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_egtt4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_osmjy")
+}],
+"loop": 1,
+"name": &"fly_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_1tqau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_k3hre")
+}],
+"loop": 1,
+"name": &"fly_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_nmtah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_3ukke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_u3lef")
+}],
+"loop": 0,
+"name": &"impact",
+"speed": 8.0
+}]
+
+[node name="BaronFireball" type="Node3D" unique_id=393775021]
+script = ExtResource("1_cpsa3")
+speed = 18.0
+damage_min = 8
+damage_max = 64
+
+[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=293638581]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_mi230")
+animation = &"fly_front"
+autoplay = "fly_front"
+
+[node name="Glow" type="OmniLight3D" parent="." unique_id=312966607]
+light_color = Color(0.4920218, 0.7330096, 0.4044647, 1)
+light_energy = 1.5
+omni_range = 3.0

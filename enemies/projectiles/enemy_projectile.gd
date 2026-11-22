@@ -13,7 +13,9 @@ extends Node3D
 @export_flags_3d_physics var collision_mask: int = 1
 
 ## Optional animated sprite for the projectile (e.g. a fireball). If it has an "impact"
-## animation, that plays when the projectile hits something.
+## animation, that plays when the projectile hits something. If it has 8-direction fly
+## animations ("fly_front", "fly_front_left", ... "fly_back"), the right one is shown from the
+## camera angle relative to the flight direction, like the monsters' sprites.
 @onready var sprite: AnimatedSprite3D = get_node_or_null("Sprite") as AnimatedSprite3D
 
 var direction: Vector3 = Vector3.FORWARD
@@ -22,6 +24,7 @@ var shooter: Node3D = null
 var _shape := SphereShape3D.new()
 var _age: float = 0.0
 var _done: bool = false
+var _directional: bool = false
 
 
 ## Call right after adding the projectile to the scene tree.
@@ -29,10 +32,33 @@ func launch(from: Vector3, toward: Vector3, fired_by: Node3D) -> void:
 	global_position = from
 	direction = (toward - from).normalized()
 	shooter = fired_by
+	_update_directional_sprite()
 
 
 func _ready() -> void:
 	_shape.radius = radius
+	_directional = sprite != null and sprite.sprite_frames != null \
+		and sprite.sprite_frames.has_animation("fly_front")
+
+
+func _process(_delta: float) -> void:
+	_update_directional_sprite()
+
+
+func _update_directional_sprite() -> void:
+	if _done or not _directional:
+		return
+	var camera := get_viewport().get_camera_3d()
+	if not camera:
+		return
+	var anim := "fly_" + DoomEnemy.view_suffix_for(global_position, direction, camera.global_position)
+	if sprite.animation == anim or not sprite.sprite_frames.has_animation(anim):
+		return
+	# Swap views without restarting the flicker cycle
+	var frame := sprite.frame
+	var progress := sprite.frame_progress
+	sprite.play(anim)
+	sprite.set_frame_and_progress(mini(frame, sprite.sprite_frames.get_frame_count(anim) - 1), progress)
 
 
 func _physics_process(delta: float) -> void:

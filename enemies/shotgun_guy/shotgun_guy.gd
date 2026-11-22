@@ -5,6 +5,8 @@ extends DoomEnemy
 @export var pellet_spread_deg: float = 5.6
 @export var damage_per_pellet_min: int = 3
 @export var damage_per_pellet_max: int = 15
+## Height above the feet where shots start (roughly the gun barrel)
+@export var gun_height: float = 1.2
 
 func _ready() -> void:
 	max_health = 30
@@ -21,7 +23,7 @@ func _perform_ranged_attack() -> void:
 	if not is_instance_valid(target):
 		return
 	var space_state := get_world_3d().direct_space_state
-	var from := global_position + Vector3(0, 1.2, 0)
+	var from := _get_feet_position() + Vector3.UP * gun_height
 	var base_dir := ((target.global_position + Vector3(0, 1.0, 0)) - from).normalized()
 
 	for i in range(pellet_count):

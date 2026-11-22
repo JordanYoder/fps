@@ -103,14 +103,33 @@ func _get_view_suffix() -> String:
 	var camera := get_viewport().get_camera_3d()
 	if not camera:
 		return "front"
-	var to_cam := camera.global_position - global_position
+	return view_suffix_for(global_position, facing_dir, camera.global_position)
+
+# Which of the 8 sprite views ("front", "back_left", ...) a camera at camera_pos sees of
+# something at pos facing `facing`. Only the horizontal angle matters. Shared with projectiles.
+static func view_suffix_for(pos: Vector3, facing: Vector3, camera_pos: Vector3) -> String:
+	var to_cam := camera_pos - pos
 	to_cam.y = 0.0
-	if to_cam.length_squared() < 0.0001:
+	facing.y = 0.0
+	if to_cam.length_squared() < 0.0001 or facing.length_squared() < 0.0001:
 		return "front"
-	var left := Vector3.UP.cross(facing_dir)
-	var angle := atan2(to_cam.dot(left), to_cam.dot(facing_dir))
+	facing = facing.normalized()
+	var left := Vector3.UP.cross(facing)
+	var angle := atan2(to_cam.dot(left), to_cam.dot(facing))
 	var sector := posmod(roundi(angle / (PI / 4.0)), 8)
 	return VIEW_SUFFIXES[sector]
+
+# World position of the bottom of the collision shape, i.e. where the monster's feet are.
+func _get_feet_position() -> Vector3:
+	var feet := global_position
+	if collision_shape and collision_shape.shape:
+		var shape_height := 0.0
+		if "height" in collision_shape.shape:
+			shape_height = collision_shape.shape.height * collision_shape.scale.y
+		elif "size" in collision_shape.shape:
+			shape_height = collision_shape.shape.size.y * collision_shape.scale.y
+		feet.y = collision_shape.global_position.y - shape_height * 0.5
+	return feet
 
 # Returns false if the monster has no animation for current_base_anim.
 func _update_directional_anim(restart: bool = false) -> bool:
