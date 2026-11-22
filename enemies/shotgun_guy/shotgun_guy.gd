@@ -11,6 +11,10 @@ func _ready() -> void:
 	pain_chance = 0.66
 	has_melee = false
 	has_ranged = true
+	# Attack: frame E aims (~0.29s), frame F fires and holds briefly. Doom runs each frame for
+	# 10 tics at 35 tics/sec (~0.29s).
+	windup_time = 0.29
+	fire_frame_time = 0.29
 	super._ready()
 
 func _perform_ranged_attack() -> void:

@@ -8,6 +8,10 @@ enum State { IDLE, CHASE, ATTACK, PAIN, DEAD }
 @export var speed: float = 3.5
 @export var sight_range: float = 25.0
 @export_range(0.0, 1.0) var pain_chance: float = 0.66
+## A killing hit gibs the monster (plays "gib_death") when health ends up below this.
+## 0 = Doom's rule: below -max_health, i.e. the hit overkilled by more than the monster's full health.
+## Set it high (e.g. 1000) to force every death to gib while testing.
+@export var gib_health: int = 0
 
 @export_group("Combat Ranges")
 @export var has_melee: bool = false
@@ -372,7 +376,10 @@ func _die() -> void:
 	state = State.DEAD
 	state_token += 1
 	velocity = Vector3.ZERO
-	_play_anim("death")
+	var gib_threshold := gib_health if gib_health != 0 else -max_health
+	# Gib only if this monster actually has a gib animation; otherwise fall back to the normal death
+	if not (health < gib_threshold and _play_anim("gib_death")):
+		_play_anim("death")
 	_align_sprite_to_floor()
 	if collision_shape:
 		collision_shape.set_deferred("disabled", true)

@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://r7gbb3jm5tma" path="res://assets/materials/CRATE_2I.tres" id="6_5tmo5"]
 [ext_resource type="PackedScene" uid="uid://b8k0law6povir" path="res://player/player.tscn" id="6_gx3xr"]
 [ext_resource type="Material" uid="uid://dyxkjrvcg0nyw" path="res://assets/materials/CRATE_1N.tres" id="7_yx7kw"]
+[ext_resource type="PackedScene" uid="uid://c4nnaocj3w11g" path="res://enemies/shotgun_guy/shotgun_guy.tscn" id="9_rtcij"]
 [ext_resource type="PackedScene" uid="uid://0onaj45fiy6h" path="res://enemies/imp/imp.tscn" id="9_xamrb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gx3xr"]
@@ -5256,3 +5257,6 @@ collision_mode = 1
 
 [node name="Imp" parent="." unique_id=720720936 instance=ExtResource("9_xamrb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.359688, 0.5, -0.024330199)
+
+[node name="ShotgunGuy" parent="." unique_id=1767135162 instance=ExtResource("9_rtcij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.274571, 1.6079929, -12.231625)
