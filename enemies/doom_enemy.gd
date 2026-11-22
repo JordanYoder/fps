@@ -22,6 +22,15 @@ enum State { IDLE, CHASE, ATTACK, PAIN, DEAD }
 @export var fire_frame_time: float = 0.3
 @export var post_attack_cooldown: float = 0.6
 
+@export_group("Flying")
+## Floats instead of walking (Cacodemon, Lost Soul): no gravity, rises/sinks to track the target.
+## Falls to the floor when killed.
+@export var can_fly: bool = false
+## While chasing, the monster's feet aim for this height above the target's feet.
+## Doom: half the target's height (player is 1.8 tall here).
+@export var hover_height: float = 0.9
+@export var fly_vertical_speed: float = 2.0
+
 var state: State = State.IDLE
 var health: int = 30
 var target: Node3D = null
@@ -183,7 +192,9 @@ func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
 		return
 		
-	if not is_on_floor():
+	if can_fly:
+		velocity.y = _get_fly_vertical_velocity() if state == State.CHASE else 0.0
+	elif not is_on_floor():
 		velocity.y -= gravity * delta
 
 	if state == State.DEAD:
@@ -207,6 +218,30 @@ func _physics_process(delta: float) -> void:
 			velocity.z = 0.0
 
 	move_and_slide()
+
+func _get_fly_vertical_velocity() -> float:
+	if not is_instance_valid(target):
+		return 0.0
+	var height_error := target.global_position.y + hover_height - _get_feet_position().y
+	# Ease in over the last half metre so it doesn't bob above/below the hover height
+	return clampf(height_error * 4.0, -fly_vertical_speed, fly_vertical_speed)
+
+# Dead flyers drop to the floor. Their collision is disabled on death, so move_and_slide
+# can't land them: find the floor with a ray and tween down to it instead.
+func _fall_to_floor() -> void:
+	var feet := _get_feet_position()
+	var query := PhysicsRayQueryParameters3D.create(feet + Vector3.UP * 0.1, feet + Vector3.DOWN * 100.0)
+	query.exclude = [get_rid()]
+	var result := get_world_3d().direct_space_state.intersect_ray(query)
+	if result.is_empty():
+		return
+	var drop: float = feet.y - result.position.y
+	if drop <= 0.01:
+		return
+	var fall_time := sqrt(2.0 * drop / gravity) # Real free-fall time for that height
+	var tween := create_tween()
+	tween.tween_property(self, "global_position:y", global_position.y - drop, fall_time) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 func _look_for_player() -> void:
 	if not is_instance_valid(target):
@@ -402,4 +437,6 @@ func _die() -> void:
 	_align_sprite_to_floor()
 	if collision_shape:
 		collision_shape.set_deferred("disabled", true)
+	if can_fly:
+		_fall_to_floor()
 	get_tree().create_timer(30.0).timeout.connect(queue_free)
