@@ -15,11 +15,21 @@ extends Control
 @onready var weapon_sprite: AnimatedSprite2D = $WeaponSprite
 @onready var muzzle_flash: AnimatedSprite2D = $MuzzleFlash
 
+## Doom's psprite origin: weapon sprites are drawn at this point minus their sprite offset
+## (sx = 1, sy = WEAPONTOP = 32), in the weapon's 320x200 screen.
+const DOOM_WEAPON_ORIGIN := Vector2(1.0, 32.0)
+
 var current_weapon: WeaponData
 var current_index: int = 0
-var can_shoot: bool = true
+var can_shoot: bool = true # False while the "shoot" animation runs
 var bob_time: float = 0.0
 var raycast: RayCast3D
+
+# How many times the trigger has been held through a refire (Doom's player->refire).
+# 0 = first shot/burst, which first_shot_accurate weapons fire dead on.
+var _refire_count: int = 0
+var _audio: AudioStreamPlayer
+var _restarting_shoot: bool = false
 
 enum SwitchState { READY, LOWERING, RAISING }
 var switch_state: SwitchState = SwitchState.READY
@@ -32,8 +42,12 @@ func _ready() -> void:
 	weapon_sprite.frame_changed.connect(_align_weapon_sprite)
 	weapon_sprite.animation_changed.connect(_align_weapon_sprite)
 	weapon_sprite.animation_finished.connect(_on_weapon_animation_finished)
+	weapon_sprite.frame_changed.connect(_on_weapon_frame_changed)
 	muzzle_flash.frame_changed.connect(_align_muzzle_flash)
 	muzzle_flash.animation_finished.connect(_on_muzzle_flash_finished)
+	_audio = AudioStreamPlayer.new()
+	_audio.max_polyphony = 4 # Chaingun shots overlap
+	add_child(_audio)
 
 func setup(player_raycast: RayCast3D) -> void:
 	raycast = player_raycast
@@ -106,7 +120,9 @@ func equip_weapon(index: int) -> void:
 	current_index = index
 	current_weapon = weapons[index]
 	can_shoot = true
+	_refire_count = 0
 	muzzle_flash.visible = false
+	muzzle_flash.stop()
 
 	weapon_sprite.visible = true
 	weapon_sprite.sprite_frames = current_weapon.weapon_frames
@@ -118,34 +134,133 @@ func equip_weapon(index: int) -> void:
 func try_fire() -> void:
 	if not can_shoot or switch_state != SwitchState.READY or not current_weapon or not raycast:
 		return
+	_refire_count = 0
+	_start_shoot()
 
+func _start_shoot() -> void:
 	can_shoot = false
-
+	# Jumping back to frame 0 may or may not emit frame_changed (it doesn't if the frame was
+	# already 0), so ignore that signal here and run frame 0's actions exactly once ourselves.
+	_restarting_shoot = true
 	weapon_sprite.play("shoot")
-	if current_weapon.muzzle_flash_frames:
-		muzzle_flash.visible = true
-		muzzle_flash.play("flash")
-		_align_muzzle_flash()
+	weapon_sprite.set_frame_and_progress(0, 0.0)
+	_restarting_shoot = false
+	_on_weapon_frame_changed()
 
-	# Hitscan Raycast Loop
-	for i in range(current_weapon.pellet_count):
-		var spread_x := deg_to_rad(randf_range(-current_weapon.spread_degrees, current_weapon.spread_degrees))
-		var spread_y := deg_to_rad(randf_range(-current_weapon.spread_degrees * 0.35, current_weapon.spread_degrees * 0.35))
-		raycast.rotation = Vector3(spread_y, spread_x, 0.0)
-		raycast.force_raycast_update()
+# Runs the actions of whichever "shoot" frame was just entered: attack, flash, refire.
+func _on_weapon_frame_changed() -> void:
+	if _restarting_shoot or weapon_sprite.animation != "shoot" or not current_weapon:
+		return
+	var frame := weapon_sprite.frame
+	var w := current_weapon
+	if frame == w.refire_frame and _try_refire():
+		return
+	if frame in w.sound_frames:
+		_play_sound(w.fire_sound)
+	if frame in w.flash_frames:
+		_start_flash(frame)
+	if frame in w.attack_frames:
+		if w.flash_frames.is_empty():
+			_start_flash(frame)
+		_attack()
 
-		if raycast.is_colliding():
-			var collider := raycast.get_collider()
-			var hit_pos := raycast.get_collision_point()
-			var hit_normal := raycast.get_collision_normal()
+# Doom's A_ReFire: still holding the trigger (and not switching) restarts the attack.
+func _try_refire() -> bool:
+	if pending_index == -1 and Input.is_action_pressed("shoot"):
+		_refire_count += 1
+		_start_shoot()
+		return true
+	_refire_count = 0
+	return false
 
-			if collider.has_method("take_damage"):
-				collider.take_damage(current_weapon.damage_per_pellet)
-				_spawn_blood(hit_pos)
-			else:
-				_spawn_wall_decal(hit_pos, hit_normal)
+func _start_flash(frame: int) -> void:
+	var frames := current_weapon.muzzle_flash_frames
+	if not frames:
+		return
+	var anim := "flash_%d" % frame
+	if not frames.has_animation(anim):
+		anim = "flash"
+		if not frames.has_animation(anim):
+			return
+	muzzle_flash.sprite_frames = frames
+	muzzle_flash.visible = true
+	muzzle_flash.play(anim)
+	_align_muzzle_flash()
 
-	raycast.rotation = Vector3.ZERO
+func _attack() -> void:
+	var w := current_weapon
+	match w.attack_type:
+		WeaponData.AttackType.HITSCAN:
+			_play_sound(w.fire_sound)
+			var accurate := w.first_shot_accurate and _refire_count == 0
+			for i in w.pellet_count:
+				_fire_bullet(w, accurate)
+		WeaponData.AttackType.MELEE:
+			var hit := _fire_bullet(w, false)
+			_play_sound(w.hit_sound if hit and w.hit_sound else w.fire_sound)
+		WeaponData.AttackType.PROJECTILE:
+			_play_sound(w.fire_sound)
+			_fire_projectile(w)
+
+# Doom's spread: the difference of two random numbers, so shots cluster near the middle.
+static func _spread(max_degrees: float) -> float:
+	return deg_to_rad((randf() - randf()) * max_degrees)
+
+# Aim direction from the crosshair, plus spread unless accurate. Returns [origin, direction].
+func _aim(w: WeaponData, accurate: bool) -> Array[Vector3]:
+	var basis := raycast.global_basis
+	var dir := -basis.z
+	if not accurate:
+		dir = dir.rotated(basis.y, _spread(w.spread_degrees))
+		dir = dir.rotated(basis.x, _spread(w.vertical_spread_degrees))
+	return [raycast.global_position, dir.normalized()]
+
+# Casts one bullet/melee hit. Returns true if it hit something that takes damage.
+func _fire_bullet(w: WeaponData, accurate: bool) -> bool:
+	var aim := _aim(w, accurate)
+	var query := PhysicsRayQueryParameters3D.create(aim[0], aim[0] + aim[1] * w.attack_range, raycast.collision_mask)
+	var shooter := _get_shooter()
+	if shooter is CollisionObject3D:
+		query.exclude = [(shooter as CollisionObject3D).get_rid()]
+	var result := raycast.get_world_3d().direct_space_state.intersect_ray(query)
+	if result.is_empty():
+		return false
+	var collider: Object = result.collider
+	if collider.has_method("take_damage"):
+		collider.take_damage(w.roll_damage(), shooter)
+		_spawn_blood(result.position)
+		return true
+	_spawn_wall_decal(result.position, result.normal)
+	return false
+
+func _fire_projectile(w: WeaponData) -> void:
+	if not w.projectile_scene:
+		push_warning("%s has no projectile_scene" % w.weapon_name)
+		return
+	var projectile := w.projectile_scene.instantiate()
+	get_tree().current_scene.add_child(projectile)
+	var aim := _aim(w, true)
+	# Start a little ahead of the camera so it's not inside the player
+	var from: Vector3 = aim[0] + aim[1] * 0.6
+	if projectile.has_method("launch"):
+		projectile.launch(from, from + aim[1] * 10.0, _get_shooter())
+	else:
+		projectile.global_position = from
+
+# The player body: excluded from our own shots, and credited for the damage.
+func _get_shooter() -> Node3D:
+	var node: Node = raycast
+	while node and not node is CharacterBody3D:
+		node = node.get_parent()
+	return node as Node3D
+
+func _play_sound(stream: AudioStream) -> void:
+	# Weapons with sound_frames play fire_sound on their own schedule, not per attack
+	if stream and stream == current_weapon.fire_sound and not current_weapon.sound_frames.is_empty() 			and not (weapon_sprite.frame in current_weapon.sound_frames):
+		return
+	if stream:
+		_audio.stream = stream
+		_audio.play()
 
 func update_bob(delta: float, horiz_speed: float, on_floor: bool) -> void:
 	if on_floor and horiz_speed > 0.5:
@@ -172,24 +287,30 @@ func _align_weapon_sprite() -> void:
 	var tex := weapon_sprite.sprite_frames.get_frame_texture(weapon_sprite.animation, weapon_sprite.frame)
 	if not tex:
 		return
-	var path := tex.resource_path.get_file().get_basename().to_upper()
-	if current_weapon.sprite_offsets.has(path):
-		weapon_sprite.position = current_weapon.sprite_offsets[path]
+	if current_weapon.sprite_offsets.has(tex):
+		weapon_sprite.position = DOOM_WEAPON_ORIGIN - current_weapon.sprite_offsets[tex]
 	else:
 		weapon_sprite.position = Vector2(160.0 - tex.get_width() * 0.5, 200.0 - tex.get_height())
 
 func _align_muzzle_flash() -> void:
-	if not current_weapon or current_weapon.flash_offsets.is_empty():
+	if not current_weapon or not muzzle_flash.sprite_frames:
 		return
-	var f := clampi(muzzle_flash.frame, 0, current_weapon.flash_offsets.size() - 1)
-	muzzle_flash.position = current_weapon.flash_offsets[f]
+	var tex := muzzle_flash.sprite_frames.get_frame_texture(muzzle_flash.animation, muzzle_flash.frame)
+	if not tex:
+		return
+	if current_weapon.sprite_offsets.has(tex):
+		muzzle_flash.position = DOOM_WEAPON_ORIGIN - current_weapon.sprite_offsets[tex]
+	else:
+		# No offset: centre it on top of the gun
+		muzzle_flash.position = Vector2(160.0 - tex.get_width() * 0.5, weapon_sprite.position.y - tex.get_height() * 0.5)
 
 func _on_weapon_animation_finished() -> void:
-	if weapon_sprite.animation == "shoot":
-		weapon_sprite.play("idle")
-		muzzle_flash.visible = false
-		muzzle_flash.stop()
-		can_shoot = true
+	if weapon_sprite.animation != "shoot":
+		return
+	if current_weapon.refire_frame < 0 and _try_refire():
+		return
+	weapon_sprite.play("idle")
+	can_shoot = true
 
 func _on_muzzle_flash_finished() -> void:
 	muzzle_flash.visible = false

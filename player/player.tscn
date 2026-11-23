@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://deeb318e1w1em" path="res://weapons/pistol/pistol.tres" id="4_vtle1"]
 [ext_resource type="Resource" uid="uid://jjigml3oywcm" path="res://weapons/shotgun/shotgun.tres" id="5_vtle1"]
 [ext_resource type="Resource" uid="uid://cka3e70w4u8qm" path="res://weapons/chaingun/chaingun.tres" id="6_od3ui"]
+[ext_resource type="Resource" uid="uid://dkmtl682cl2p1" path="res://weapons/bfg9000/bfg9000.tres" id="7_rgyib"]
 [ext_resource type="PackedScene" uid="uid://cn6ea7vbhptc" path="res://weapons/bullet_decal.tscn" id="8_od3ui"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
@@ -50,7 +51,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_gwnis")
-weapons = Array[ExtResource("3_fhl08")]([ExtResource("4_vtle1"), ExtResource("5_vtle1"), ExtResource("6_od3ui")])
+weapons = Array[ExtResource("3_fhl08")]([ExtResource("4_vtle1"), ExtResource("5_vtle1"), ExtResource("6_od3ui"), ExtResource("7_rgyib")])
 wall_decal_scene = ExtResource("8_od3ui")
 
 [node name="WeaponSprite" type="AnimatedSprite2D" parent="HUD/WeaponManager" unique_id=432965689]

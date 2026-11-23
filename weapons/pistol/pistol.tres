@@ -3,20 +3,29 @@
 [ext_resource type="Script" uid="uid://so521phpo1rq" path="res://weapons/weapon_data.gd" id="1_script"]
 [ext_resource type="SpriteFrames" uid="uid://e7rg3a1vn2va" path="res://weapons/pistol/pistol_frames.tres" id="2_wframes"]
 [ext_resource type="SpriteFrames" uid="uid://d36rsv8c57ac" path="res://weapons/pistol/pistol_flash_frames.tres" id="3_fframes"]
+[ext_resource type="AudioStream" uid="uid://cup71u4pln6sb" path="res://assets/sounds/effects/weapons/pistol_fire.wav" id="4_sound"]
+[ext_resource type="Texture2D" uid="uid://cdh58wjep6ye8" path="res://assets/weapons/first_person/pistol/frames/frame_A.png" id="gA"]
+[ext_resource type="Texture2D" uid="uid://bf0wvy0hsdd41" path="res://assets/weapons/first_person/pistol/frames/frame_B.png" id="gB"]
+[ext_resource type="Texture2D" uid="uid://cxg88v3m2mi00" path="res://assets/weapons/first_person/pistol/frames/frame_C.png" id="gC"]
+[ext_resource type="Texture2D" uid="uid://ctmggnl5u26wi" path="res://assets/weapons/first_person/pistol/muzzle_flash/frame_A.png" id="fA"]
 
 [resource]
 script = ExtResource("1_script")
 weapon_name = "Pistol"
-damage_per_pellet = 15
+damage_base = 5
+damage_dice = 3
 pellet_count = 1
-spread_degrees = 1.5
+spread_degrees = 5.6
+first_shot_accurate = true
+attack_frames = Array[int]([1])
+refire_frame = 3
 weapon_frames = ExtResource("2_wframes")
 muzzle_flash_frames = ExtResource("3_fframes")
-sprite_offsets = {
-"PISGA0": Vector2(124, 150),
-"PISGB0": Vector2(124, 130),
-"PISGC0": Vector2(125, 138),
-"PISGE0": Vector2(126, 135)
-}
-flash_offsets = Array[Vector2]([Vector2(155, 114)])
+sprite_offsets = Dictionary[Texture2D, Vector2]({
+ExtResource("gA"): Vector2(-126, -106),
+ExtResource("gB"): Vector2(-104, -86),
+ExtResource("gC"): Vector2(-119, -87),
+ExtResource("fA"): Vector2(-140, -66)
+})
+fire_sound = ExtResource("4_sound")
 metadata/_custom_type_script = "uid://so521phpo1rq"

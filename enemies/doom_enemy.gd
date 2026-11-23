@@ -12,6 +12,9 @@ enum State { IDLE, CHASE, ATTACK, PAIN, DEAD }
 ## 0 = Doom's rule: below -max_health, i.e. the hit overkilled by more than the monster's full health.
 ## Set it high (e.g. 1000) to force every death to gib while testing.
 @export var gib_health: int = 0
+## Vanish when the death animation ends instead of leaving a corpse (Doom: Lost Soul,
+## Pain Elemental). Their last death frame is the end of an explosion, not a body.
+@export var leaves_no_corpse: bool = false
 
 @export_group("Combat Ranges")
 @export var has_melee: bool = false
@@ -21,6 +24,13 @@ enum State { IDLE, CHASE, ATTACK, PAIN, DEAD }
 @export var windup_time: float = 0.3
 @export var fire_frame_time: float = 0.3
 @export var post_attack_cooldown: float = 0.6
+## How many times one attack repeats its wind-up + fire frames (Cyberdemon: 3 rockets).
+## Override _should_refire() for open-ended bursts (Spider Mastermind keeps firing while it sees you).
+@export var attack_shots: int = 1
+## Wind-up time for the repeats after the first shot. Negative = same as windup_time.
+@export var refire_windup_time: float = -1.0
+## Takes no damage from explosions (Doom: Cyberdemon and Spider Mastermind).
+@export var splash_immune: bool = false
 
 @export_group("Flying")
 ## Floats instead of walking (Cacodemon, Lost Soul): no gravity, rises/sinks to track the target.
@@ -146,9 +156,9 @@ func _update_directional_anim(restart: bool = false) -> bool:
 		return false
 	var frames := anim_sprite.sprite_frames
 	var anim_name := current_base_anim + "_" + _get_view_suffix()
-	if not frames.has_animation(anim_name):
+	if not _has_frames(frames, anim_name):
 		anim_name = current_base_anim
-		if not frames.has_animation(anim_name):
+		if not _has_frames(frames, anim_name):
 			return false
 
 	if restart:
@@ -166,6 +176,21 @@ func _update_directional_anim(restart: bool = false) -> bool:
 	if not was_playing:
 		anim_sprite.pause()
 	return true
+
+# An animation with no frames would make the monster invisible, so treat it as missing.
+static func _has_frames(frames: SpriteFrames, anim_name: String) -> bool:
+	return frames.has_animation(anim_name) and frames.get_frame_count(anim_name) > 0
+
+# Horizontal half-width of the collision shape (capsule/sphere radius, or half the box's widest side).
+func _get_body_radius() -> float:
+	if not collision_shape or not collision_shape.shape:
+		return 0.5
+	var shape = collision_shape.shape # Untyped: radius/size exist only on some shapes
+	if "radius" in shape:
+		return shape.radius * collision_shape.scale.x
+	if "size" in shape:
+		return maxf(shape.size.x * collision_shape.scale.x, shape.size.z * collision_shape.scale.z) * 0.5
+	return 0.5
 
 func _align_sprite_to_floor() -> void:
 	if not anim_sprite or not anim_sprite.sprite_frames:
@@ -323,7 +348,8 @@ func _face_target() -> void:
 func _is_dir_blocked(dir: Vector3) -> bool:
 	var space_state := get_world_3d().direct_space_state
 	var from := collision_shape.global_position if collision_shape else global_position
-	var query := PhysicsRayQueryParameters3D.create(from, from + dir * 1.5)
+	# Probe a metre past the body's edge, so big monsters (Spider Mastermind) see walls in time
+	var query := PhysicsRayQueryParameters3D.create(from, from + dir * (_get_body_radius() + 1.0))
 	query.exclude = [get_rid()]
 	var result := space_state.intersect_ray(query)
 	return not result.is_empty() and result.collider != target
@@ -350,42 +376,55 @@ func _start_attack(is_melee: bool) -> void:
 	state_token += 1
 	var my_token := state_token
 
-	_face_target()
-	# Attack frames are stepped manually: wind-up frames share windup_time, and the
-	# last frame is the one where the attack actually fires (e.g. 3 frames = 2 wind-up + fire).
-	var fire_frame := 0
-	if _play_anim("attack"):
-		anim_sprite.pause()
-		anim_sprite.frame = 0
-		fire_frame = maxi(anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation) - 1, 0)
-	elif anim_sprite:
-		anim_sprite.pause() # No attack animation: hold the current frame
+	var shots := 0
+	while true:
+		_face_target()
+		# Attack frames are stepped manually: wind-up frames share the wind-up time, and the
+		# last frame is the one where the attack actually fires (e.g. 3 frames = 2 wind-up + fire).
+		var fire_frame := 0
+		if _play_anim("attack"):
+			anim_sprite.pause()
+			anim_sprite.frame = 0
+			fire_frame = maxi(anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation) - 1, 0)
+		elif anim_sprite:
+			anim_sprite.pause() # No attack animation: hold the current frame
 
-	var step_time := windup_time / maxi(fire_frame, 1)
-	for i in range(1, fire_frame + 1):
-		await get_tree().create_timer(step_time).timeout
+		var windup := windup_time if shots == 0 or refire_windup_time < 0.0 else refire_windup_time
+		var step_time := windup / maxi(fire_frame, 1)
+		for i in range(1, fire_frame + 1):
+			await get_tree().create_timer(step_time).timeout
+			if state_token != my_token or state == State.DEAD:
+				return
+			anim_sprite.frame = i
+		if fire_frame == 0:
+			await get_tree().create_timer(windup).timeout
+			if state_token != my_token or state == State.DEAD:
+				return
+
+		# Calls the child monster's custom attack implementation
+		if is_melee:
+			_perform_melee_attack()
+		else:
+			_perform_ranged_attack()
+		shots += 1
+		# The attack itself may have taken over (Lost Soul charge)
+		if state_token != my_token:
+			return
+
+		await get_tree().create_timer(fire_frame_time).timeout
 		if state_token != my_token or state == State.DEAD:
 			return
-		anim_sprite.frame = i
-	if fire_frame == 0:
-		await get_tree().create_timer(windup_time).timeout
-		if state_token != my_token or state == State.DEAD:
-			return
-
-	# Calls the child monster's custom attack implementation
-	if is_melee:
-		_perform_melee_attack()
-	else:
-		_perform_ranged_attack()
-
-	await get_tree().create_timer(fire_frame_time).timeout
-	if state_token != my_token or state == State.DEAD:
-		return
+		if is_melee or not _should_refire(shots):
+			break
 
 	reaction_cooldown = post_attack_cooldown
 	state = State.CHASE
 	_pick_new_chase_dir()
 	_play_anim("walk")
+
+# Called after each ranged shot: return true to fire again without going back to chasing.
+func _should_refire(shots_fired: int) -> bool:
+	return shots_fired < attack_shots
 
 # Virtual methods to be overridden by ShotgunGuy, Imp, etc.
 func _perform_melee_attack() -> void:
@@ -439,4 +478,8 @@ func _die() -> void:
 		collision_shape.set_deferred("disabled", true)
 	if can_fly:
 		_fall_to_floor()
+	if leaves_no_corpse and anim_sprite and anim_sprite.is_playing():
+		await anim_sprite.animation_finished
+		queue_free()
+		return
 	get_tree().create_timer(30.0).timeout.connect(queue_free)

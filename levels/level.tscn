@@ -7,8 +7,9 @@
 [ext_resource type="Material" uid="uid://r7gbb3jm5tma" path="res://assets/materials/CRATE_2I.tres" id="6_5tmo5"]
 [ext_resource type="PackedScene" uid="uid://b8k0law6povir" path="res://player/player.tscn" id="6_gx3xr"]
 [ext_resource type="Material" uid="uid://dyxkjrvcg0nyw" path="res://assets/materials/CRATE_1N.tres" id="7_yx7kw"]
-[ext_resource type="PackedScene" uid="uid://ccr85wssjq1kp" path="res://enemies/pinky/pinky.tscn" id="8_d5x7l"]
-[ext_resource type="PackedScene" uid="uid://btaqji6d082ni" path="res://enemies/cacodemon/cacodemon.tscn" id="9_rtcij"]
+[ext_resource type="PackedScene" uid="uid://bv0h3bgbhlxo3" path="res://enemies/cyberdemon/cyberdemon.tscn" id="8_ukwr8"]
+[ext_resource type="PackedScene" uid="uid://b6i3r256lib7d" path="res://enemies/lost_soul/lost_soul.tscn" id="9_pb8y7"]
+[ext_resource type="PackedScene" uid="uid://dpb0x4arti7o3" path="res://enemies/spider_mastermind/spider_mastermind.tscn" id="10_hy0rb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gx3xr"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -5255,8 +5256,11 @@ script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_p5ddi")
 collision_mode = 1
 
-[node name="Pinky" parent="." unique_id=1001045237 instance=ExtResource("8_d5x7l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.265877, 1.5649467, -9.881335)
+[node name="Cyberdemon" parent="." unique_id=1317778158 instance=ExtResource("8_ukwr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.777924, 2.3599465, -15.294973)
 
-[node name="Cacodemon" parent="." unique_id=617540634 instance=ExtResource("9_rtcij")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.06224, 13.116886, 4.3744383)
+[node name="LostSoul" parent="." unique_id=1229155327 instance=ExtResource("9_pb8y7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.321342, 5.287447, -0.36791134)
+
+[node name="SpiderMastermind" parent="." unique_id=1524995834 instance=ExtResource("10_hy0rb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.61034, 2.3899465, 22.869442)

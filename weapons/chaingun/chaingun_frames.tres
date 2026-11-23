@@ -1,26 +1,26 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dej2rkft5vg1d"]
 
-[ext_resource type="Texture2D" uid="uid://b52sbrmb2bdfx" path="res://assets/sprites/weapons/chaingun/CHGGA0.png" id="1_13hsk"]
-[ext_resource type="Texture2D" uid="uid://c62lkmesybk1x" path="res://assets/sprites/weapons/chaingun/CHGGB0.png" id="2_aence"]
+[ext_resource type="Texture2D" uid="uid://bixb2hfq5fk8n" path="res://assets/weapons/first_person/chaingun/frames/frame_A.png" id="1_A"]
+[ext_resource type="Texture2D" uid="uid://cyj0tlvcbpw5h" path="res://assets/weapons/first_person/chaingun/frames/frame_B.png" id="2_B"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_13hsk")
+"texture": ExtResource("1_A")
 }],
-"loop": 1,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_13hsk")
+"duration": 4.0,
+"texture": ExtResource("1_A")
 }, {
-"duration": 1.0,
-"texture": ExtResource("2_aence")
+"duration": 4.0,
+"texture": ExtResource("2_B")
 }],
-"loop": 0,
+"loop": false,
 "name": &"shoot",
-"speed": 9.0
+"speed": 35.0
 }]

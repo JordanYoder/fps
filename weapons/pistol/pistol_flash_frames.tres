@@ -1,14 +1,14 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://d36rsv8c57ac"]
 
-[ext_resource type="Texture2D" uid="uid://bfem7ejiarkdc" path="res://assets/sprites/weapons/pistol/PISFA0.png" id="1_gxibc"]
+[ext_resource type="Texture2D" uid="uid://ctmggnl5u26wi" path="res://assets/weapons/first_person/pistol/muzzle_flash/frame_A.png" id="1_A"]
 
 [resource]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_gxibc")
+"duration": 7.0,
+"texture": ExtResource("1_A")
 }],
-"loop": 0,
+"loop": false,
 "name": &"flash",
-"speed": 8.0
+"speed": 35.0
 }]

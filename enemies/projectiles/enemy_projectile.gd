@@ -12,6 +12,12 @@ extends Node3D
 @export var lifetime: float = 5.0
 @export_flags_3d_physics var collision_mask: int = 1
 
+@export_group("Explosion")
+## Damage at the centre of the blast, falling to 0 at splash_radius. 0 = no explosion.
+## Doom rocket: 128 damage over 128 units (~4 m here).
+@export var splash_damage: int = 0
+@export var splash_radius: float = 4.0
+
 ## Optional animated sprite for the projectile (e.g. a fireball). If it has an "impact"
 ## animation, that plays when the projectile hits something. If it has 8-direction fly
 ## animations ("fly_front", "fly_front_left", ... "fly_back"), the right one is shown from the
@@ -99,8 +105,42 @@ func _impact(collider: Object) -> void:
 	if collider and collider.has_method("take_damage"):
 		var attacker: Node3D = shooter if is_instance_valid(shooter) else null
 		collider.take_damage(randi_range(damage_min, damage_max), attacker)
+	if splash_damage > 0:
+		_explode(collider)
 
 	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("impact"):
 		sprite.play("impact")
 		await sprite.animation_finished
 	queue_free()
+
+
+# Doom-style radius damage: everything with take_damage within splash_radius that the blast can
+# see gets hurt, falling off linearly with distance. The direct-hit target takes splash too.
+# The shooter can hurt itself, unless it's splash_immune (Cyberdemon, Spider Mastermind).
+func _explode(direct_hit: Object) -> void:
+	var space := get_world_3d().direct_space_state
+	var sphere := SphereShape3D.new()
+	sphere.radius = splash_radius
+	var params := PhysicsShapeQueryParameters3D.new()
+	params.shape = sphere
+	params.transform = Transform3D(Basis.IDENTITY, global_position)
+	params.collision_mask = collision_mask
+	var attacker: Node3D = shooter if is_instance_valid(shooter) else null
+
+	for hit in space.intersect_shape(params, 32):
+		var body := hit.collider as Node3D
+		if not body or not body.has_method("take_damage"):
+			continue
+		if body.get("splash_immune") == true:
+			continue
+		# The blast is touching whatever it hit directly, so that takes the full amount
+		var dist := 0.0 if body == direct_hit else global_position.distance_to(body.global_position)
+		var damage := roundi(splash_damage * (1.0 - dist / splash_radius))
+		if damage <= 0:
+			continue
+		# Walls block the blast
+		var ray := PhysicsRayQueryParameters3D.create(global_position, body.global_position, collision_mask)
+		var blocker := space.intersect_ray(ray)
+		if not blocker.is_empty() and blocker.collider != body:
+			continue
+		body.take_damage(damage, attacker)

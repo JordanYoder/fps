@@ -1,18 +1,18 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://ckg77qoybdsul"]
 
-[ext_resource type="Texture2D" uid="uid://d4iqpfqgelxln" path="res://assets/sprites/weapons/shotgun/SHTFA0.png" id="1_csn4g"]
-[ext_resource type="Texture2D" uid="uid://c8vs63oxyv70o" path="res://assets/sprites/weapons/shotgun/SHTFB0.png" id="2_cmdy3"]
+[ext_resource type="Texture2D" uid="uid://0did02e750aq" path="res://assets/weapons/first_person/shotgun/muzzle_flash/frame_A.png" id="1_A"]
+[ext_resource type="Texture2D" uid="uid://d0iicuqib6fyf" path="res://assets/weapons/first_person/shotgun/muzzle_flash/frame_B.png" id="2_B"]
 
 [resource]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_csn4g")
+"duration": 4.0,
+"texture": ExtResource("1_A")
 }, {
-"duration": 1.0,
-"texture": ExtResource("2_cmdy3")
+"duration": 3.0,
+"texture": ExtResource("2_B")
 }],
-"loop": 0,
+"loop": false,
 "name": &"flash",
-"speed": 10.0
+"speed": 35.0
 }]
