@@ -182,6 +182,9 @@ func _start_flash(frame: int) -> void:
 		anim = "flash"
 		if not frames.has_animation(anim):
 			return
+	# An "<anim>_alt" animation is picked half the time (Doom's plasma rifle flash)
+	if frames.has_animation(anim + "_alt") and randi() % 2 == 1:
+		anim += "_alt"
 	muzzle_flash.sprite_frames = frames
 	muzzle_flash.visible = true
 	muzzle_flash.play(anim)
@@ -228,9 +231,10 @@ func _fire_bullet(w: WeaponData, accurate: bool) -> bool:
 	var collider: Object = result.collider
 	if collider.has_method("take_damage"):
 		collider.take_damage(w.roll_damage(), shooter)
-		_spawn_blood(result.position)
+		_try_spawn_blood(collider, result.position, aim[0], aim[1])
 		return true
-	_spawn_wall_decal(result.position, result.normal)
+	if w.attack_type != WeaponData.AttackType.MELEE: # Fists and chainsaws don't leave bullet holes
+		_spawn_wall_decal(result.position, result.normal)
 	return false
 
 func _fire_projectile(w: WeaponData) -> void:
@@ -327,6 +331,18 @@ func _spawn_wall_decal(pos: Vector3, normal: Vector3) -> void:
 		var forward := right.cross(up).normalized()
 		decal.global_basis = Basis(right, up, forward)
 		decal.rotate_object_local(Vector3.UP, randf() * TAU)
+
+# Enemies' collision boxes are bigger than their sprites: only bleed when the shot
+# actually crosses a visible pixel, and put the blood on the sprite, not on the box.
+func _try_spawn_blood(collider: Object, box_hit: Vector3, from: Vector3, dir: Vector3) -> void:
+	if collider.has_method("sprite_hit_point"):
+		var hit: Vector3 = collider.sprite_hit_point(from, dir, raycast.get_viewport().get_camera_3d())
+		if hit == Vector3.INF:
+			return
+		# Nudge toward the shooter so the blood draws in front of the sprite
+		_spawn_blood(hit - dir * 0.1)
+	else:
+		_spawn_blood(box_hit - dir * 0.3)
 
 func _spawn_blood(pos: Vector3) -> void:
 	if not blood_splatter_scene:

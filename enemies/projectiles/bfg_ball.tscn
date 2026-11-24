@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://cqkxmeonakqbg" path="res://enemies/projectiles/enemy_projectile.gd" id="1_script"]
+[ext_resource type="Script" path="res://enemies/projectiles/bfg_ball.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://enemies/projectiles/bfg_tracer_hit.tscn" id="10_tracer"]
 [ext_resource type="Texture2D" uid="uid://cr707ymhcgqbc" path="res://assets/sprites/projectiles/bfg_ball/frame_A.png" id="2_flyA"]
 [ext_resource type="Texture2D" uid="uid://dr0ibjp40h1tk" path="res://assets/sprites/projectiles/bfg_ball/frame_B.png" id="3_flyB"]
 [ext_resource type="Texture2D" uid="uid://dl4nmc3fikg" path="res://assets/sprites/projectiles/bfg_explosion/frame_A.png" id="4_boomA"]
@@ -53,6 +54,7 @@ speed = 30.0
 damage_min = 100
 damage_max = 800
 radius = 0.3
+tracer_hit_scene = ExtResource("10_tracer")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.03

@@ -4,12 +4,12 @@
 [ext_resource type="SpriteFrames" uid="uid://5mhetrk6y4a6" path="res://weapons/shotgun/shotgun_frames.tres" id="2_wframes"]
 [ext_resource type="SpriteFrames" uid="uid://ckg77qoybdsul" path="res://weapons/shotgun/shotgun_flash_frames.tres" id="3_fframes"]
 [ext_resource type="AudioStream" uid="uid://c3x0o5khdircq" path="res://assets/sounds/effects/weapons/shotgun_fire.wav" id="4_sound"]
-[ext_resource type="Texture2D" uid="uid://0did02e750aq" path="res://assets/weapons/first_person/shotgun/muzzle_flash/frame_A.png" id="fA"]
-[ext_resource type="Texture2D" uid="uid://d0iicuqib6fyf" path="res://assets/weapons/first_person/shotgun/muzzle_flash/frame_B.png" id="fB"]
-[ext_resource type="Texture2D" uid="uid://bv0l3xcpemhjd" path="res://assets/weapons/first_person/shotgun/frames/frame_A.png" id="gA"]
-[ext_resource type="Texture2D" uid="uid://0rwukc4ouf5x" path="res://assets/weapons/first_person/shotgun/frames/frame_B.png" id="gB"]
-[ext_resource type="Texture2D" uid="uid://lkc5nh281rwf" path="res://assets/weapons/first_person/shotgun/frames/frame_C.png" id="gC"]
-[ext_resource type="Texture2D" uid="uid://cu434fppt4ygx" path="res://assets/weapons/first_person/shotgun/frames/frame_D.png" id="gD"]
+[ext_resource type="Texture2D" uid="uid://0did02e750aq" path="res://assets/sprites/weapons/first_person/shotgun/muzzle_flash/frame_A.png" id="fA"]
+[ext_resource type="Texture2D" uid="uid://d0iicuqib6fyf" path="res://assets/sprites/weapons/first_person/shotgun/muzzle_flash/frame_B.png" id="fB"]
+[ext_resource type="Texture2D" uid="uid://bv0l3xcpemhjd" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_A.png" id="gA"]
+[ext_resource type="Texture2D" uid="uid://0rwukc4ouf5x" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_B.png" id="gB"]
+[ext_resource type="Texture2D" uid="uid://lkc5nh281rwf" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_C.png" id="gC"]
+[ext_resource type="Texture2D" uid="uid://cu434fppt4ygx" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_D.png" id="gD"]
 
 [resource]
 script = ExtResource("1_script")

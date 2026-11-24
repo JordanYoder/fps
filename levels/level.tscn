@@ -7,9 +7,7 @@
 [ext_resource type="Material" uid="uid://r7gbb3jm5tma" path="res://assets/materials/CRATE_2I.tres" id="6_5tmo5"]
 [ext_resource type="PackedScene" uid="uid://b8k0law6povir" path="res://player/player.tscn" id="6_gx3xr"]
 [ext_resource type="Material" uid="uid://dyxkjrvcg0nyw" path="res://assets/materials/CRATE_1N.tres" id="7_yx7kw"]
-[ext_resource type="PackedScene" uid="uid://bv0h3bgbhlxo3" path="res://enemies/cyberdemon/cyberdemon.tscn" id="8_ukwr8"]
-[ext_resource type="PackedScene" uid="uid://b6i3r256lib7d" path="res://enemies/lost_soul/lost_soul.tscn" id="9_pb8y7"]
-[ext_resource type="PackedScene" uid="uid://dpb0x4arti7o3" path="res://enemies/spider_mastermind/spider_mastermind.tscn" id="10_hy0rb"]
+[ext_resource type="PackedScene" uid="uid://0onaj45fiy6h" path="res://enemies/imp/imp.tscn" id="8_d5x7l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gx3xr"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -5256,11 +5254,5 @@ script = ExtResource("1_0vq05")
 mesh_data = SubResource("Resource_p5ddi")
 collision_mode = 1
 
-[node name="Cyberdemon" parent="." unique_id=1317778158 instance=ExtResource("8_ukwr8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.777924, 2.3599465, -15.294973)
-
-[node name="LostSoul" parent="." unique_id=1229155327 instance=ExtResource("9_pb8y7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.321342, 5.287447, -0.36791134)
-
-[node name="SpiderMastermind" parent="." unique_id=1524995834 instance=ExtResource("10_hy0rb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.61034, 2.3899465, 22.869442)
+[node name="Imp" parent="." unique_id=720720936 instance=ExtResource("8_d5x7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 1, 5)

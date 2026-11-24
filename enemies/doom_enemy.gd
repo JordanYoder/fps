@@ -483,3 +483,69 @@ func _die() -> void:
 		queue_free()
 		return
 	get_tree().create_timer(30.0).timeout.connect(queue_free)
+
+# --- Sprite hit testing -------------------------------------------------------
+# The collision box is much bigger than the visible sprite, so effects like blood check
+# whether a shot actually crossed an opaque pixel of the current frame.
+
+## Alpha above this counts as "solid" when hit-testing the sprite.
+const SPRITE_HIT_ALPHA := 0.5
+# Texture -> Image, so each frame's pixels are only pulled from the GPU once.
+static var _sprite_image_cache: Dictionary = {}
+
+## Where a ray from `from` along `dir` hits a visible pixel of this monster's sprite, as seen
+## by `camera`. Returns Vector3.INF if it passes through a transparent part (or misses).
+func sprite_hit_point(from: Vector3, dir: Vector3, camera: Camera3D) -> Vector3:
+	if not anim_sprite or not anim_sprite.sprite_frames or not camera:
+		return Vector3.INF
+	var tex := anim_sprite.sprite_frames.get_frame_texture(anim_sprite.animation, anim_sprite.frame)
+	if not tex:
+		return Vector3.INF
+
+	# Rebuild the quad the Y-billboard shader draws: upright, facing along the camera's
+	# flattened view axis (not toward the camera position).
+	var cam_z := camera.global_basis.z
+	cam_z.y = 0.0
+	if cam_z.length_squared() < 0.0001:
+		return Vector3.INF # Looking straight up/down: billboard is edge-on
+	cam_z = cam_z.normalized()
+	var right := Vector3.UP.cross(cam_z) # Sprite's local +X in world space
+	var center := anim_sprite.global_position
+
+	# Ray / plane intersection
+	var denom := dir.dot(cam_z)
+	if absf(denom) < 0.0001:
+		return Vector3.INF
+	var t := (center - from).dot(cam_z) / denom
+	if t < 0.0:
+		return Vector3.INF
+	var hit := from + dir * t
+
+	# World offset -> texture pixel. Sprites are centered with no offset (see _ready), and
+	# a pixel's world size is pixel_size times the node's scale.
+	var sprite_scale := anim_sprite.global_basis.get_scale()
+	var px_w := anim_sprite.pixel_size * sprite_scale.x
+	var px_h := anim_sprite.pixel_size * sprite_scale.y
+	var local := hit - center
+	var x := local.dot(right) / px_w + tex.get_width() * 0.5
+	var y := tex.get_height() * 0.5 - local.y / px_h # Image rows go down, world Y goes up
+	if anim_sprite.flip_h:
+		x = tex.get_width() - x
+	if anim_sprite.flip_v:
+		y = tex.get_height() - y
+	if x < 0.0 or y < 0.0 or x >= tex.get_width() or y >= tex.get_height():
+		return Vector3.INF
+
+	var img := _get_sprite_image(tex)
+	if not img or img.get_pixel(int(x), int(y)).a < SPRITE_HIT_ALPHA:
+		return Vector3.INF
+	return hit
+
+static func _get_sprite_image(tex: Texture2D) -> Image:
+	if _sprite_image_cache.has(tex):
+		return _sprite_image_cache[tex]
+	var img := tex.get_image()
+	if img and img.is_compressed():
+		img.decompress()
+	_sprite_image_cache[tex] = img
+	return img

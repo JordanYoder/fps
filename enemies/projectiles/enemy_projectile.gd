@@ -8,9 +8,14 @@ extends Node3D
 @export var speed: float = 12.0
 @export var damage_min: int = 3
 @export var damage_max: int = 24
+## If > 0, direct hits use Doom's missile formula instead: 1d8 x this (plasma ball: 5, so
+## 5, 10 ... 40). damage_min/damage_max are then ignored.
+@export var damage_per_roll: int = 0
 @export var radius: float = 0.25
 @export var lifetime: float = 5.0
 @export_flags_3d_physics var collision_mask: int = 1
+## Played where the projectile hits (e.g. the rocket's explosion).
+@export var impact_sound: AudioStream
 
 @export_group("Explosion")
 ## Damage at the centre of the blast, falling to 0 at splash_radius. 0 = no explosion.
@@ -102,9 +107,10 @@ func _physics_process(delta: float) -> void:
 
 func _impact(collider: Object) -> void:
 	_done = true
+	_play_impact_sound()
 	if collider and collider.has_method("take_damage"):
 		var attacker: Node3D = shooter if is_instance_valid(shooter) else null
-		collider.take_damage(randi_range(damage_min, damage_max), attacker)
+		collider.take_damage(_roll_direct_damage(), attacker)
 	if splash_damage > 0:
 		_explode(collider)
 
@@ -112,6 +118,25 @@ func _impact(collider: Object) -> void:
 		sprite.play("impact")
 		await sprite.animation_finished
 	queue_free()
+
+
+# The sound gets its own node in the level, so it isn't cut off when the projectile frees itself.
+func _play_impact_sound() -> void:
+	if not impact_sound:
+		return
+	var player := AudioStreamPlayer3D.new()
+	player.stream = impact_sound
+	get_tree().current_scene.add_child(player)
+	player.global_position = global_position
+	player.finished.connect(player.queue_free)
+	player.play()
+
+
+## Damage dealt to whatever the projectile hits directly. Subclasses can override this.
+func _roll_direct_damage() -> int:
+	if damage_per_roll > 0:
+		return randi_range(1, 8) * damage_per_roll
+	return randi_range(damage_min, damage_max)
 
 
 # Doom-style radius damage: everything with take_damage within splash_radius that the blast can

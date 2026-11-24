@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://cvi8668klp7xm" path="res://player/player.gd" id="1_3qydi"]
 [ext_resource type="Script" uid="uid://d0qlkgikd8lcq" path="res://weapons/weapon_manager.gd" id="2_gwnis"]
 [ext_resource type="Script" uid="uid://so521phpo1rq" path="res://weapons/weapon_data.gd" id="3_fhl08"]
+[ext_resource type="Resource" uid="uid://21m0jgxvicnx" path="res://weapons/fist/fist.tres" id="4_2ieo8"]
 [ext_resource type="Resource" uid="uid://deeb318e1w1em" path="res://weapons/pistol/pistol.tres" id="4_vtle1"]
 [ext_resource type="Resource" uid="uid://jjigml3oywcm" path="res://weapons/shotgun/shotgun.tres" id="5_vtle1"]
 [ext_resource type="Resource" uid="uid://cka3e70w4u8qm" path="res://weapons/chaingun/chaingun.tres" id="6_od3ui"]
+[ext_resource type="Resource" uid="uid://4eg1qjoaec2w" path="res://weapons/plasma_rifle/plasma_rifle.tres" id="7_8t03j"]
 [ext_resource type="Resource" uid="uid://dkmtl682cl2p1" path="res://weapons/bfg9000/bfg9000.tres" id="7_rgyib"]
-[ext_resource type="PackedScene" uid="uid://cn6ea7vbhptc" path="res://weapons/bullet_decal.tscn" id="8_od3ui"]
+[ext_resource type="Resource" uid="uid://dm4pibendsqrs" path="res://weapons/rocket_launcher/rocket_launcher.tres" id="8_ebec5"]
+[ext_resource type="PackedScene" uid="uid://cn6ea7vbhptc" path="res://weapons/weapon_effects/bullet_decal.tscn" id="8_od3ui"]
+[ext_resource type="PackedScene" uid="uid://b3lkdy00f15h" path="res://weapons/weapon_effects/blood_spatter.tscn" id="9_hg6s5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
 radius = 0.4
@@ -51,8 +55,9 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_gwnis")
-weapons = Array[ExtResource("3_fhl08")]([ExtResource("4_vtle1"), ExtResource("5_vtle1"), ExtResource("6_od3ui"), ExtResource("7_rgyib")])
+weapons = Array[ExtResource("3_fhl08")]([ExtResource("4_2ieo8"), ExtResource("4_vtle1"), ExtResource("5_vtle1"), ExtResource("6_od3ui"), ExtResource("8_ebec5"), ExtResource("7_8t03j"), ExtResource("7_rgyib")])
 wall_decal_scene = ExtResource("8_od3ui")
+blood_splatter_scene = ExtResource("9_hg6s5")
 
 [node name="WeaponSprite" type="AnimatedSprite2D" parent="HUD/WeaponManager" unique_id=432965689]
 animation = &""

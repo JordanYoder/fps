@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://ckg77qoybdsul"]
 
-[ext_resource type="Texture2D" uid="uid://0did02e750aq" path="res://assets/weapons/first_person/shotgun/muzzle_flash/frame_A.png" id="1_A"]
-[ext_resource type="Texture2D" uid="uid://d0iicuqib6fyf" path="res://assets/weapons/first_person/shotgun/muzzle_flash/frame_B.png" id="2_B"]
+[ext_resource type="Texture2D" uid="uid://0did02e750aq" path="res://assets/sprites/weapons/first_person/shotgun/muzzle_flash/frame_A.png" id="1_A"]
+[ext_resource type="Texture2D" uid="uid://d0iicuqib6fyf" path="res://assets/sprites/weapons/first_person/shotgun/muzzle_flash/frame_B.png" id="2_B"]
 
 [resource]
 animations = [{

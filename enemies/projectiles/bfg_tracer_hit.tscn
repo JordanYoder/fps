@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://ong73lcuwkld" path="res://weapons/weapon_effects/one_shot_effect.gd" id="5_script"]
+[ext_resource type="Texture2D" uid="uid://mcn6py7wqn4g" path="res://assets/sprites/projectiles/bfg_tracer_hit/frame_A.png" id="1_hitA"]
+[ext_resource type="Texture2D" uid="uid://3me4kp0ewq2y" path="res://assets/sprites/projectiles/bfg_tracer_hit/frame_B.png" id="2_hitB"]
+[ext_resource type="Texture2D" uid="uid://5lwhe8n0yajp" path="res://assets/sprites/projectiles/bfg_tracer_hit/frame_C.png" id="3_hitC"]
+[ext_resource type="Texture2D" uid="uid://bno1npfrqtdn4" path="res://assets/sprites/projectiles/bfg_tracer_hit/frame_D.png" id="4_hitD"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hit"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hitA")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hitB")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hitC")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hitD")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.4
+}]
+
+[node name="BFGTracerHit" type="AnimatedSprite3D"]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_hit")
+script = ExtResource("5_script")

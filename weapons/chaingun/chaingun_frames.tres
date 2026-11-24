@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dej2rkft5vg1d"]
 
-[ext_resource type="Texture2D" uid="uid://bixb2hfq5fk8n" path="res://assets/weapons/first_person/chaingun/frames/frame_A.png" id="1_A"]
-[ext_resource type="Texture2D" uid="uid://cyj0tlvcbpw5h" path="res://assets/weapons/first_person/chaingun/frames/frame_B.png" id="2_B"]
+[ext_resource type="Texture2D" uid="uid://bixb2hfq5fk8n" path="res://assets/sprites/weapons/first_person/chaingun/frames/frame_A.png" id="1_A"]
+[ext_resource type="Texture2D" uid="uid://cyj0tlvcbpw5h" path="res://assets/sprites/weapons/first_person/chaingun/frames/frame_B.png" id="2_B"]
 
 [resource]
 animations = [{

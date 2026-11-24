@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DebugSettings" format=3 uid="uid://bcas6y47dvsqa"]
+
+[ext_resource type="Script" uid="uid://rldg4n0aqrqb" path="res://debug/debug_settings.gd" id="1_8oj0t"]
+
+[resource]
+script = ExtResource("1_8oj0t")
+option_defaults = Dictionary[String, bool]({
+"Audio": false
+})

@@ -4,10 +4,10 @@
 [ext_resource type="SpriteFrames" uid="uid://e7rg3a1vn2va" path="res://weapons/pistol/pistol_frames.tres" id="2_wframes"]
 [ext_resource type="SpriteFrames" uid="uid://d36rsv8c57ac" path="res://weapons/pistol/pistol_flash_frames.tres" id="3_fframes"]
 [ext_resource type="AudioStream" uid="uid://cup71u4pln6sb" path="res://assets/sounds/effects/weapons/pistol_fire.wav" id="4_sound"]
-[ext_resource type="Texture2D" uid="uid://cdh58wjep6ye8" path="res://assets/weapons/first_person/pistol/frames/frame_A.png" id="gA"]
-[ext_resource type="Texture2D" uid="uid://bf0wvy0hsdd41" path="res://assets/weapons/first_person/pistol/frames/frame_B.png" id="gB"]
-[ext_resource type="Texture2D" uid="uid://cxg88v3m2mi00" path="res://assets/weapons/first_person/pistol/frames/frame_C.png" id="gC"]
-[ext_resource type="Texture2D" uid="uid://ctmggnl5u26wi" path="res://assets/weapons/first_person/pistol/muzzle_flash/frame_A.png" id="fA"]
+[ext_resource type="Texture2D" uid="uid://cdh58wjep6ye8" path="res://assets/sprites/weapons/first_person/pistol/frames/frame_A.png" id="gA"]
+[ext_resource type="Texture2D" uid="uid://bf0wvy0hsdd41" path="res://assets/sprites/weapons/first_person/pistol/frames/frame_B.png" id="gB"]
+[ext_resource type="Texture2D" uid="uid://cxg88v3m2mi00" path="res://assets/sprites/weapons/first_person/pistol/frames/frame_C.png" id="gC"]
+[ext_resource type="Texture2D" uid="uid://ctmggnl5u26wi" path="res://assets/sprites/weapons/first_person/pistol/muzzle_flash/frame_A.png" id="fA"]
 
 [resource]
 script = ExtResource("1_script")

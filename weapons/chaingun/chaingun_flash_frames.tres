@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bdei0oqo5pdpm"]
 
-[ext_resource type="Texture2D" uid="uid://c8jrfg0i4talt" path="res://assets/weapons/first_person/chaingun/muzzle_flash/frame_A.png" id="1_A"]
-[ext_resource type="Texture2D" uid="uid://rrbyl2wm67ap" path="res://assets/weapons/first_person/chaingun/muzzle_flash/frame_B.png" id="2_B"]
+[ext_resource type="Texture2D" uid="uid://c8jrfg0i4talt" path="res://assets/sprites/weapons/first_person/chaingun/muzzle_flash/frame_A.png" id="1_A"]
+[ext_resource type="Texture2D" uid="uid://rrbyl2wm67ap" path="res://assets/sprites/weapons/first_person/chaingun/muzzle_flash/frame_B.png" id="2_B"]
 
 [resource]
 animations = [{

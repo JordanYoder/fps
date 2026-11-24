@@ -40,7 +40,8 @@ enum AttackType {
 ## rest (Doom's A_ReFire). -1 = check when the animation ends.
 @export var refire_frame: int = -1
 ## Optional. When the attack happens on frame N, plays "flash_N" if it exists, else "flash".
-## Set the flash animations to 35 fps with tic durations too.
+## Set the flash animations to 35 fps with tic durations too. If "<name>_alt" also exists
+## (e.g. "flash_alt"), each shot picks one of the two at random, like the plasma rifle.
 @export var muzzle_flash_frames: SpriteFrames
 ## "shoot" frames that start the flash. Empty = flash with every attack.
 ## (Doom's rocket launcher flashes one state before it fires.)

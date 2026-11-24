@@ -1,7 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://or0k2xexq131"]
 
 [ext_resource type="Script" uid="uid://cqkxmeonakqbg" path="res://enemies/projectiles/enemy_projectile.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://dmmp5c8bsdu8g" path="res://assets/sprites/projectiles/rocket/back/frame_A.png" id="2_back"]
+[ext_resource type="AudioStream" uid="uid://dn0v0vggcv548" path="res://assets/sounds/effects/weapons/rocket_explosion.wav" id="2_kwam2"]
 [ext_resource type="Texture2D" uid="uid://drv3eftdtbulp" path="res://assets/sprites/projectiles/rocket/back_left/frame_A.png" id="3_back_left"]
 [ext_resource type="Texture2D" uid="uid://d163oijxubw2s" path="res://assets/sprites/projectiles/rocket/back_right/frame_A.png" id="4_back_right"]
 [ext_resource type="Texture2D" uid="uid://78jff71uk7fq" path="res://assets/sprites/projectiles/rocket/front/frame_A.png" id="5_front"]
@@ -19,7 +20,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_back")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_back",
 "speed": 10.0
 }, {
@@ -27,7 +28,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_back_left")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_back_left",
 "speed": 10.0
 }, {
@@ -35,7 +36,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_back_right")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_back_right",
 "speed": 10.0
 }, {
@@ -43,7 +44,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_front")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_front",
 "speed": 10.0
 }, {
@@ -51,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_front_left")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_front_left",
 "speed": 10.0
 }, {
@@ -59,7 +60,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_front_right")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_front_right",
 "speed": 10.0
 }, {
@@ -67,7 +68,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_left")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_left",
 "speed": 10.0
 }, {
@@ -75,7 +76,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_right")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly_right",
 "speed": 10.0
 }, {
@@ -89,21 +90,22 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_boomD")
 }],
-"loop": false,
+"loop": 0,
 "name": &"impact",
 "speed": 5.0
 }]
 
-[node name="CyberdemonRocket" type="Node3D"]
+[node name="CyberdemonRocket" type="Node3D" unique_id=719139531]
 script = ExtResource("1_script")
 speed = 24.0
 damage_min = 20
 damage_max = 160
+damage_per_roll = 20
 radius = 0.3
+impact_sound = ExtResource("2_kwam2")
 splash_damage = 128
-splash_radius = 4.0
 
-[node name="Sprite" type="AnimatedSprite3D" parent="."]
+[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1897027961]
 pixel_size = 0.03
 billboard = 1
 texture_filter = 0
@@ -111,7 +113,7 @@ sprite_frames = SubResource("SpriteFrames_rocket")
 animation = &"fly_front"
 autoplay = "fly_front"
 
-[node name="Glow" type="OmniLight3D" parent="."]
+[node name="Glow" type="OmniLight3D" parent="." unique_id=1834241089]
 light_color = Color(1, 0.62, 0.25, 1)
 light_energy = 2.0
 omni_range = 4.0

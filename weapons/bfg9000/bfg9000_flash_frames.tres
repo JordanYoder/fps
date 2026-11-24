@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://c1u055smdtcee"]
 
-[ext_resource type="Texture2D" uid="uid://b6ji8kgg4524a" path="res://assets/weapons/first_person/bfg9000/muzzle_flash/frame_A.png" id="1_3duov"]
-[ext_resource type="Texture2D" uid="uid://bj0n1bjsw7nif" path="res://assets/weapons/first_person/bfg9000/muzzle_flash/frame_B.png" id="2_jsq75"]
+[ext_resource type="Texture2D" uid="uid://csco4l66mrp21" path="res://assets/sprites/weapons/first_person/bfg9000/muzzle_flash/frame_A.png" id="1_3duov"]
+[ext_resource type="Texture2D" uid="uid://eqgx3y2oy5xd" path="res://assets/sprites/weapons/first_person/bfg9000/muzzle_flash/frame_B.png" id="2_jsq75"]
 
 [resource]
 animations = [{

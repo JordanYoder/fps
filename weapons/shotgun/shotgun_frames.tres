@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://5mhetrk6y4a6"]
 
-[ext_resource type="Texture2D" uid="uid://bv0l3xcpemhjd" path="res://assets/weapons/first_person/shotgun/frames/frame_A.png" id="1_A"]
-[ext_resource type="Texture2D" uid="uid://0rwukc4ouf5x" path="res://assets/weapons/first_person/shotgun/frames/frame_B.png" id="2_B"]
-[ext_resource type="Texture2D" uid="uid://lkc5nh281rwf" path="res://assets/weapons/first_person/shotgun/frames/frame_C.png" id="3_C"]
-[ext_resource type="Texture2D" uid="uid://cu434fppt4ygx" path="res://assets/weapons/first_person/shotgun/frames/frame_D.png" id="4_D"]
+[ext_resource type="Texture2D" uid="uid://bv0l3xcpemhjd" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_A.png" id="1_A"]
+[ext_resource type="Texture2D" uid="uid://0rwukc4ouf5x" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_B.png" id="2_B"]
+[ext_resource type="Texture2D" uid="uid://lkc5nh281rwf" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_C.png" id="3_C"]
+[ext_resource type="Texture2D" uid="uid://cu434fppt4ygx" path="res://assets/sprites/weapons/first_person/shotgun/frames/frame_D.png" id="4_D"]
 
 [resource]
 animations = [{

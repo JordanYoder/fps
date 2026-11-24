@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b8yq1fpo8ie2b"]
 
 [ext_resource type="Script" uid="uid://cqkxmeonakqbg" path="res://enemies/projectiles/enemy_projectile.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bf0juaocon5ba" path="res://assets/sprites/projectiles/plasma_ball/frame_A.png" id="2_flyA"]
@@ -18,7 +18,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_flyB")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fly",
 "speed": 6.0
 }, {
@@ -38,19 +38,20 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_boomE")
 }],
-"loop": false,
+"loop": 0,
 "name": &"impact",
 "speed": 9.0
 }]
 
-[node name="PlasmaBall" type="Node3D"]
+[node name="PlasmaBall" type="Node3D" unique_id=668159264]
 script = ExtResource("1_script")
-speed = 30.0
+speed = 27.0
 damage_min = 5
 damage_max = 40
+damage_per_roll = 5
 radius = 0.3
 
-[node name="Sprite" type="AnimatedSprite3D" parent="."]
+[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=2099444638]
 pixel_size = 0.03
 billboard = 1
 texture_filter = 0
@@ -58,7 +59,7 @@ sprite_frames = SubResource("SpriteFrames_proj")
 animation = &"fly"
 autoplay = "fly"
 
-[node name="Glow" type="OmniLight3D" parent="."]
+[node name="Glow" type="OmniLight3D" parent="." unique_id=667328943]
 light_color = Color(0.45, 0.6, 1, 1)
 light_energy = 1.5
 omni_range = 3.0
