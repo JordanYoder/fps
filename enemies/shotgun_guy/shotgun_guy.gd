@@ -11,6 +11,9 @@ extends DoomEnemy
 func _ready() -> void:
 	max_health = 30
 	pain_chance = 0.66
+	pain_time = 0.17 # 6 tics
+	mass = 100.0
+	species = &"shotgun_guy"
 	has_melee = false
 	has_ranged = true
 	# Attack: frame E aims (~0.29s), frame F fires and holds briefly. Doom runs each frame for
@@ -37,4 +40,4 @@ func _perform_ranged_attack() -> void:
 
 		if not result.is_empty() and result.collider.has_method("take_damage"):
 			var dmg := randi_range(damage_per_pellet_min, damage_per_pellet_max)
-			result.collider.take_damage(dmg)
+			result.collider.take_damage(dmg, self) # Credited, so stray shots start infighting

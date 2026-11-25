@@ -5,14 +5,16 @@
 [ext_resource type="PackedScene" path="res://enemies/projectiles/bfg_ball.tscn" id="2_5kpng"]
 [ext_resource type="SpriteFrames" uid="uid://c1u055smdtcee" path="res://weapons/bfg9000/bfg9000_flash_frames.tres" id="2_jsr2v"]
 [ext_resource type="SpriteFrames" uid="uid://5ucmgyrpbspb" path="res://weapons/bfg9000/bfg9000_frames.tres" id="4_5kpng"]
-[ext_resource type="Texture2D" uid="uid://1sfsk84g6kba" path="res://assets/sprites/weapons/first_person/bfg9000/frames/frame_A.png" id="gA"]
-[ext_resource type="Texture2D" uid="uid://brt12ptthoja3" path="res://assets/sprites/weapons/first_person/bfg9000/frames/frame_B.png" id="gB"]
 [ext_resource type="Texture2D" uid="uid://csco4l66mrp21" path="res://assets/sprites/weapons/first_person/bfg9000/muzzle_flash/frame_A.png" id="fA"]
 [ext_resource type="Texture2D" uid="uid://eqgx3y2oy5xd" path="res://assets/sprites/weapons/first_person/bfg9000/muzzle_flash/frame_B.png" id="fB"]
+[ext_resource type="Texture2D" uid="uid://1sfsk84g6kba" path="res://assets/sprites/weapons/first_person/bfg9000/frames/frame_A.png" id="gA"]
+[ext_resource type="Texture2D" uid="uid://brt12ptthoja3" path="res://assets/sprites/weapons/first_person/bfg9000/frames/frame_B.png" id="gB"]
 
 [resource]
 script = ExtResource("1_oc5cp")
 weapon_name = "BFG 9000"
+ammo_type = 4
+ammo_per_shot = 40
 attack_type = 2
 projectile_scene = ExtResource("2_5kpng")
 weapon_frames = ExtResource("4_5kpng")

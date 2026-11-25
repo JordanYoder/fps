@@ -1,7 +1,15 @@
 extends Control
 
+## Emitted when any ammo count changes (firing, pickups, respawn).
+signal ammo_changed(ammo_type: WeaponData.AmmoType, amount: int, max_amount: int)
+## Emitted when a weapon finishes switching in (or is first equipped).
+signal weapon_equipped(weapon: WeaponData)
+
 @export var weapons: Array[WeaponData] = []
 @export var weapon_scale: float = 4.5
+## Smoke puff spawned where a bullet or punch hits a wall.
+@export var bullet_puff_scene: PackedScene
+## Bullet hole decal left on walls by bullets (not fists).
 @export var wall_decal_scene: PackedScene
 @export var blood_splatter_scene: PackedScene
 
@@ -11,6 +19,29 @@ extends Control
 ## Lower/raise speed in those pixels per second. Like Doom, a switch can't start mid-shot and
 ## you can't fire until the new weapon is fully raised, so switching can't beat the fire rate.
 @export var switch_speed: float = 270.0
+
+@export_group("Ammo")
+## Most of each type you can carry (Doom: 200 bullets, 50 shells, 50 rockets, 300 cells;
+## a backpack doubles these).
+@export var max_bullets: int = 200
+@export var max_shells: int = 50
+@export var max_rockets: int = 50
+@export var max_cells: int = 300
+## What you start with. Doom gives you 50 bullets and nothing else; the rest are placeholders
+## so every weapon can be tested until there are ammo pickups.
+@export var start_bullets: int = 50
+@export var start_shells: int = 20
+@export var start_rockets: int = 10
+@export var start_cells: int = 100
+## When you run dry, switch to the first weapon in this list (indices into `weapons`) that
+## has ammo. Default is Doom's order for the weapons array in player.tscn: plasma, chaingun,
+## shotgun, pistol, rocket launcher, BFG, fist. Explosive weapons come late so you don't
+## get switched to a rocket launcher at point-blank range.
+@export var auto_switch_order: Array[int] = [5, 3, 2, 1, 4, 6, 0]
+
+## Set from the debug menu: firing doesn't use ammo.
+var unlimited_ammo: bool = false
+var _ammo: Dictionary[WeaponData.AmmoType, int] = {}
 
 @onready var weapon_sprite: AnimatedSprite2D = $WeaponSprite
 @onready var muzzle_flash: AnimatedSprite2D = $MuzzleFlash
@@ -48,6 +79,47 @@ func _ready() -> void:
 	_audio = AudioStreamPlayer.new()
 	_audio.max_polyphony = 4 # Chaingun shots overlap
 	add_child(_audio)
+	_ammo = {
+		WeaponData.AmmoType.BULLETS: mini(start_bullets, max_bullets),
+		WeaponData.AmmoType.SHELLS: mini(start_shells, max_shells),
+		WeaponData.AmmoType.ROCKETS: mini(start_rockets, max_rockets),
+		WeaponData.AmmoType.CELLS: mini(start_cells, max_cells),
+	}
+	DebugMenu.add_option("Unlimited ammo", func(on: bool) -> void: unlimited_ammo = on)
+
+## How much of this ammo type you have (melee weapons' NONE reports 0).
+func get_ammo(type: WeaponData.AmmoType) -> int:
+	return _ammo.get(type, 0)
+
+func get_max_ammo(type: WeaponData.AmmoType) -> int:
+	match type:
+		WeaponData.AmmoType.BULLETS: return max_bullets
+		WeaponData.AmmoType.SHELLS: return max_shells
+		WeaponData.AmmoType.ROCKETS: return max_rockets
+		WeaponData.AmmoType.CELLS: return max_cells
+	return 0
+
+## For ammo pickups. Returns false if you're already full, so the pickup can stay on the floor.
+func add_ammo(type: WeaponData.AmmoType, amount: int) -> bool:
+	if type == WeaponData.AmmoType.NONE or get_ammo(type) >= get_max_ammo(type):
+		return false
+	_set_ammo(type, mini(get_ammo(type) + amount, get_max_ammo(type)))
+	return true
+
+func _set_ammo(type: WeaponData.AmmoType, amount: int) -> void:
+	_ammo[type] = amount
+	ammo_changed.emit(type, amount, get_max_ammo(type))
+
+func has_ammo_for(w: WeaponData) -> bool:
+	return unlimited_ammo or w.ammo_type == WeaponData.AmmoType.NONE \
+		or get_ammo(w.ammo_type) >= w.ammo_per_shot
+
+# Doom's P_CheckAmmo: out of ammo, so put this gun away for the best one you can still fire.
+func _switch_from_empty_weapon() -> void:
+	for index in auto_switch_order:
+		if index >= 0 and index < weapons.size() and weapons[index] and has_ammo_for(weapons[index]):
+			request_switch(index)
+			return
 
 func setup(player_raycast: RayCast3D) -> void:
 	raycast = player_raycast
@@ -130,9 +202,13 @@ func equip_weapon(index: int) -> void:
 		muzzle_flash.sprite_frames = current_weapon.muzzle_flash_frames
 	weapon_sprite.play("idle")
 	_align_weapon_sprite()
+	weapon_equipped.emit(current_weapon)
 
 func try_fire() -> void:
 	if not can_shoot or switch_state != SwitchState.READY or not current_weapon or not raycast:
+		return
+	if not has_ammo_for(current_weapon):
+		_switch_from_empty_weapon()
 		return
 	_refire_count = 0
 	_start_shoot()
@@ -167,6 +243,10 @@ func _on_weapon_frame_changed() -> void:
 # Doom's A_ReFire: still holding the trigger (and not switching) restarts the attack.
 func _try_refire() -> bool:
 	if pending_index == -1 and Input.is_action_pressed("shoot"):
+		if not has_ammo_for(current_weapon):
+			_switch_from_empty_weapon()
+			_refire_count = 0
+			return false
 		_refire_count += 1
 		_start_shoot()
 		return true
@@ -192,6 +272,15 @@ func _start_flash(frame: int) -> void:
 
 func _attack() -> void:
 	var w := current_weapon
+	# The chaingun's second frame can come up empty: Doom just skips that shot
+	if not has_ammo_for(w):
+		return
+	if not unlimited_ammo and w.ammo_type != WeaponData.AmmoType.NONE:
+		_set_ammo(w.ammo_type, get_ammo(w.ammo_type) - w.ammo_per_shot)
+	# Doom's P_NoiseAlert: every attack, even a punch, wakes monsters that can hear it
+	var shooter := _get_shooter()
+	if shooter:
+		DoomEnemy.noise_alert(get_tree(), shooter, raycast.global_position)
 	match w.attack_type:
 		WeaponData.AttackType.HITSCAN:
 			_play_sound(w.fire_sound)
@@ -233,7 +322,10 @@ func _fire_bullet(w: WeaponData, accurate: bool) -> bool:
 		collider.take_damage(w.roll_damage(), shooter)
 		_try_spawn_blood(collider, result.position, aim[0], aim[1])
 		return true
-	if w.attack_type != WeaponData.AttackType.MELEE: # Fists and chainsaws don't leave bullet holes
+	# Pull back off the wall so the sprite isn't half buried in it
+	var melee := w.attack_type == WeaponData.AttackType.MELEE
+	_spawn_bullet_puff(result.position - aim[1] * 0.1, melee)
+	if not melee: # Fists don't leave bullet holes
 		_spawn_wall_decal(result.position, result.normal)
 	return false
 
@@ -246,6 +338,18 @@ func _fire_projectile(w: WeaponData) -> void:
 	var aim := _aim(w, true)
 	# Start a little ahead of the camera so it's not inside the player
 	var from: Vector3 = aim[0] + aim[1] * 0.6
+	# Point-blank against a wall, that spot can be inside or past the wall: the rocket would then
+	# explode on the far side and the wall would shield us from our own blast. Pull it back
+	# to our side of whatever's in the way.
+	var query := PhysicsRayQueryParameters3D.create(aim[0], from, raycast.collision_mask)
+	var shooter := _get_shooter()
+	if shooter is CollisionObject3D:
+		query.exclude = [(shooter as CollisionObject3D).get_rid()]
+	var blocked := raycast.get_world_3d().direct_space_state.intersect_ray(query)
+	if not blocked.is_empty():
+		var r = projectile.get("radius") # Only EnemyProjectile has one
+		var back: float = (r if r is float else 0.0) + 0.05
+		from = aim[0] + aim[1] * maxf(aim[0].distance_to(blocked.position) - back, 0.0)
 	if projectile.has_method("launch"):
 		projectile.launch(from, from + aim[1] * 10.0, _get_shooter())
 	else:
@@ -326,11 +430,21 @@ func _spawn_wall_decal(pos: Vector3, normal: Vector3) -> void:
 	get_tree().current_scene.add_child(decal)
 	decal.global_position = pos
 	if normal.length_squared() > 0.001:
+		# A Decal projects along its local -Y, so point +Y out of the wall
 		var up := normal.normalized()
 		var right := up.cross(Vector3.FORWARD if absf(up.z) < 0.99 else Vector3.RIGHT).normalized()
 		var forward := right.cross(up).normalized()
 		decal.global_basis = Basis(right, up, forward)
 		decal.rotate_object_local(Vector3.UP, randf() * TAU)
+
+func _spawn_bullet_puff(pos: Vector3, melee: bool) -> void:
+	if not bullet_puff_scene:
+		return
+	var puff := bullet_puff_scene.instantiate() as Node3D
+	if "skip_spark_frames" in puff:
+		puff.skip_spark_frames = melee
+	puff.position = pos # Set before _ready so its jitter applies on top
+	get_tree().current_scene.add_child(puff)
 
 # Enemies' collision boxes are bigger than their sprites: only bleed when the shot
 # actually crosses a visible pixel, and put the blood on the sprite, not on the box.

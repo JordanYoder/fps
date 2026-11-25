@@ -19,6 +19,9 @@ var _charge_timer: float = 0.0
 func _ready() -> void:
 	max_health = 100
 	pain_chance = 1.0 # Doom Lost Soul = 256/256: every hit stuns it
+	pain_time = 0.17 # 6 tics
+	mass = 50.0 # The lightest monster: hits knock it far
+	species = &"lost_soul"
 	speed = 3.5 # Doom Lost Soul speed 8, same as the Imp
 	can_fly = true
 	leaves_no_corpse = true # Bursts into flame and is gone, like Doom
@@ -78,8 +81,8 @@ func _end_charge() -> void:
 	_pick_new_chase_dir()
 	_play_anim("walk")
 
-func take_damage(amount: int, attacker: Node3D = null) -> void:
+func take_damage(amount: int, attacker: Node3D = null, inflictor_pos: Vector3 = Vector3.INF) -> void:
 	# Doom stops a charging Lost Soul in its tracks when it's hurt
 	if _charging and state != State.DEAD:
 		_end_charge()
-	super.take_damage(amount, attacker)
+	super.take_damage(amount, attacker, inflictor_pos)

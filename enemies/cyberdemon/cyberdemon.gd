@@ -14,6 +14,9 @@ const CYBERDEMON_ROCKET_PATH := "res://enemies/projectiles/cyberdemon_rocket.tsc
 func _ready() -> void:
 	max_health = 4000
 	pain_chance = 0.08 # Doom Cyberdemon = 20/256 (~8%)
+	pain_time = 0.29 # 10 tics
+	mass = 1000.0
+	species = &"cyberdemon"
 	speed = 7.0 # Doom Cyberdemon speed 16 vs Imp's 8
 	has_melee = false
 	has_ranged = true

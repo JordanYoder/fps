@@ -886,6 +886,8 @@ func begin_shape_adjust(node: UBMeshInstance3D, shape_kind: int, dims: Dictionar
 	_ensure_panels_discovered()
 
 	var own_sel: bool = node == edited
+	values = values.duplicate()
+	UBShapeTool.dims_to_values(shape_kind, dims, values)
 	adjust = {
 		"id": "shape",
 		"node": node,
@@ -910,7 +912,7 @@ func begin_shape_adjust(node: UBMeshInstance3D, shape_kind: int, dims: Dictionar
 
 
 func _remember_shape_params(shape_kind: int, values: Dictionary) -> void:
-	action_options[UBShapeTool.memory_key(shape_kind)] = values.duplicate()
+	action_options[UBShapeTool.memory_key(shape_kind)] = UBShapeTool.strip_dims(shape_kind, values)
 	_queue_save_settings()
 
 
@@ -926,7 +928,7 @@ func _on_shape_edit_requested() -> void:
 	var kind := int(spec.kind)
 
 	begin_shape_adjust(edited, kind, (spec.dims as Dictionary).duplicate(),
-		UBShapeTool.SHAPE_PARAMS[kind], (spec.params as Dictionary).duplicate(),
+		UBShapeTool.adjust_params(kind), (spec.params as Dictionary).duplicate(),
 		UBShapeTool.shape_title(kind), bool(spec.get("base", false)))
 
 
@@ -1140,8 +1142,11 @@ func _apply_session_changes(changes: Dictionary, derive_key: String) -> void:
 		var node = adjust.node
 		if node == null or not is_instance_valid(node) or node.mesh_data == null:
 			return
+		var prior_dims: Dictionary = (adjust.dims as Dictionary).duplicate()
+		UBShapeTool.values_to_dims(adjust.kind, adjust.values, adjust.dims)
 		if adjust.kind == UBShapeTool.Kind.STAIRS:
 
+			# A size change keeps the step count and recomputes the riser.
 			UBShapeTool.derive_stairs_params(adjust.dims, adjust.values, derive_key)
 			adjust_panel.sync_values(adjust.values)
 		_adjust_reapplying = true
@@ -1149,6 +1154,7 @@ func _apply_session_changes(changes: Dictionary, derive_key: String) -> void:
 
 		if _demo_face_wall(node.mesh_data.faces.size(), rebuilt.faces.size(), adjust.title):
 			_restore_session_values(prior)
+			adjust.dims = prior_dims
 			adjust_panel.sync_values(adjust.values)
 			_adjust_reapplying = false
 			return
@@ -1157,7 +1163,7 @@ func _apply_session_changes(changes: Dictionary, derive_key: String) -> void:
 		rebuilt.shape_spec = {
 			"kind": adjust.kind,
 			"dims": (adjust.dims as Dictionary).duplicate(),
-			"params": (adjust.values as Dictionary).duplicate(),
+			"params": UBShapeTool.strip_dims(adjust.kind, adjust.values),
 			"base": bool(adjust.get("base", false)),
 		}
 		node.mesh_data.copy_from(rebuilt)

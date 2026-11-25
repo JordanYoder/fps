@@ -10,6 +10,9 @@ func _ready() -> void:
 	max_health = 1000
 	health = max_health # super._ready() already set health from the Imp's 60
 	pain_chance = 0.2 # Doom Baron = 50/256 (~20%)
+	pain_time = 0.11 # 4 tics
+	mass = 1000.0
+	species = &"baron" # Doom counts Hell Knights as Barons here too
 	claw_damage_min = 10
 	claw_damage_max = 80
 	# Attack: frames E and F wind up (8 tics each, ~0.23s), frame G throws/claws (8 tics)

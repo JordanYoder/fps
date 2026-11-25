@@ -110,6 +110,72 @@ const SHAPE_PARAMS := {
 }
 
 
+## Adjust-panel rows for a shape's drawn size, per kind. Each row's `dims` lists
+## the draw dims ({su, sv, ah}) it sets; a row over two dims shows their max.
+## Shapes drawn from points (Poly, Wall, Trim Walls) have no rows here.
+const _DIM_W := {"key": "dim_w", "label": "Width", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["su"]}
+const _DIM_D := {"key": "dim_d", "label": "Depth", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["sv"]}
+const _DIM_H := {"key": "dim_h", "label": "Height", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["ah"]}
+const _DIM_DIA := {"key": "dim_dia", "label": "Diameter", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["su", "sv"]}
+const DIM_PARAMS := {
+	Kind.CUBE: [_DIM_W, _DIM_H, _DIM_D],
+	Kind.PRISM: [_DIM_W, _DIM_H, _DIM_D],
+	Kind.PLANE: [_DIM_W, _DIM_D],
+	Kind.STAIRS: [_DIM_W, _DIM_H,
+		{"key": "dim_d", "label": "Length", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["sv"]}],
+	Kind.CYLINDER: [_DIM_DIA, _DIM_H],
+	Kind.CONE: [_DIM_DIA, _DIM_H],
+	Kind.PIPE: [_DIM_DIA, _DIM_H],
+	Kind.SPHERE: [_DIM_DIA],
+	Kind.TORUS: [_DIM_DIA],
+	Kind.CURVED_STAIRS: [
+		{"key": "dim_dia", "label": "Footprint", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["su", "sv"]},
+		_DIM_H],
+	Kind.ARCH: [
+		{"key": "dim_w", "label": "Width", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["sv"]},
+		_DIM_H,
+		{"key": "dim_d", "label": "Thickness", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["su"]}],
+	Kind.DOOR: [
+		{"key": "dim_w", "label": "Width", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["sv"]},
+		_DIM_H,
+		{"key": "dim_d", "label": "Thickness", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["su"]}],
+	Kind.TRIM: [
+		{"key": "dim_d", "label": "Length", "type": "float", "min": 0.001, "max": 1024.0, "step": 0.05, "dims": ["sv"]}],
+}
+
+
+## Size rows followed by the kind's own params: the full adjust-panel schema.
+static func adjust_params(shape_kind: int) -> Array:
+	return (DIM_PARAMS.get(shape_kind, []) as Array) + (SHAPE_PARAMS.get(shape_kind, []) as Array)
+
+
+## Writes the size rows' values into `values` from the draw dims.
+static func dims_to_values(shape_kind: int, dims: Dictionary, values: Dictionary) -> void:
+	for spec in DIM_PARAMS.get(shape_kind, []):
+		var v := 0.0
+		for d in spec.dims:
+			v = maxf(v, float(dims.get(d, 1.0)))
+		values[spec.key] = v
+
+
+## Writes the size rows' values from `values` back into the draw dims.
+static func values_to_dims(shape_kind: int, values: Dictionary, dims: Dictionary) -> void:
+	for spec in DIM_PARAMS.get(shape_kind, []):
+		if not values.has(spec.key):
+			continue
+		var v := maxf(float(values[spec.key]), 0.001)
+		for d in spec.dims:
+			dims[d] = v
+
+
+## A copy of `values` without the size rows (they live in the dims instead).
+static func strip_dims(shape_kind: int, values: Dictionary) -> Dictionary:
+	var out := values.duplicate()
+	for spec in DIM_PARAMS.get(shape_kind, []):
+		out.erase(spec.key)
+	return out
+
+
 ## Kinds that place their own geometry against the drawing plane.
 const SELF_ANCHORED := [Kind.POLY, Kind.TRIM, Kind.TRIM_WALLS, Kind.WALL]
 
@@ -1114,7 +1180,7 @@ static func editable_spec(data: UBMeshData) -> Dictionary:
 		return {}
 	var spec := data.shape_spec
 	var kind_id := int(spec.get("kind", -1))
-	if not SHAPE_PARAMS.has(kind_id):
+	if adjust_params(kind_id).is_empty():
 		return {}
 	var dims: Dictionary = spec.get("dims", {})
 	var params: Dictionary = spec.get("params", {})
@@ -1168,7 +1234,7 @@ func _commit() -> void:
 		plugin.toolbar.set_last_shape(kind)
 		plugin._save_grid_settings()
 
-	var params: Array = SHAPE_PARAMS.get(kind, [])
+	var params: Array = adjust_params(kind)
 	var dims: Dictionary = result.get("dims", {})
 	var defaults: Dictionary = result.get("params", {})
 	var title := shape_title(kind)

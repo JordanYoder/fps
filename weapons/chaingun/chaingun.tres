@@ -4,22 +4,18 @@
 [ext_resource type="SpriteFrames" uid="uid://dej2rkft5vg1d" path="res://weapons/chaingun/chaingun_frames.tres" id="2_wframes"]
 [ext_resource type="SpriteFrames" uid="uid://bdei0oqo5pdpm" path="res://weapons/chaingun/chaingun_flash_frames.tres" id="3_fframes"]
 [ext_resource type="AudioStream" uid="uid://cup71u4pln6sb" path="res://assets/sounds/effects/weapons/pistol_fire.wav" id="4_sound"]
-[ext_resource type="Texture2D" uid="uid://bixb2hfq5fk8n" path="res://assets/sprites/weapons/first_person/chaingun/frames/frame_A.png" id="gA"]
-[ext_resource type="Texture2D" uid="uid://cyj0tlvcbpw5h" path="res://assets/sprites/weapons/first_person/chaingun/frames/frame_B.png" id="gB"]
 [ext_resource type="Texture2D" uid="uid://c8jrfg0i4talt" path="res://assets/sprites/weapons/first_person/chaingun/muzzle_flash/frame_A.png" id="fA"]
 [ext_resource type="Texture2D" uid="uid://rrbyl2wm67ap" path="res://assets/sprites/weapons/first_person/chaingun/muzzle_flash/frame_B.png" id="fB"]
+[ext_resource type="Texture2D" uid="uid://bixb2hfq5fk8n" path="res://assets/sprites/weapons/first_person/chaingun/frames/frame_A.png" id="gA"]
+[ext_resource type="Texture2D" uid="uid://cyj0tlvcbpw5h" path="res://assets/sprites/weapons/first_person/chaingun/frames/frame_B.png" id="gB"]
 
 [resource]
 script = ExtResource("1_script")
 weapon_name = "Chaingun"
-damage_base = 5
-damage_dice = 3
-pellet_count = 1
-spread_degrees = 5.6
+ammo_type = 1
 first_shot_accurate = true
-attack_frames = Array[int]([0, 1])
-refire_frame = -1
 weapon_frames = ExtResource("2_wframes")
+attack_frames = Array[int]([0, 1])
 muzzle_flash_frames = ExtResource("3_fframes")
 sprite_offsets = Dictionary[Texture2D, Vector2]({
 ExtResource("gA"): Vector2(-104, -117),

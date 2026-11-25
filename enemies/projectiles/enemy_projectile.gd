@@ -108,9 +108,9 @@ func _physics_process(delta: float) -> void:
 func _impact(collider: Object) -> void:
 	_done = true
 	_play_impact_sound()
-	if collider and collider.has_method("take_damage"):
+	if collider and collider.has_method("take_damage") and not _is_same_species(collider):
 		var attacker: Node3D = shooter if is_instance_valid(shooter) else null
-		collider.take_damage(_roll_direct_damage(), attacker)
+		collider.take_damage(_roll_direct_damage(), attacker, global_position)
 	if splash_damage > 0:
 		_explode(collider)
 
@@ -131,6 +131,14 @@ func _play_impact_sound() -> void:
 	player.finished.connect(player.queue_free)
 	player.play()
 
+
+# Doom: a monster's projectile does no direct damage to its own kind (an Imp's fireball just
+# fizzles on another Imp), so they never start infighting with each other. Blasts still hurt.
+func _is_same_species(body: Object) -> bool:
+	if not is_instance_valid(shooter) or not shooter is DoomEnemy or not body is DoomEnemy:
+		return false
+	var mine: StringName = (shooter as DoomEnemy).species
+	return mine != &"" and mine == (body as DoomEnemy).species
 
 ## Damage dealt to whatever the projectile hits directly. Subclasses can override this.
 func _roll_direct_damage() -> int:
@@ -168,4 +176,4 @@ func _explode(direct_hit: Object) -> void:
 		var blocker := space.intersect_ray(ray)
 		if not blocker.is_empty() and blocker.collider != body:
 			continue
-		body.take_damage(damage, attacker)
+		body.take_damage(damage, attacker, global_position) # Pushed away from the blast

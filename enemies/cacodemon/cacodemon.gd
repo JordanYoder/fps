@@ -16,6 +16,9 @@ const CACODEMON_FIREBALL_PATH := "res://enemies/projectiles/cacodemon_fireball.t
 func _ready() -> void:
 	max_health = 400
 	pain_chance = 0.5 # Doom Cacodemon = 128/256 (50%)
+	pain_time = 0.34 # 12 tics: the slowest to recover
+	mass = 400.0
+	species = &"cacodemon"
 	speed = 3.5 # Same move speed as the Imp in Doom
 	can_fly = true
 	has_melee = true
@@ -38,7 +41,7 @@ func _ready() -> void:
 func _perform_melee_attack() -> void:
 	if is_instance_valid(target) and global_position.distance_to(target.global_position) <= melee_range + 0.5:
 		if target.has_method("take_damage"):
-			target.take_damage(randi_range(bite_damage_min, bite_damage_max))
+			target.take_damage(randi_range(bite_damage_min, bite_damage_max), self)
 
 func _perform_ranged_attack() -> void:
 	if not is_instance_valid(target) or not fireball_scene:

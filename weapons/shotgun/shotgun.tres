@@ -14,6 +14,7 @@
 [resource]
 script = ExtResource("1_script")
 weapon_name = "Shotgun"
+ammo_type = 2
 pellet_count = 7
 vertical_spread_degrees = 2.0
 weapon_frames = ExtResource("2_wframes")

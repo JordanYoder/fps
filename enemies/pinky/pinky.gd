@@ -10,6 +10,9 @@ extends DoomEnemy
 func _ready() -> void:
 	max_health = 150
 	pain_chance = 0.7 # Doom Demon = 180/256 (~70%)
+	pain_time = 0.11 # 4 tics
+	mass = 400.0
+	species = &"demon"
 	speed = 4.4 # Doom Demon speed 10 vs Imp's 8, scaled from the 3.5 default
 	has_melee = true
 	has_ranged = false
@@ -22,4 +25,4 @@ func _perform_melee_attack() -> void:
 	# Bite only connects if the target is still in reach after the wind-up
 	if is_instance_valid(target) and global_position.distance_to(target.global_position) <= melee_range + 0.5:
 		if target.has_method("take_damage"):
-			target.take_damage(randi_range(bite_damage_min, bite_damage_max))
+			target.take_damage(randi_range(bite_damage_min, bite_damage_max), self)

@@ -11,7 +11,22 @@ enum AttackType {
 	PROJECTILE, ## Fires projectile_scene (rocket launcher, plasma rifle, BFG)
 }
 
+## Ammo kinds. The player's counts and limits live in the weapon manager.
+enum AmmoType {
+	NONE, ## Melee, never runs out (fist, chainsaw)
+	BULLETS, ## Pistol, chaingun
+	SHELLS, ## Shotgun
+	ROCKETS, ## Rocket launcher
+	CELLS, ## Plasma rifle, BFG
+}
+
 @export var weapon_name: String = "Pistol"
+
+@export_group("Ammo")
+@export var ammo_type: AmmoType = AmmoType.NONE
+## Used by each attack (Doom: 1 for most guns, 40 for the BFG). The chaingun attacks on both
+## of its frames, so it uses 1 per frame, like Doom.
+@export var ammo_per_shot: int = 1
 
 @export_group("Attack")
 @export var attack_type: AttackType = AttackType.HITSCAN

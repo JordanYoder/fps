@@ -9,6 +9,9 @@ func _ready() -> void:
 	max_health = 3000
 	health = max_health # super._ready() already set health from the Shotgun Guy's 30
 	pain_chance = 0.16 # Doom Spider Mastermind = 40/256 (~16%)
+	pain_time = 0.17 # 6 tics
+	mass = 1000.0
+	species = &"spider_mastermind"
 	speed = 5.25 # Doom Spider speed 12 vs Imp's 8
 	splash_immune = true
 	max_attack_range = 40.0

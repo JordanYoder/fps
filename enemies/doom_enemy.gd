@@ -15,6 +15,23 @@ enum State { IDLE, CHASE, ATTACK, PAIN, DEAD }
 ## Vanish when the death animation ends instead of leaving a corpse (Doom: Lost Soul,
 ## Pain Elemental). Their last death frame is the end of an explosion, not a body.
 @export var leaves_no_corpse: bool = false
+## How long the pain frame holds before it goes back to chasing. Doom's pain states vary per
+## monster: Imp/Pinky/Baron 4 tics (~0.11s) up to Cacodemon 12 tics (~0.34s).
+@export var pain_time: float = 0.17
+## Doom's mass: how hard hits push this monster. Knockback = damage * 100 / mass, so a rocket
+## throws an Imp (100) across the room but barely moves a Cyberdemon (1000).
+@export var mass: float = 100.0
+## Monsters of the same species can't hurt each other with projectiles (Doom: an Imp's fireball
+## passes harmlessly into another Imp). Empty = no species. Barons and Hell Knights share one.
+@export var species: StringName = &""
+
+@export_group("Waking Up")
+## Doom's "ambush" (deaf) flag: gunfire only wakes this monster if it has a clear view of
+## where the shot came from. It still wakes when it sees you or gets hurt.
+@export var ambush: bool = false
+## Idle monsters only see in front of them (a 180 degree arc), except within this distance,
+## where they notice you all around. Doom: MELEERANGE, 64 units.
+@export var all_around_sight_range: float = 2.0
 
 @export_group("Combat Ranges")
 @export var has_melee: bool = false
@@ -31,6 +48,8 @@ enum State { IDLE, CHASE, ATTACK, PAIN, DEAD }
 @export var refire_windup_time: float = -1.0
 ## Takes no damage from explosions (Doom: Cyberdemon and Spider Mastermind).
 @export var splash_immune: bool = false
+## Walkers won't step off a ledge deeper than this. Doom: 24 units (0.75 m here). Flyers ignore it.
+@export var max_drop_height: float = 0.75
 
 @export_group("Flying")
 ## Floats instead of walking (Cacodemon, Lost Soul): no gravity, rises/sinks to track the target.
@@ -50,6 +69,13 @@ var move_timer: float = 0.0
 var attack_check_timer: float = 0.0
 var reaction_cooldown: float = 0.0
 var state_token: int = 0
+# The player: who idle monsters look for, and who they go back to after a fight with another monster.
+var _player: Node3D = null
+# Doom's threshold: after switching to a monster that hurt it, it sticks with that target this
+# long before another attacker can steal its attention.
+var _target_lock: float = 0.0
+# Horizontal push from hits, on top of the monster's own walking. Fades with friction.
+var _knockback: Vector3 = Vector3.ZERO
 
 # Direction the monster's body faces (horizontal). Drives which of the 8 sprite views is shown.
 var facing_dir: Vector3 = Vector3.FORWARD
@@ -66,6 +92,21 @@ const VIEW_SUFFIXES: Array[String] = [
 @onready var collision_shape: CollisionShape3D = get_node_or_null("CollisionShape3D") as CollisionShape3D
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+## Group every monster joins, so gunfire can find who hears it.
+const GROUP := &"doom_enemies"
+## Doom's scale here: 32 map units per metre, 35 tics per second.
+const UNITS_PER_METRE := 32.0
+const TICRATE := 35.0
+## Doom's ground friction: momentum is multiplied by this every tic.
+const FRICTION := 0.90625
+## Doom's BASETHRESHOLD: 100 tics.
+const TARGET_LOCK_TIME := 100.0 / TICRATE
+## Gunfire wakes idle monsters this close that have a clear line to the shot...
+const HEARING_RANGE := 40.0
+## ...and ones this close even through walls, standing in for Doom's sound carrying around
+## corners and through open doors (this game has no sectors to flood it through).
+const MUFFLED_HEARING_RANGE := 12.0
 
 const DIRS_8: Array[Vector3] = [
 	Vector3(1, 0, 0),
@@ -91,9 +132,11 @@ func _ready() -> void:
 	if initial_forward.length_squared() > 0.001:
 		facing_dir = initial_forward.normalized()
 
-	target = get_tree().get_first_node_in_group("player")
-	if not target:
-		target = get_node_or_null("../Player")
+	add_to_group(GROUP)
+	_player = get_tree().get_first_node_in_group("player")
+	if not _player:
+		_player = get_node_or_null("../Player")
+	target = _player
 
 	if anim_sprite:
 		# Ensure consistent pivot behavior across Imp and ShotgunGuy
@@ -213,36 +256,60 @@ func _align_sprite_to_floor() -> void:
 	anim_sprite.position.y = floor_y + (sprite_world_height * 0.5)
 
 func _physics_process(delta: float) -> void:
-	
 	if state == State.DEAD:
+		# Dead flyers drop by tween (_fall_to_floor). Walkers' corpses keep sliding from the
+		# killing blow, and fall if it knocked them off a ledge.
+		if not can_fly:
+			if not is_on_floor():
+				velocity.y -= gravity * delta
+			velocity.x = _knockback.x
+			velocity.z = _knockback.z
+			move_and_slide()
+			_update_knockback(delta)
 		return
-		
+
 	if can_fly:
 		velocity.y = _get_fly_vertical_velocity() if state == State.CHASE else 0.0
 	elif not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if state == State.DEAD:
-		velocity.x = move_toward(velocity.x, 0.0, speed * 4.0 * delta)
-		velocity.z = move_toward(velocity.z, 0.0, speed * 4.0 * delta)
-		move_and_slide()
-		return
-
 	if reaction_cooldown > 0.0:
 		reaction_cooldown -= delta
+	if _target_lock > 0.0:
+		_target_lock -= delta
 
+	# The monster's own movement: only chasing walks
+	velocity.x = 0.0
+	velocity.z = 0.0
 	match state:
 		State.IDLE:
-			velocity.x = 0.0
-			velocity.z = 0.0
 			_look_for_player()
 		State.CHASE:
 			_process_chase(delta)
-		State.ATTACK, State.PAIN:
-			velocity.x = 0.0
-			velocity.z = 0.0
 
+	velocity.x += _knockback.x
+	velocity.z += _knockback.z
 	move_and_slide()
+	_update_knockback(delta)
+
+# Doom's P_XYMovement for thrust: hitting a wall kills the push into it, and friction slows it
+# every tic, but only on the ground. A monster knocked off a ledge keeps flying until it lands.
+# Flyers get friction too, or a pushed Cacodemon would drift until it hit a wall.
+func _update_knockback(delta: float) -> void:
+	if _knockback == Vector3.ZERO:
+		return
+	for i in get_slide_collision_count():
+		var normal := get_slide_collision(i).get_normal()
+		if absf(normal.y) < 0.7: # A wall, not the floor
+			var into := _knockback.dot(normal)
+			if into < 0.0:
+				_knockback -= normal * into
+	_knockback.y = 0.0
+	if can_fly or is_on_floor():
+		_knockback *= pow(FRICTION, delta * TICRATE)
+	# Doom's STOPSPEED: 1/16 unit per tic
+	if _knockback.length() < (1.0 / 16.0) * TICRATE / UNITS_PER_METRE:
+		_knockback = Vector3.ZERO
 
 func _get_fly_vertical_velocity() -> float:
 	if not is_instance_valid(target):
@@ -268,11 +335,61 @@ func _fall_to_floor() -> void:
 	tween.tween_property(self, "global_position:y", global_position.y - drop, fall_time) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
-func _look_for_player() -> void:
-	if not is_instance_valid(target):
+# Doom's A_Look / P_LookForPlayers. Idle monsters only see in front of them unless you're
+# right next to them, so you can sneak up from behind. Returns true if it found the player.
+func _look_for_player(all_around: bool = false) -> bool:
+	if not is_instance_valid(_player) or _player.get("is_dead") == true:
+		return false
+	target = _player
+	var to_player := _player.global_position - global_position
+	var dist := to_player.length()
+	if dist > sight_range or not _has_line_of_sight():
+		return false
+	to_player.y = 0.0
+	if not all_around and dist > all_around_sight_range and to_player.dot(facing_dir) < 0.0:
+		return false # Behind it
+	_wake_up()
+	return true
+
+## Doom's P_NoiseAlert: firing a weapon wakes idle monsters that can hear it. Call it with
+## whoever fired (they become the target) and where the shot came from.
+static func noise_alert(tree: SceneTree, emitter: Node3D, pos: Vector3) -> void:
+	for node in tree.get_nodes_in_group(GROUP):
+		var monster := node as DoomEnemy
+		if monster:
+			monster._hear_noise(emitter, pos)
+
+func _hear_noise(emitter: Node3D, pos: Vector3) -> void:
+	if state != State.IDLE or not is_instance_valid(emitter):
 		return
-	if global_position.distance_to(target.global_position) <= sight_range and _has_line_of_sight():
-		_wake_up()
+	var ear := collision_shape.global_position if collision_shape else global_position
+	var dist := ear.distance_to(pos)
+	if dist > HEARING_RANGE:
+		return
+	var clear := _is_path_open(pos, ear, emitter)
+	# Deaf monsters must see where the noise came from; others hear nearby shots through walls
+	if not clear and (ambush or dist > MUFFLED_HEARING_RANGE):
+		return
+	target = emitter
+	_wake_up()
+
+# True if nothing but monsters and the player stands between the two points (only the level
+# blocks sound and sight lines here).
+func _is_path_open(from: Vector3, to: Vector3, emitter: Node3D) -> bool:
+	var space_state := get_world_3d().direct_space_state
+	var exclude: Array[RID] = [get_rid()]
+	if emitter is CollisionObject3D:
+		exclude.append((emitter as CollisionObject3D).get_rid())
+	for i in 8: # Skip past up to 8 bodies in the way
+		var query := PhysicsRayQueryParameters3D.create(from, to)
+		query.exclude = exclude
+		var result := space_state.intersect_ray(query)
+		if result.is_empty():
+			return true
+		if not result.collider is CharacterBody3D:
+			return false
+		exclude.append(result.rid)
+	return false
 
 func _wake_up() -> void:
 	if state == State.IDLE:
@@ -281,8 +398,14 @@ func _wake_up() -> void:
 		_play_anim("walk")
 
 func _process_chase(delta: float) -> void:
-	if not is_instance_valid(target):
-		return
+	# Doom's A_Chase: when its target dies (e.g. it won a fight with another monster), it looks
+	# all around for the player. If it can't see you, it goes back to standing and listening.
+	if not is_instance_valid(target) or _is_target_dead():
+		_target_lock = 0.0
+		if not _look_for_player(true):
+			state = State.IDLE
+			_play_anim("idle")
+			return
 
 	if current_base_anim != "walk":
 		_play_anim("walk")
@@ -299,6 +422,12 @@ func _process_chase(delta: float) -> void:
 
 	if is_on_wall() or move_timer <= 0.0:
 		_pick_new_chase_dir()
+
+	# Stop at the edge instead of walking off it, then try another way
+	if move_dir != Vector3.ZERO and _is_ledge(move_dir, speed * delta + 0.05):
+		_pick_new_chase_dir()
+	if move_dir != Vector3.ZERO and _is_ledge(move_dir, speed * delta + 0.05):
+		move_dir = Vector3.ZERO
 
 	velocity.x = move_dir.x * speed
 	velocity.z = move_dir.z * speed
@@ -332,10 +461,12 @@ func _pick_new_chase_dir() -> void:
 			if not _is_dir_blocked(d):
 				valid_dirs.append(d)
 
-	move_dir = valid_dirs.pick_random() if not valid_dirs.is_empty() else to_target
+	# Boxed in (e.g. a pillar top): stand still and look again when the timer runs out
+	move_dir = valid_dirs.pick_random() if not valid_dirs.is_empty() else Vector3.ZERO
 	move_timer = randf_range(0.45, 1.1)
 	# Like Doom, the monster's body turns to face the way it walks
-	facing_dir = move_dir.normalized()
+	if move_dir != Vector3.ZERO:
+		facing_dir = move_dir.normalized()
 
 func _face_target() -> void:
 	if not is_instance_valid(target):
@@ -352,7 +483,28 @@ func _is_dir_blocked(dir: Vector3) -> bool:
 	var query := PhysicsRayQueryParameters3D.create(from, from + dir * (_get_body_radius() + 1.0))
 	query.exclude = [get_rid()]
 	var result := space_state.intersect_ray(query)
-	return not result.is_empty() and result.collider != target
+	if not result.is_empty() and result.collider != target:
+		return true
+	return _is_ledge(dir, 0.3)
+
+# True if walking `ahead` metres past the body's edge in `dir` would drop more than
+# max_drop_height (Doom's dropoff check). Probes the floor at the middle and both corners of the
+# leading edge, so the monster can't slip off diagonally either.
+func _is_ledge(dir: Vector3, ahead: float) -> bool:
+	if can_fly or not is_on_floor():
+		return false
+	var space_state := get_world_3d().direct_space_state
+	var feet := _get_feet_position()
+	var radius := _get_body_radius()
+	var side := Vector3.UP.cross(dir).normalized() * radius * 0.9
+	var front := feet + dir * (radius + ahead)
+	for probe in [front, front + side, front - side]:
+		# Start a little above the feet so steps up still count as floor
+		var query := PhysicsRayQueryParameters3D.create(probe + Vector3.UP * 0.5, probe + Vector3.DOWN * max_drop_height)
+		query.exclude = [get_rid()]
+		if space_state.intersect_ray(query).is_empty():
+			return true
+	return false
 
 func _should_ranged_attack(dist: float) -> bool:
 	if dist > max_attack_range or not _has_line_of_sight():
@@ -361,7 +513,7 @@ func _should_ranged_attack(dist: float) -> bool:
 	return randf() < attack_prob
 
 func _has_line_of_sight() -> bool:
-	if not is_instance_valid(target):
+	if not is_instance_valid(target) or _is_target_dead():
 		return false
 	var space_state := get_world_3d().direct_space_state
 	var from := collision_shape.global_position if collision_shape else global_position
@@ -370,6 +522,12 @@ func _has_line_of_sight() -> bool:
 	query.exclude = [get_rid()]
 	var result := space_state.intersect_ray(query)
 	return not result.is_empty() and result.collider == target
+
+# A dead target can't be seen, so monsters stop attacking it and just wander (as in Doom).
+func _is_target_dead() -> bool:
+	if target is DoomEnemy:
+		return (target as DoomEnemy).state == State.DEAD
+	return target.get("is_dead") == true
 
 func _start_attack(is_melee: bool) -> void:
 	state = State.ATTACK
@@ -433,16 +591,25 @@ func _perform_melee_attack() -> void:
 func _perform_ranged_attack() -> void:
 	pass
 
-func take_damage(amount: int, attacker: Node3D = null) -> void:
+## `inflictor_pos`: where the damage came from, for knockback (a rocket's blast centre).
+## Defaults to the attacker's position, which is right for bullets and melee.
+func take_damage(amount: int, attacker: Node3D = null, inflictor_pos: Vector3 = Vector3.INF) -> void:
 	print(name, " took ", amount, " damage! Remaining HP: ", health - amount)
 	if state == State.DEAD:
 		return
 
+	if inflictor_pos == Vector3.INF and is_instance_valid(attacker):
+		inflictor_pos = _feet_of(attacker)
+	if inflictor_pos != Vector3.INF:
+		_apply_knockback(amount, inflictor_pos)
+
 	health -= amount
 
-	# Optional Doom Infighting: switch target if hit by another monster
-	if is_instance_valid(attacker) and attacker != self:
+	# Doom's infighting: switch to whoever hurt us, then stick with them for a while so a
+	# second attacker can't immediately steal our attention back
+	if is_instance_valid(attacker) and attacker != self and _target_lock <= 0.0:
 		target = attacker
+		_target_lock = TARGET_LOCK_TIME
 
 	if state == State.IDLE:
 		_wake_up()
@@ -457,13 +624,39 @@ func take_damage(amount: int, attacker: Node3D = null) -> void:
 		var my_token := state_token
 		_play_anim("pain")
 
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(pain_time).timeout
 		if state_token != my_token or state == State.DEAD:
 			return
 
 		reaction_cooldown = 0.0
 		state = State.CHASE
 		_pick_new_chase_dir()
+
+# Doom's P_DamageMobj thrust: pushed straight away from the inflictor (horizontally), harder the
+# more damage and the lighter the monster. Runs before the damage is applied, so `health` is
+# still what the monster had before the hit.
+func _apply_knockback(amount: int, from: Vector3) -> void:
+	var away := global_position - from
+	away.y = 0.0
+	if away.length_squared() < 0.0001:
+		away = -facing_dir # Hit from exactly overhead: push it backwards
+	away = away.normalized()
+	# Doom: damage * (FRACUNIT >> 3) * 100 / mass, in map units per tic
+	var thrust := amount * 100.0 / (8.0 * maxf(mass, 1.0)) * TICRATE / UNITS_PER_METRE
+	# The famous "falls toward you" rule: a weak killing blow from more than 64 units below
+	# has a 50% chance to throw the monster toward the attacker at 4x strength, so monsters
+	# shot from below topple off their ledges
+	if amount < 40 and amount > health and _get_feet_position().y - from.y > 64.0 / UNITS_PER_METRE \
+			and randi() % 2 == 0:
+		away = -away
+		thrust *= 4.0
+	_knockback += away * thrust
+
+# Where a node's feet are: Doom measures heights from the bottom of things.
+static func _feet_of(node: Node3D) -> Vector3:
+	if node is DoomEnemy:
+		return (node as DoomEnemy)._get_feet_position()
+	return node.global_position
 
 func _die() -> void:
 	state = State.DEAD
@@ -474,10 +667,15 @@ func _die() -> void:
 	if not (health < gib_threshold and _play_anim("gib_death")):
 		_play_anim("death")
 	_align_sprite_to_floor()
-	if collision_shape:
-		collision_shape.set_deferred("disabled", true)
 	if can_fly:
+		if collision_shape:
+			collision_shape.set_deferred("disabled", true)
+		_knockback = Vector3.ZERO
 		_fall_to_floor()
+	else:
+		# Corpses stop being hit by shots and bumped by the player, but still collide with the
+		# level, so the killing blow can slide them across the floor or off a ledge
+		set_deferred("collision_layer", 0)
 	if leaves_no_corpse and anim_sprite and anim_sprite.is_playing():
 		await anim_sprite.animation_finished
 		queue_free()
