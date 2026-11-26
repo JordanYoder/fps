@@ -550,12 +550,12 @@ func _start_attack(is_melee: bool) -> void:
 		var windup := windup_time if shots == 0 or refire_windup_time < 0.0 else refire_windup_time
 		var step_time := windup / maxi(fire_frame, 1)
 		for i in range(1, fire_frame + 1):
-			await get_tree().create_timer(step_time).timeout
+			await _wait(step_time)
 			if state_token != my_token or state == State.DEAD:
 				return
 			anim_sprite.frame = i
 		if fire_frame == 0:
-			await get_tree().create_timer(windup).timeout
+			await _wait(windup)
 			if state_token != my_token or state == State.DEAD:
 				return
 
@@ -569,7 +569,7 @@ func _start_attack(is_melee: bool) -> void:
 		if state_token != my_token:
 			return
 
-		await get_tree().create_timer(fire_frame_time).timeout
+		await _wait(fire_frame_time)
 		if state_token != my_token or state == State.DEAD:
 			return
 		if is_melee or not _should_refire(shots):
@@ -626,12 +626,27 @@ func _require(value: Variant, field: String) -> void:
 	push_error(msg)
 	assert(false, msg)
 
+## Waits `seconds` of game time. Use `await _wait(t)` instead of a SceneTree timer:
+## - The Timer is our child, so it pauses with us when the game is paused.
+## - If we're freed mid-wait (level reload, corpse cleanup), the Timer goes with us and the
+##   waiting code is simply dropped. A SceneTree timer would outlive us and then error with
+##   "Resumed function after await, but class instance is gone".
+func _wait(seconds: float) -> void:
+	var timer := Timer.new()
+	timer.one_shot = true
+	timer.wait_time = maxf(seconds, 0.001) # A Timer can't start at 0
+	add_child(timer)
+	timer.start()
+	await timer.timeout
+	timer.queue_free()
+
 ## `inflictor_pos`: where the damage came from, for knockback (a rocket's blast centre).
 ## Defaults to the attacker's position, which is right for bullets and melee.
 func take_damage(amount: int, attacker: Node3D = null, inflictor_pos: Vector3 = Vector3.INF) -> void:
-	print(name, " took ", amount, " damage! Remaining HP: ", health - amount)
 	if state == State.DEAD:
 		return
+	if DebugMenu.log_damage:
+		print("%s took %d damage, %d HP left" % [name, amount, health - amount])
 
 	if inflictor_pos == Vector3.INF and is_instance_valid(attacker):
 		inflictor_pos = _feet_of(attacker)
@@ -659,7 +674,7 @@ func take_damage(amount: int, attacker: Node3D = null, inflictor_pos: Vector3 = 
 		var my_token := state_token
 		_play_anim("pain")
 
-		await get_tree().create_timer(pain_time).timeout
+		await _wait(pain_time)
 		if state_token != my_token or state == State.DEAD:
 			return
 
@@ -715,7 +730,7 @@ func _die() -> void:
 		await anim_sprite.animation_finished
 		queue_free()
 		return
-	get_tree().create_timer(30.0).timeout.connect(queue_free)
+	get_tree().create_timer(30.0, false).timeout.connect(queue_free) # false: pauses with the game
 
 # --- Sprite hit testing -------------------------------------------------------
 # The collision box is much bigger than the visible sprite, so effects like blood check

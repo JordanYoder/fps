@@ -17,7 +17,12 @@ class Option:
 		on_toggle = cb
 
 ## Startup on/off values for options, edited in the Inspector. Optional.
-const SETTINGS_PATH := "res://debug/debug_settings.tres"
+## debug_settings.tres, by UID so it survives file moves.
+const SETTINGS_PATH := "uid://bcas6y47dvsqa"
+
+## Print every hit taken by the player and monsters to the Output panel. Off by default:
+## with the chaingun or infighting it floods the log and slows the game.
+var log_damage: bool = false
 
 var _options: Array[Option] = []
 var _settings: DebugSettings
@@ -33,6 +38,7 @@ func _ready() -> void:
 	visible = _settings != null and _settings.show_menu_on_start
 
 	add_option("Audio", _set_audio, true)
+	add_option("Log damage", func(on: bool) -> void: log_damage = on)
 	# Other scripts register options in their own _ready, which runs after this autoload's,
 	# so check the settings for typos once everything has loaded.
 	_warn_unknown_defaults.call_deferred()

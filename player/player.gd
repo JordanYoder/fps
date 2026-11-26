@@ -86,7 +86,8 @@ func take_damage(amount: int, _attacker: Node3D = null, _inflictor_pos: Vector3 
 		amount -= saved
 		armor_changed.emit(armor)
 	health -= amount
-	print("Player took ", amount, " damage! Remaining HP: ", health)
+	if DebugMenu.log_damage:
+		print("Player took %d damage, %d HP left" % [amount, health])
 	damaged.emit(amount)
 	if health <= 0:
 		health = 0
