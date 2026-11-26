@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://5ucmgyrpbspb"]
+
+[ext_resource type="Texture2D" uid="uid://1sfsk84g6kba" path="res://assets/doom/sprites/weapons/first_person/bfg9000/frames/frame_A.png" id="1_6jcng"]
+[ext_resource type="Texture2D" uid="uid://brt12ptthoja3" path="res://assets/doom/sprites/weapons/first_person/bfg9000/frames/frame_B.png" id="2_k8mw2"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6jcng")
+}],
+"loop": 0,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": ExtResource("1_6jcng")
+}, {
+"duration": 10.0,
+"texture": ExtResource("2_k8mw2")
+}, {
+"duration": 10.0,
+"texture": ExtResource("2_k8mw2")
+}, {
+"duration": 20.0,
+"texture": ExtResource("2_k8mw2")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 35.0
+}]

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cp01tx4fxrgim" path="res://addons/unibuilder/nodes/ub_mesh_instance.gd" id="1_0vq05"]
 [ext_resource type="Script" uid="uid://dyj0rf32exito" path="res://addons/unibuilder/core/ub_face.gd" id="2_vqrxs"]
-[ext_resource type="Material" uid="uid://cbqfk8o6vp5nx" path="res://assets/materials/_checkerboard.tres" id="3_5tmo5"]
+[ext_resource type="Material" uid="uid://cbqfk8o6vp5nx" path="res://assets/doom/materials/_checkerboard.tres" id="3_5tmo5"]
 [ext_resource type="Script" uid="uid://dnaqomcyqdloo" path="res://addons/unibuilder/core/ub_mesh_data.gd" id="3_ut75f"]
-[ext_resource type="Material" uid="uid://r7gbb3jm5tma" path="res://assets/materials/CRATE_2I.tres" id="6_5tmo5"]
+[ext_resource type="Material" uid="uid://r7gbb3jm5tma" path="res://assets/doom/materials/CRATE_2I.tres" id="6_5tmo5"]
 [ext_resource type="PackedScene" uid="uid://b8k0law6povir" path="res://player/player.tscn" id="6_gx3xr"]
-[ext_resource type="Material" uid="uid://dyxkjrvcg0nyw" path="res://assets/materials/CRATE_1N.tres" id="7_yx7kw"]
-[ext_resource type="PackedScene" uid="uid://0onaj45fiy6h" path="res://enemies/imp/imp.tscn" id="8_d5x7l"]
-[ext_resource type="Texture2D" uid="uid://cw3rainj1kx64" path="res://assets/textures/BRICK_1A.PNG" id="9_rtcij"]
+[ext_resource type="Material" uid="uid://dyxkjrvcg0nyw" path="res://assets/doom/materials/CRATE_1N.tres" id="7_yx7kw"]
+[ext_resource type="PackedScene" uid="uid://0onaj45fiy6h" path="res://enemies/doom/imp/imp.tscn" id="8_d5x7l"]
+[ext_resource type="Texture2D" uid="uid://cw3rainj1kx64" path="res://assets/doom/textures/BRICK_1A.PNG" id="9_rtcij"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gx3xr"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

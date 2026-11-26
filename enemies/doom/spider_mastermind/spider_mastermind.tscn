@@ -1,0 +1,485 @@
+[gd_scene format=3 uid="uid://dpb0x4arti7o3"]
+
+[ext_resource type="Script" uid="uid://ds2q26s834xh3" path="res://enemies/doom/spider_mastermind/spider_mastermind.gd" id="1_usq1q"]
+[ext_resource type="Texture2D" uid="uid://bf45or7iixhle" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_back/frame_G.png" id="2_usq1q"]
+[ext_resource type="Texture2D" uid="uid://dpsh0j0dlo6lr" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_back/frame_H.png" id="3_r7k3d"]
+[ext_resource type="Texture2D" uid="uid://bj8ouhgisubn" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_back_left/frame_G.png" id="4_ja871"]
+[ext_resource type="Texture2D" uid="uid://tp3bhw8mdu38" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_back_left/frame_H.png" id="5_forqh"]
+[ext_resource type="Texture2D" uid="uid://ccxbnxbew3yjh" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_back_right/frame_G.png" id="6_1lv1x"]
+[ext_resource type="Texture2D" uid="uid://y6xfjkujeiq7" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_back_right/frame_H.png" id="7_p0akb"]
+[ext_resource type="Texture2D" uid="uid://b83tt44i5dfdt" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_front/frame_G.png" id="8_sq275"]
+[ext_resource type="Texture2D" uid="uid://cs6ehv7whcvj1" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_front/frame_H.png" id="9_ajdqj"]
+[ext_resource type="Texture2D" uid="uid://cvwmiuuocqcrq" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_front_left/frame_G.png" id="10_r468q"]
+[ext_resource type="Texture2D" uid="uid://crxp0cbklmo3j" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_front_left/frame_H.png" id="11_ph02c"]
+[ext_resource type="Texture2D" uid="uid://r5xckiatp5gn" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_front_right/frame_G.png" id="12_2cuda"]
+[ext_resource type="Texture2D" uid="uid://ckdxkfarumtf8" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_front_right/frame_H.png" id="13_wn2k0"]
+[ext_resource type="Texture2D" uid="uid://b4238b47ux6j2" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_left/frame_G.png" id="14_mutn1"]
+[ext_resource type="Texture2D" uid="uid://chb0vwwae57yd" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_left/frame_H.png" id="15_3rpxh"]
+[ext_resource type="Texture2D" uid="uid://cwbbhj77ql7kw" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_right/frame_G.png" id="16_fgs7k"]
+[ext_resource type="Texture2D" uid="uid://cl01vc0nd46hp" path="res://assets/doom/sprites/enemies/spider_mastermind/attack/attack_right/frame_H.png" id="17_fakab"]
+[ext_resource type="Texture2D" uid="uid://bm2ky3rokbgbq" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_J.png" id="18_aaorq"]
+[ext_resource type="Texture2D" uid="uid://dsnpx5s1n7qcf" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_K.png" id="19_yksn5"]
+[ext_resource type="Texture2D" uid="uid://dijoeortidssf" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_L.png" id="20_7x0s3"]
+[ext_resource type="Texture2D" uid="uid://8gg7faf1g5m5" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_M.png" id="21_esm2q"]
+[ext_resource type="Texture2D" uid="uid://ctkcbv3bbuuwj" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_N.png" id="22_c8pqx"]
+[ext_resource type="Texture2D" uid="uid://tvgta0hrs3x3" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_O.png" id="23_11g6m"]
+[ext_resource type="Texture2D" uid="uid://cuis13b2tf580" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_P.png" id="24_lmrlo"]
+[ext_resource type="Texture2D" uid="uid://bxheh0lgc0h75" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_Q.png" id="25_fp42p"]
+[ext_resource type="Texture2D" uid="uid://cu5o0hsssc7va" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_R.png" id="26_k1hkt"]
+[ext_resource type="Texture2D" uid="uid://cmr6dpwyy60ym" path="res://assets/doom/sprites/enemies/spider_mastermind/death/frame_S.png" id="27_ujjtt"]
+[ext_resource type="Texture2D" uid="uid://l3ikw1h4trvy" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front/frame_A.png" id="28_8vwvw"]
+[ext_resource type="Texture2D" uid="uid://s57qu2mnnpw2" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_back/frame_I.png" id="29_pwx12"]
+[ext_resource type="Texture2D" uid="uid://t27tr7erqwss" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_back_left/frame_I.png" id="30_u0q4i"]
+[ext_resource type="Texture2D" uid="uid://clvjajvc2milf" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_back_right/frame_I.png" id="31_lwl2n"]
+[ext_resource type="Texture2D" uid="uid://bhci1biq4ko5b" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_front/frame_I.png" id="32_hlffv"]
+[ext_resource type="Texture2D" uid="uid://ba7q08o7osnxf" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_front_left/frame_I.png" id="33_altiu"]
+[ext_resource type="Texture2D" uid="uid://gvmli0qlb7yb" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_front_right/frame_I.png" id="34_ucryd"]
+[ext_resource type="Texture2D" uid="uid://cgw72p1qu8mnq" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_left/frame_I.png" id="35_gt0hy"]
+[ext_resource type="Texture2D" uid="uid://dmcwaqeam1fm4" path="res://assets/doom/sprites/enemies/spider_mastermind/pain/pain_right/frame_I.png" id="36_1yqwu"]
+[ext_resource type="Texture2D" uid="uid://bitbvio0l85jb" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back/frame_A.png" id="37_v2qm0"]
+[ext_resource type="Texture2D" uid="uid://bfp8yfadco3x1" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back/frame_B.png" id="38_qiqnk"]
+[ext_resource type="Texture2D" uid="uid://clolb7vu8mwve" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back/frame_C.png" id="39_5yb3y"]
+[ext_resource type="Texture2D" uid="uid://rstwx74tljy5" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back/frame_D.png" id="40_h00e8"]
+[ext_resource type="Texture2D" uid="uid://boctclpfqr67y" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back/frame_E.png" id="41_0j4d5"]
+[ext_resource type="Texture2D" uid="uid://bcf5d55tld41v" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back/frame_F.png" id="42_l637o"]
+[ext_resource type="Texture2D" uid="uid://m3srk13p8qag" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_left/frame_A.png" id="43_ri6at"]
+[ext_resource type="Texture2D" uid="uid://bd6vlxudg3600" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_left/frame_B.png" id="44_kblu3"]
+[ext_resource type="Texture2D" uid="uid://df3l8ly0v48r0" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_left/frame_C.png" id="45_7e3av"]
+[ext_resource type="Texture2D" uid="uid://b3np6fqqvwhfh" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_left/frame_D.png" id="46_t3goc"]
+[ext_resource type="Texture2D" uid="uid://egoevsxcvwdh" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_left/frame_E.png" id="47_xmxnx"]
+[ext_resource type="Texture2D" uid="uid://xhq78n0qt4l3" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_left/frame_F.png" id="48_skrlq"]
+[ext_resource type="Texture2D" uid="uid://cjraprvekqta5" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_right/frame_A.png" id="49_rtajn"]
+[ext_resource type="Texture2D" uid="uid://hh52ho5pk15g" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_right/frame_B.png" id="50_gsy76"]
+[ext_resource type="Texture2D" uid="uid://cnnhasfr25ylr" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_right/frame_C.png" id="51_japmg"]
+[ext_resource type="Texture2D" uid="uid://4erm1mt72b0u" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_right/frame_D.png" id="52_osle6"]
+[ext_resource type="Texture2D" uid="uid://cnunbg6s7li3i" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_right/frame_E.png" id="53_1hv51"]
+[ext_resource type="Texture2D" uid="uid://vw0gxihs6ir0" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_back_right/frame_F.png" id="54_a461u"]
+[ext_resource type="Texture2D" uid="uid://cwkibp2xiko0b" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front/frame_B.png" id="55_47k1y"]
+[ext_resource type="Texture2D" uid="uid://bprj700xss660" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front/frame_C.png" id="56_cdcq8"]
+[ext_resource type="Texture2D" uid="uid://bjtapju0wgixo" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front/frame_D.png" id="57_r4uet"]
+[ext_resource type="Texture2D" uid="uid://dqho7kkbf60rs" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front/frame_E.png" id="58_d3m8h"]
+[ext_resource type="Texture2D" uid="uid://b1lngv4s11n72" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front/frame_F.png" id="59_a0ce8"]
+[ext_resource type="Texture2D" uid="uid://cw3ktpswuyoeg" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_left/frame_A.png" id="60_e4p5h"]
+[ext_resource type="Texture2D" uid="uid://xuicicu7ypvk" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_left/frame_B.png" id="61_m4m2h"]
+[ext_resource type="Texture2D" uid="uid://djqd1kkjyeqcn" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_left/frame_C.png" id="62_v0jrl"]
+[ext_resource type="Texture2D" uid="uid://cgqund8ugfka2" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_left/frame_D.png" id="63_rh3i3"]
+[ext_resource type="Texture2D" uid="uid://cg260wao3wo01" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_left/frame_E.png" id="64_aonsh"]
+[ext_resource type="Texture2D" uid="uid://csuyn8c05h1rk" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_left/frame_F.png" id="65_lrvpy"]
+[ext_resource type="Texture2D" uid="uid://byynf0h6lr3io" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_right/frame_A.png" id="66_stsvr"]
+[ext_resource type="Texture2D" uid="uid://cc54kkbvfn11q" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_right/frame_B.png" id="67_tqkuf"]
+[ext_resource type="Texture2D" uid="uid://2dky3i0fitui" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_right/frame_C.png" id="68_7rtlm"]
+[ext_resource type="Texture2D" uid="uid://3dcxb6vudn2k" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_right/frame_D.png" id="69_6gh5m"]
+[ext_resource type="Texture2D" uid="uid://bgdx8dlwa8gcy" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_right/frame_E.png" id="70_b7rqm"]
+[ext_resource type="Texture2D" uid="uid://c65otfcnuafwo" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_front_right/frame_F.png" id="71_5lm41"]
+[ext_resource type="Texture2D" uid="uid://blx5b7ytepp4e" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_left/frame_A.png" id="72_emuax"]
+[ext_resource type="Texture2D" uid="uid://c53i65map3pti" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_left/frame_B.png" id="73_ovy7l"]
+[ext_resource type="Texture2D" uid="uid://dsvy87d3h4frl" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_left/frame_C.png" id="74_lwsjm"]
+[ext_resource type="Texture2D" uid="uid://ds3hbimsav6ey" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_left/frame_D.png" id="75_lnhhr"]
+[ext_resource type="Texture2D" uid="uid://cyrv3xgrf0r3n" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_left/frame_E.png" id="76_eds4h"]
+[ext_resource type="Texture2D" uid="uid://l235d0847bd3" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_left/frame_F.png" id="77_b5j57"]
+[ext_resource type="Texture2D" uid="uid://byudggvbecsft" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_right/frame_A.png" id="78_hu8bq"]
+[ext_resource type="Texture2D" uid="uid://hndj11bmpr33" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_right/frame_B.png" id="79_4cvg2"]
+[ext_resource type="Texture2D" uid="uid://itd66cqkqxu2" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_right/frame_C.png" id="80_xpo8w"]
+[ext_resource type="Texture2D" uid="uid://dvxxsx41tcibn" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_right/frame_D.png" id="81_2nev1"]
+[ext_resource type="Texture2D" uid="uid://f0j5rfjty8ja" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_right/frame_E.png" id="82_wcwd8"]
+[ext_resource type="Texture2D" uid="uid://dcowfhhh7bta" path="res://assets/doom/sprites/enemies/spider_mastermind/walk/walk_right/frame_F.png" id="83_ccys3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mi230"]
+size = Vector3(4.5, 3.2, 4.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ykdes"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_usq1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r7k3d")
+}],
+"loop": 0,
+"name": &"attack_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ja871")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_forqh")
+}],
+"loop": 0,
+"name": &"attack_back_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1lv1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p0akb")
+}],
+"loop": 0,
+"name": &"attack_back_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_sq275")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ajdqj")
+}],
+"loop": 0,
+"name": &"attack_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_r468q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ph02c")
+}],
+"loop": 0,
+"name": &"attack_front_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_2cuda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_wn2k0")
+}],
+"loop": 0,
+"name": &"attack_front_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_mutn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3rpxh")
+}],
+"loop": 0,
+"name": &"attack_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_fgs7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_fakab")
+}],
+"loop": 0,
+"name": &"attack_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_aaorq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_yksn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_7x0s3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_esm2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_c8pqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_11g6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_lmrlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_fp42p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_k1hkt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ujjtt")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_8vwvw")
+}],
+"loop": 2,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_pwx12")
+}],
+"loop": 0,
+"name": &"pain_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_u0q4i")
+}],
+"loop": 0,
+"name": &"pain_back_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_lwl2n")
+}],
+"loop": 0,
+"name": &"pain_back_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_hlffv")
+}],
+"loop": 0,
+"name": &"pain_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_altiu")
+}],
+"loop": 0,
+"name": &"pain_front_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_ucryd")
+}],
+"loop": 0,
+"name": &"pain_front_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_gt0hy")
+}],
+"loop": 0,
+"name": &"pain_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_1yqwu")
+}],
+"loop": 0,
+"name": &"pain_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_v2qm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_qiqnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_5yb3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_h00e8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_0j4d5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_l637o")
+}],
+"loop": 1,
+"name": &"walk_back",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("43_ri6at")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_kblu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_7e3av")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_t3goc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_xmxnx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_skrlq")
+}],
+"loop": 1,
+"name": &"walk_back_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("49_rtajn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_gsy76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_japmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_osle6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_1hv51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_a461u")
+}],
+"loop": 1,
+"name": &"walk_back_right",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_8vwvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_47k1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_cdcq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_r4uet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_d3m8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_a0ce8")
+}],
+"loop": 1,
+"name": &"walk_front",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("60_e4p5h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_m4m2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_v0jrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_rh3i3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_aonsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_lrvpy")
+}],
+"loop": 1,
+"name": &"walk_front_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("66_stsvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_tqkuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_7rtlm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_6gh5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_b7rqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_5lm41")
+}],
+"loop": 1,
+"name": &"walk_front_right",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("72_emuax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_ovy7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_lwsjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_lnhhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_eds4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_b5j57")
+}],
+"loop": 1,
+"name": &"walk_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("78_hu8bq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_4cvg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_xpo8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_2nev1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_wcwd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_ccys3")
+}],
+"loop": 1,
+"name": &"walk_right",
+"speed": 6.0
+}]
+
+[node name="SpiderMastermind" type="CharacterBody3D" unique_id=1524995834]
+script = ExtResource("1_usq1q")
+metadata/_custom_type_script = "uid://b35u6fmu300dp"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1561442865]
+shape = SubResource("BoxShape3D_mi230")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=2131994962]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.22494656, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ykdes")
+animation = &"walk_right"
+autoplay = "idle"

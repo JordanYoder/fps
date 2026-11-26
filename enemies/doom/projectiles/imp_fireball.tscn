@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://fuj1kol32kfn"]
+
+[ext_resource type="Texture2D" uid="uid://s2ap5jlyg4c" path="res://assets/doom/sprites/projectiles/imp_fireball/frame_A.png" id="1_8myk6"]
+[ext_resource type="Script" uid="uid://cqkxmeonakqbg" path="res://enemies/doom/projectiles/enemy_projectile.gd" id="1_proj"]
+[ext_resource type="Texture2D" uid="uid://crwxngy0joayl" path="res://assets/doom/sprites/projectiles/imp_fireball/frame_B.png" id="2_2qsqs"]
+[ext_resource type="Texture2D" uid="uid://cktgu1157rum5" path="res://assets/doom/sprites/projectiles/imp_fireball/frame_C.png" id="3_r8a5y"]
+[ext_resource type="Texture2D" uid="uid://bw0g2byr37r4o" path="res://assets/doom/sprites/projectiles/imp_fireball/frame_D.png" id="4_1dael"]
+[ext_resource type="Texture2D" uid="uid://besqg55h3nxs3" path="res://assets/doom/sprites/projectiles/imp_fireball/frame_E.png" id="5_k701p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mi230"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8myk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2qsqs")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_r8a5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1dael")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k701p")
+}],
+"loop": 0,
+"name": &"impact",
+"speed": 8.0
+}]
+
+[node name="ImpFireball" type="Node3D" unique_id=393775021]
+script = ExtResource("1_proj")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=293638581]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_mi230")
+animation = &"impact"
+autoplay = "fly"
+
+[node name="Glow" type="OmniLight3D" parent="." unique_id=312966607]
+light_color = Color(1, 0.48731744, 0.28545988, 1)
+light_energy = 1.5
+omni_range = 3.0

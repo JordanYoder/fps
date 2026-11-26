@@ -2,7 +2,7 @@
 extends EditorScript
 
 const EXTERNAL_SOURCE_DIR = "C:/Users/jorda/OneDrive/Desktop/temp"
-const OUTPUT_MAT_DIR = "res://assets/materials/"
+const OUTPUT_MAT_DIR = "res://assets/doom/materials/"
 
 func _run() -> void:
 	var dir = DirAccess.open(EXTERNAL_SOURCE_DIR)

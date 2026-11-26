@@ -1,0 +1,438 @@
+[gd_scene format=3 uid="uid://ccr85wssjq1kp"]
+
+[ext_resource type="Script" uid="uid://cwmp3vx5b4ba0" path="res://enemies/doom/pinky/pinky.gd" id="1_5s8i7"]
+[ext_resource type="Texture2D" uid="uid://b0l4pj4xdtgcm" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back/frame_E.png" id="2_5s8i7"]
+[ext_resource type="Texture2D" uid="uid://deo50lo35gsyy" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back/frame_F.png" id="3_xtmhs"]
+[ext_resource type="Texture2D" uid="uid://dk2clbnh6srsu" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back/frame_G.png" id="4_isutp"]
+[ext_resource type="Texture2D" uid="uid://dq5rbovj3c8wy" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back_left/frame_E.png" id="5_of573"]
+[ext_resource type="Texture2D" uid="uid://b12r88en2y450" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back_left/frame_F.png" id="6_8wrlo"]
+[ext_resource type="Texture2D" uid="uid://c06xtr1ejacrj" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back_left/frame_G.png" id="7_d6u4g"]
+[ext_resource type="Texture2D" uid="uid://wgqfubteiws0" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back_right/frame_E.png" id="8_kqywn"]
+[ext_resource type="Texture2D" uid="uid://dqy8pf2jr0u5o" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back_right/frame_F.png" id="9_o7hs0"]
+[ext_resource type="Texture2D" uid="uid://ci820dd4byw4j" path="res://assets/doom/sprites/enemies/pinky/attack/attack_back_right/frame_G.png" id="10_kjlm0"]
+[ext_resource type="Texture2D" uid="uid://bohaim2vst38f" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front/frame_E.png" id="11_gxstm"]
+[ext_resource type="Texture2D" uid="uid://ddotdbxjtutas" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front/frame_F.png" id="12_bwckr"]
+[ext_resource type="Texture2D" uid="uid://gcqnaiujwv71" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front/frame_G.png" id="13_50v0x"]
+[ext_resource type="Texture2D" uid="uid://dn8gumn64l7to" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front_left/frame_E.png" id="14_7vobb"]
+[ext_resource type="Texture2D" uid="uid://df05t7pr2s3nv" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front_left/frame_F.png" id="15_jw6r4"]
+[ext_resource type="Texture2D" uid="uid://cfq6m7quvahkg" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front_left/frame_G.png" id="16_x0fpo"]
+[ext_resource type="Texture2D" uid="uid://ctxyhvcgv1j22" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front_right/frame_E.png" id="17_3p4ro"]
+[ext_resource type="Texture2D" uid="uid://dn5etyaaxn76a" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front_right/frame_F.png" id="18_a7i4o"]
+[ext_resource type="Texture2D" uid="uid://dtvbv27dq3q7r" path="res://assets/doom/sprites/enemies/pinky/attack/attack_front_right/frame_G.png" id="19_68ale"]
+[ext_resource type="Texture2D" uid="uid://b47415w15trlk" path="res://assets/doom/sprites/enemies/pinky/attack/attack_left/frame_E.png" id="20_wyll3"]
+[ext_resource type="Texture2D" uid="uid://3o6fqkef3rnd" path="res://assets/doom/sprites/enemies/pinky/attack/attack_left/frame_F.png" id="21_rfcjr"]
+[ext_resource type="Texture2D" uid="uid://cm3sl4ymyk3em" path="res://assets/doom/sprites/enemies/pinky/attack/attack_left/frame_G.png" id="22_3rvuh"]
+[ext_resource type="Texture2D" uid="uid://ckouqs3irbe12" path="res://assets/doom/sprites/enemies/pinky/attack/attack_right/frame_E.png" id="23_2ux2d"]
+[ext_resource type="Texture2D" uid="uid://cgp38l53jnlyp" path="res://assets/doom/sprites/enemies/pinky/attack/attack_right/frame_F.png" id="24_o4iuc"]
+[ext_resource type="Texture2D" uid="uid://dxm2ixmdm8j08" path="res://assets/doom/sprites/enemies/pinky/attack/attack_right/frame_G.png" id="25_a6m5e"]
+[ext_resource type="Texture2D" uid="uid://cvf0rwnh2wetd" path="res://assets/doom/sprites/enemies/pinky/death/frame_I.png" id="26_n71au"]
+[ext_resource type="Texture2D" uid="uid://bru8v2timxnai" path="res://assets/doom/sprites/enemies/pinky/death/frame_J.png" id="27_n6blp"]
+[ext_resource type="Texture2D" uid="uid://c5d75x6fpeis0" path="res://assets/doom/sprites/enemies/pinky/death/frame_K.png" id="28_rawvc"]
+[ext_resource type="Texture2D" uid="uid://d2w3s8xr7s42n" path="res://assets/doom/sprites/enemies/pinky/death/frame_L.png" id="29_0cn4l"]
+[ext_resource type="Texture2D" uid="uid://bpsbxj7nvvolw" path="res://assets/doom/sprites/enemies/pinky/death/frame_M.png" id="30_ortjt"]
+[ext_resource type="Texture2D" uid="uid://dm738acq4qa1p" path="res://assets/doom/sprites/enemies/pinky/death/frame_N.png" id="31_ai71k"]
+[ext_resource type="Texture2D" uid="uid://bk8wh0ksf5pfu" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front/frame_A.png" id="32_klbm0"]
+[ext_resource type="Texture2D" uid="uid://dlds42ahm5cu2" path="res://assets/doom/sprites/enemies/pinky/pain/pain_back/frame_H.png" id="33_bdcat"]
+[ext_resource type="Texture2D" uid="uid://1pf4dwouon08" path="res://assets/doom/sprites/enemies/pinky/pain/pain_back_left/frame_H.png" id="34_x2e2b"]
+[ext_resource type="Texture2D" uid="uid://bd3v3yitaf28i" path="res://assets/doom/sprites/enemies/pinky/pain/pain_back_right/frame_H.png" id="35_nsog5"]
+[ext_resource type="Texture2D" uid="uid://bcex0ce0bo7vw" path="res://assets/doom/sprites/enemies/pinky/pain/pain_front/frame_H.png" id="36_1ls3t"]
+[ext_resource type="Texture2D" uid="uid://uqp6dt132yne" path="res://assets/doom/sprites/enemies/pinky/pain/pain_front_left/frame_H.png" id="37_f4f57"]
+[ext_resource type="Texture2D" uid="uid://vpy1rk0uq3t8" path="res://assets/doom/sprites/enemies/pinky/pain/pain_front_right/frame_H.png" id="38_o57xs"]
+[ext_resource type="Texture2D" uid="uid://ci02gudlm8rx5" path="res://assets/doom/sprites/enemies/pinky/pain/pain_right/frame_H.png" id="39_vk5vj"]
+[ext_resource type="Texture2D" uid="uid://djb725x4pyim0" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back/frame_A.png" id="40_c3rwl"]
+[ext_resource type="Texture2D" uid="uid://53dryhx74ek2" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back/frame_B.png" id="41_x5bsk"]
+[ext_resource type="Texture2D" uid="uid://ctvnueww3vki0" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back/frame_C.png" id="42_q5aw7"]
+[ext_resource type="Texture2D" uid="uid://dj1m31jtowyox" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back/frame_D.png" id="43_dct16"]
+[ext_resource type="Texture2D" uid="uid://c5a1i5ussalkv" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_left/frame_A.png" id="44_5ygi4"]
+[ext_resource type="Texture2D" uid="uid://duhj8q0goy12a" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_left/frame_B.png" id="45_tbs0p"]
+[ext_resource type="Texture2D" uid="uid://bp3tim6bxw1t0" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_left/frame_C.png" id="46_qnmcp"]
+[ext_resource type="Texture2D" uid="uid://d1kqsklt2ks8o" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_left/frame_D.png" id="47_vruxx"]
+[ext_resource type="Texture2D" uid="uid://dagm8u5v1h278" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_right/frame_A.png" id="48_gvyxt"]
+[ext_resource type="Texture2D" uid="uid://uk4d1i0or18d" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_right/frame_B.png" id="49_4aej4"]
+[ext_resource type="Texture2D" uid="uid://drl7cth8oos7o" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_right/frame_C.png" id="50_7vu16"]
+[ext_resource type="Texture2D" uid="uid://5jarmfwocdkp" path="res://assets/doom/sprites/enemies/pinky/walk/walk_back_right/frame_D.png" id="51_yx0o1"]
+[ext_resource type="Texture2D" uid="uid://8cvwfx77dena" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front/frame_B.png" id="52_53qld"]
+[ext_resource type="Texture2D" uid="uid://dptymxljpw4sj" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front/frame_C.png" id="53_v8mv7"]
+[ext_resource type="Texture2D" uid="uid://c0qq5xeai0rob" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front/frame_D.png" id="54_xw74x"]
+[ext_resource type="Texture2D" uid="uid://cg7hatvirxfnd" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_left/frame_A.png" id="55_qsisu"]
+[ext_resource type="Texture2D" uid="uid://df4jib4fw0phd" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_left/frame_B.png" id="56_uq4n7"]
+[ext_resource type="Texture2D" uid="uid://dt0jquqjvhjrv" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_left/frame_C.png" id="57_epbmp"]
+[ext_resource type="Texture2D" uid="uid://ctxqp6dcu1o8y" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_left/frame_D.png" id="58_43lld"]
+[ext_resource type="Texture2D" uid="uid://cate3d6ukxisy" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_right/frame_A.png" id="59_nox1v"]
+[ext_resource type="Texture2D" uid="uid://co316n1s2g7h8" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_right/frame_B.png" id="60_g8acp"]
+[ext_resource type="Texture2D" uid="uid://b1piqh58pyeyv" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_right/frame_C.png" id="61_eex07"]
+[ext_resource type="Texture2D" uid="uid://bjosi8nrlnt2t" path="res://assets/doom/sprites/enemies/pinky/walk/walk_front_right/frame_D.png" id="62_82pt7"]
+[ext_resource type="Texture2D" uid="uid://c2j3xvbhh3iiv" path="res://assets/doom/sprites/enemies/pinky/walk/walk_left/frame_A.png" id="63_kn5l5"]
+[ext_resource type="Texture2D" uid="uid://b42m63qxhbm3j" path="res://assets/doom/sprites/enemies/pinky/walk/walk_left/frame_B.png" id="64_7al40"]
+[ext_resource type="Texture2D" uid="uid://buqknpcr1bqp6" path="res://assets/doom/sprites/enemies/pinky/walk/walk_left/frame_C.png" id="65_x0ghd"]
+[ext_resource type="Texture2D" uid="uid://dvv0f47jxtk6i" path="res://assets/doom/sprites/enemies/pinky/walk/walk_left/frame_D.png" id="66_jhs08"]
+[ext_resource type="Texture2D" uid="uid://c3m0j5wvt5vr2" path="res://assets/doom/sprites/enemies/pinky/walk/walk_right/frame_A.png" id="67_6b7kl"]
+[ext_resource type="Texture2D" uid="uid://dlk0f21854iip" path="res://assets/doom/sprites/enemies/pinky/walk/walk_right/frame_B.png" id="68_k8cum"]
+[ext_resource type="Texture2D" uid="uid://d2r8o1kgmct4v" path="res://assets/doom/sprites/enemies/pinky/walk/walk_right/frame_C.png" id="69_e5afq"]
+[ext_resource type="Texture2D" uid="uid://bombgop8wwiv" path="res://assets/doom/sprites/enemies/pinky/walk/walk_right/frame_D.png" id="70_bihdt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
+radius = 0.5805664
+height = 1.6176758
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_afmi3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5s8i7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xtmhs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_isutp")
+}],
+"loop": 0,
+"name": &"attack_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_of573")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8wrlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d6u4g")
+}],
+"loop": 0,
+"name": &"attack_back_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_kqywn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_o7hs0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kjlm0")
+}],
+"loop": 0,
+"name": &"attack_back_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_gxstm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bwckr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_50v0x")
+}],
+"loop": 0,
+"name": &"attack_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_7vobb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jw6r4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_x0fpo")
+}],
+"loop": 0,
+"name": &"attack_front_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_3p4ro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_a7i4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_68ale")
+}],
+"loop": 0,
+"name": &"attack_front_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_wyll3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_rfcjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_3rvuh")
+}],
+"loop": 0,
+"name": &"attack_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_2ux2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_o4iuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_a6m5e")
+}],
+"loop": 0,
+"name": &"attack_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_n71au")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_n6blp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_rawvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_0cn4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_ortjt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ai71k")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_klbm0")
+}],
+"loop": 2,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_bdcat")
+}],
+"loop": 0,
+"name": &"pain_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_x2e2b")
+}],
+"loop": 0,
+"name": &"pain_back_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_nsog5")
+}],
+"loop": 0,
+"name": &"pain_back_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_1ls3t")
+}],
+"loop": 0,
+"name": &"pain_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_f4f57")
+}],
+"loop": 0,
+"name": &"pain_front_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_o57xs")
+}],
+"loop": 0,
+"name": &"pain_front_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_o57xs")
+}],
+"loop": 0,
+"name": &"pain_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_vk5vj")
+}],
+"loop": 0,
+"name": &"pain_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_c3rwl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_x5bsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_q5aw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_dct16")
+}],
+"loop": 1,
+"name": &"walk_back",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_5ygi4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_tbs0p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_qnmcp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_vruxx")
+}],
+"loop": 1,
+"name": &"walk_back_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_gvyxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_4aej4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_7vu16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_yx0o1")
+}],
+"loop": 1,
+"name": &"walk_back_right",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_klbm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_53qld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_v8mv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_xw74x")
+}],
+"loop": 1,
+"name": &"walk_front",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_qsisu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_uq4n7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_epbmp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_43lld")
+}],
+"loop": 1,
+"name": &"walk_front_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_nox1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_g8acp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_eex07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_82pt7")
+}],
+"loop": 1,
+"name": &"walk_front_right",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("63_kn5l5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_7al40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_x0ghd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_jhs08")
+}],
+"loop": 1,
+"name": &"walk_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("67_6b7kl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_k8cum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_e5afq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_bihdt")
+}],
+"loop": 1,
+"name": &"walk_right",
+"speed": 6.0
+}]
+
+[node name="Pinky" type="CharacterBody3D" unique_id=1001045237]
+script = ExtResource("1_5s8i7")
+metadata/_custom_type_script = "uid://b35u6fmu300dp"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1186000429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19116211, 0)
+shape = SubResource("CapsuleShape3D_mi230")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=8305644]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.22494656, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_afmi3")
+animation = &"idle"
+autoplay = "idle"

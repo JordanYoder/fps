@@ -591,6 +591,41 @@ func _perform_melee_attack() -> void:
 func _perform_ranged_attack() -> void:
 	pass
 
+## Melee hit for the end of the wind-up: only connects if the target is still in reach.
+func _melee_hit(damage_min: int, damage_max: int) -> void:
+	if not is_instance_valid(target):
+		return
+	if global_position.distance_to(target.global_position) > melee_range + 0.5:
+		return
+	if target.has_method("take_damage"):
+		target.take_damage(randi_range(damage_min, damage_max), self)
+
+## Spawns `scene` into the level and launches it from `from` toward `aim`. Reports an error
+## and returns null if the scene is missing or isn't an EnemyProjectile.
+func _spawn_projectile(scene: PackedScene, from: Vector3, aim: Vector3) -> EnemyProjectile:
+	if not scene:
+		push_error("%s: no projectile scene assigned" % name)
+		return null
+	var node := scene.instantiate()
+	var projectile := node as EnemyProjectile
+	if not projectile:
+		push_error("%s: %s is not an EnemyProjectile" % [name, scene.resource_path])
+		node.free()
+		return null
+	if not Spawner.add_to_level(projectile, self):
+		return null
+	projectile.launch(from, aim, self)
+	return projectile
+
+## Fails loudly when a required export (a projectile scene, say) is empty: in a debug build
+## the game stops here with the message instead of the monster quietly misbehaving.
+func _require(value: Variant, field: String) -> void:
+	if value:
+		return
+	var msg := "%s (%s): '%s' is not set" % [name, scene_file_path, field]
+	push_error(msg)
+	assert(false, msg)
+
 ## `inflictor_pos`: where the damage came from, for knockback (a rocket's blast centre).
 ## Defaults to the attacker's position, which is right for bullets and melee.
 func take_damage(amount: int, attacker: Node3D = null, inflictor_pos: Vector3 = Vector3.INF) -> void:

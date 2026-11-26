@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://c311n22aqs1d"]
+
+[ext_resource type="Texture2D" uid="uid://p2pgaiik4x8j" path="res://assets/doom/sprites/weapons/first_person/plasma_rifle/frames/frame_A.png" id="1_co1iy"]
+[ext_resource type="Texture2D" uid="uid://dthw2ggol4dk4" path="res://assets/doom/sprites/weapons/first_person/plasma_rifle/frames/frame_B.png" id="2_6m1qp"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_co1iy")
+}],
+"loop": 0,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("1_co1iy")
+}, {
+"duration": 20.0,
+"texture": ExtResource("2_6m1qp")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 35.0
+}]

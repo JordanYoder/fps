@@ -1,9 +1,9 @@
 [gd_scene format=3]
 
-[ext_resource type="Texture2D" uid="uid://wnerlf08bmsd" path="res://assets/sprites/effects/bullet_puff/frame_A.png" id="1_puffa"]
-[ext_resource type="Texture2D" uid="uid://8yiqicjrwqt2" path="res://assets/sprites/effects/bullet_puff/frame_B.png" id="2_puffb"]
-[ext_resource type="Texture2D" uid="uid://cuwp0378v0doi" path="res://assets/sprites/effects/bullet_puff/frame_C.png" id="3_puffc"]
-[ext_resource type="Texture2D" uid="uid://bdxngvlaylft7" path="res://assets/sprites/effects/bullet_puff/frame_D.png" id="4_puffd"]
+[ext_resource type="Texture2D" uid="uid://wnerlf08bmsd" path="res://assets/doom/sprites/effects/bullet_puff/frame_A.png" id="1_puffa"]
+[ext_resource type="Texture2D" uid="uid://8yiqicjrwqt2" path="res://assets/doom/sprites/effects/bullet_puff/frame_B.png" id="2_puffb"]
+[ext_resource type="Texture2D" uid="uid://cuwp0378v0doi" path="res://assets/doom/sprites/effects/bullet_puff/frame_C.png" id="3_puffc"]
+[ext_resource type="Texture2D" uid="uid://bdxngvlaylft7" path="res://assets/doom/sprites/effects/bullet_puff/frame_D.png" id="4_puffd"]
 [ext_resource type="Script" uid="uid://cr6gi2ikwfkw" path="res://weapons/weapon_effects/bullet_puff.gd" id="5_script"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_puff"]

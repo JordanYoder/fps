@@ -9,5 +9,5 @@ func _run():
 	var tex = ImageTexture.create_from_image(img)
 
 	# 3. Save it as a permanent standalone resource
-	ResourceSaver.save(tex, "res://assets/materials/_checkerboard.tres")
+	ResourceSaver.save(tex, "res://assets/doom/materials/_checkerboard.tres")
 	print("Texture baked successfully!")

@@ -1,0 +1,442 @@
+[gd_scene format=3 uid="uid://ci0l5wmky5lc7"]
+
+[ext_resource type="Script" uid="uid://bkqs4j7gw307m" path="res://enemies/doom/baron_of_hell/baron.gd" id="1_efsup"]
+[ext_resource type="Texture2D" uid="uid://cejvfa0uyp87v" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back/frame_E.png" id="2_efsup"]
+[ext_resource type="Texture2D" uid="uid://rqejlimo1dqh" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back/frame_F.png" id="3_dimpm"]
+[ext_resource type="Texture2D" uid="uid://d0455ed28pnhs" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back/frame_G.png" id="4_6qikv"]
+[ext_resource type="Texture2D" uid="uid://bkimjkrxjkmag" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back_left/frame_E.png" id="5_nry8q"]
+[ext_resource type="Texture2D" uid="uid://d4dwr1pftc0qt" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back_left/frame_F.png" id="6_4aalq"]
+[ext_resource type="Texture2D" uid="uid://dpqjc7vr7pcy3" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back_left/frame_G.png" id="7_8jamv"]
+[ext_resource type="Texture2D" uid="uid://bivpg17g72u83" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back_right/frame_E.png" id="8_xbpvu"]
+[ext_resource type="Texture2D" uid="uid://dk8w20mfso5a6" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back_right/frame_F.png" id="9_j2wlj"]
+[ext_resource type="Texture2D" uid="uid://fnoq3wbaf7rb" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_back_right/frame_G.png" id="10_q772h"]
+[ext_resource type="Texture2D" uid="uid://bo4rf3xefi6yt" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front/frame_E.png" id="11_i0tth"]
+[ext_resource type="Texture2D" uid="uid://c7qwlqfs8osp" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front/frame_F.png" id="12_epyip"]
+[ext_resource type="Texture2D" uid="uid://cgnxojlhce41s" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front/frame_G.png" id="13_6cscq"]
+[ext_resource type="Texture2D" uid="uid://dsgg0shd2smjd" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front_left/frame_E.png" id="14_2k8fu"]
+[ext_resource type="Texture2D" uid="uid://mygpod6sjqk4" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front_left/frame_F.png" id="15_lwpjk"]
+[ext_resource type="Texture2D" uid="uid://c4cxc534vodj6" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front_left/frame_G.png" id="16_kqw3t"]
+[ext_resource type="Texture2D" uid="uid://caanm2wtirk6w" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front_right/frame_E.png" id="17_oeast"]
+[ext_resource type="Texture2D" uid="uid://bebydmeld6mlg" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front_right/frame_F.png" id="18_pfavj"]
+[ext_resource type="Texture2D" uid="uid://cki0j7mygdddd" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_front_right/frame_G.png" id="19_uodr5"]
+[ext_resource type="Texture2D" uid="uid://bj2ede4hmmsnv" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_left/frame_E.png" id="20_k2vid"]
+[ext_resource type="Texture2D" uid="uid://cwqtcdfymsyit" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_left/frame_F.png" id="21_2u8hq"]
+[ext_resource type="Texture2D" uid="uid://d1hwxf0qgpkwa" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_left/frame_G.png" id="22_5gynp"]
+[ext_resource type="Texture2D" uid="uid://dd8oxinpf8dva" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_right/frame_E.png" id="23_sb4hp"]
+[ext_resource type="Texture2D" uid="uid://c2i8ic8u6vgfo" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_right/frame_F.png" id="24_tc32b"]
+[ext_resource type="Texture2D" uid="uid://d1bnjkk7thg4d" path="res://assets/doom/sprites/enemies/baron_of_hell/attack/attack_right/frame_G.png" id="25_5qp8q"]
+[ext_resource type="Texture2D" uid="uid://d3jrkonxadtji" path="res://assets/doom/sprites/enemies/baron_of_hell/death/frame_I.png" id="26_2its4"]
+[ext_resource type="Texture2D" uid="uid://bxoumgtx674jx" path="res://assets/doom/sprites/enemies/baron_of_hell/death/frame_J.png" id="27_0hs10"]
+[ext_resource type="Texture2D" uid="uid://bthw8o44p5cww" path="res://assets/doom/sprites/enemies/baron_of_hell/death/frame_K.png" id="28_834tm"]
+[ext_resource type="Texture2D" uid="uid://dfijaleo2k301" path="res://assets/doom/sprites/enemies/baron_of_hell/death/frame_L.png" id="29_ectvb"]
+[ext_resource type="Texture2D" uid="uid://cxfns0yr02t5g" path="res://assets/doom/sprites/enemies/baron_of_hell/death/frame_M.png" id="30_4h281"]
+[ext_resource type="Texture2D" uid="uid://bk77n2nfimc82" path="res://assets/doom/sprites/enemies/baron_of_hell/death/frame_N.png" id="31_6d0ae"]
+[ext_resource type="Texture2D" uid="uid://c6qx18476wdf4" path="res://assets/doom/sprites/enemies/baron_of_hell/death/frame_O.png" id="32_qbnsr"]
+[ext_resource type="Texture2D" uid="uid://cumn4ktwff3wy" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front/frame_A.png" id="33_j7a6a"]
+[ext_resource type="Texture2D" uid="uid://da1a2867hqbk" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_back/frame_H.png" id="34_d82bo"]
+[ext_resource type="Texture2D" uid="uid://dey6d1tqnmf1" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_back_left/frame_H.png" id="35_3dbqe"]
+[ext_resource type="Texture2D" uid="uid://dpd78fo8vfx7v" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_back_right/frame_H.png" id="36_qq7a1"]
+[ext_resource type="Texture2D" uid="uid://ckttq4qvqucb4" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_front/frame_H.png" id="37_n6mqw"]
+[ext_resource type="Texture2D" uid="uid://cp1518qox54gm" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_front_left/frame_H.png" id="38_4m5o4"]
+[ext_resource type="Texture2D" uid="uid://cannx2nbsde0" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_front_right/frame_H.png" id="39_jtyfy"]
+[ext_resource type="Texture2D" uid="uid://h07jvbf2w7fq" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_left/frame_H.png" id="40_cv625"]
+[ext_resource type="Texture2D" uid="uid://cmthud3nlsyqe" path="res://assets/doom/sprites/enemies/baron_of_hell/pain/pain_right/frame_H.png" id="41_m0gjg"]
+[ext_resource type="Texture2D" uid="uid://b8hnu55fbjqag" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back/frame_A.png" id="42_1v3wo"]
+[ext_resource type="Texture2D" uid="uid://c11k5yxpb6ts7" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back/frame_B.png" id="43_dohq4"]
+[ext_resource type="Texture2D" uid="uid://bh3ym1sja15r8" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back/frame_C.png" id="44_ij5eh"]
+[ext_resource type="Texture2D" uid="uid://m731di44iws0" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back/frame_D.png" id="45_h5l1d"]
+[ext_resource type="Texture2D" uid="uid://di2s4cnnp4hsj" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_left/frame_A.png" id="46_is72p"]
+[ext_resource type="Texture2D" uid="uid://bjw1evi1m302u" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_left/frame_B.png" id="47_bgrjc"]
+[ext_resource type="Texture2D" uid="uid://bxc0mtfoobp4m" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_left/frame_C.png" id="48_bshh0"]
+[ext_resource type="Texture2D" uid="uid://dtp5fjew4v1ul" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_left/frame_D.png" id="49_62j7u"]
+[ext_resource type="Texture2D" uid="uid://c1a6grlt8wkpb" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_right/frame_A.png" id="50_x5ng4"]
+[ext_resource type="Texture2D" uid="uid://c4gehji182a7m" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_right/frame_B.png" id="51_uwf17"]
+[ext_resource type="Texture2D" uid="uid://dmwtkcnsp8njo" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_right/frame_C.png" id="52_7kuep"]
+[ext_resource type="Texture2D" uid="uid://belwatxm0prmp" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_back_right/frame_D.png" id="53_57tbv"]
+[ext_resource type="Texture2D" uid="uid://rcx3j4571cyp" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front/frame_B.png" id="54_ojnxl"]
+[ext_resource type="Texture2D" uid="uid://dyxesmqbegjte" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front/frame_C.png" id="55_hlmug"]
+[ext_resource type="Texture2D" uid="uid://hvnt4ays032r" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front/frame_D.png" id="56_n73uy"]
+[ext_resource type="Texture2D" uid="uid://dy35skxiwcb06" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_left/frame_A.png" id="57_6rjr6"]
+[ext_resource type="Texture2D" uid="uid://be4gwegixco6i" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_left/frame_B.png" id="58_81vm6"]
+[ext_resource type="Texture2D" uid="uid://capw1viyiiwnw" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_left/frame_C.png" id="59_df6ae"]
+[ext_resource type="Texture2D" uid="uid://bh84f48q82wje" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_left/frame_D.png" id="60_47re5"]
+[ext_resource type="Texture2D" uid="uid://mk8hhrotcgcv" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_right/frame_A.png" id="61_0tf5n"]
+[ext_resource type="Texture2D" uid="uid://c0ehsnp4rnqpe" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_right/frame_B.png" id="62_dlbex"]
+[ext_resource type="Texture2D" uid="uid://b5anfpsdm3ons" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_right/frame_C.png" id="63_0cfup"]
+[ext_resource type="Texture2D" uid="uid://ca6a3ej0olps5" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_front_right/frame_D.png" id="64_u65h6"]
+[ext_resource type="Texture2D" uid="uid://nb7vvd40jkkw" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_left/frame_A.png" id="65_ri34k"]
+[ext_resource type="Texture2D" uid="uid://bsmja1mxi74hy" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_left/frame_B.png" id="66_kgox5"]
+[ext_resource type="Texture2D" uid="uid://cs8gdwjg3xj00" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_left/frame_C.png" id="67_b71gr"]
+[ext_resource type="Texture2D" uid="uid://djqr3su1m7r2s" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_left/frame_D.png" id="68_iddt3"]
+[ext_resource type="Texture2D" uid="uid://1sed3i1dkr5g" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_right/frame_A.png" id="69_ihsd4"]
+[ext_resource type="Texture2D" uid="uid://brdpdh80bigrb" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_right/frame_B.png" id="70_r2rm4"]
+[ext_resource type="Texture2D" uid="uid://diewyyv62s87f" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_right/frame_C.png" id="71_dkcpm"]
+[ext_resource type="Texture2D" uid="uid://dd03an6fnjgt7" path="res://assets/doom/sprites/enemies/baron_of_hell/walk/walk_right/frame_D.png" id="72_53npp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7bweo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_efsup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dimpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6qikv")
+}],
+"loop": 0,
+"name": &"attack_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_nry8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4aalq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8jamv")
+}],
+"loop": 0,
+"name": &"attack_back_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_xbpvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j2wlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_q772h")
+}],
+"loop": 0,
+"name": &"attack_back_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_i0tth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_epyip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6cscq")
+}],
+"loop": 0,
+"name": &"attack_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_2k8fu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lwpjk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_kqw3t")
+}],
+"loop": 0,
+"name": &"attack_front_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_oeast")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_pfavj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_uodr5")
+}],
+"loop": 0,
+"name": &"attack_front_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_k2vid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_2u8hq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_5gynp")
+}],
+"loop": 0,
+"name": &"attack_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_sb4hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_tc32b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_5qp8q")
+}],
+"loop": 0,
+"name": &"attack_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_2its4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_0hs10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_834tm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ectvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_4h281")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_6d0ae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_qbnsr")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_j7a6a")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_d82bo")
+}],
+"loop": 0,
+"name": &"pain_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_3dbqe")
+}],
+"loop": 0,
+"name": &"pain_back_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_qq7a1")
+}],
+"loop": 0,
+"name": &"pain_back_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_n6mqw")
+}],
+"loop": 0,
+"name": &"pain_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_4m5o4")
+}],
+"loop": 0,
+"name": &"pain_front_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_jtyfy")
+}],
+"loop": 0,
+"name": &"pain_front_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_cv625")
+}],
+"loop": 0,
+"name": &"pain_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_m0gjg")
+}],
+"loop": 0,
+"name": &"pain_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("42_1v3wo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_dohq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_ij5eh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_h5l1d")
+}],
+"loop": 1,
+"name": &"walk_back",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_is72p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_bgrjc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_bshh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_62j7u")
+}],
+"loop": 1,
+"name": &"walk_back_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_x5ng4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_uwf17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_7kuep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_57tbv")
+}],
+"loop": 1,
+"name": &"walk_back_right",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_j7a6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_ojnxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_hlmug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_n73uy")
+}],
+"loop": 1,
+"name": &"walk_front",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("57_6rjr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_81vm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_df6ae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_47re5")
+}],
+"loop": 1,
+"name": &"walk_front_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("61_0tf5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_dlbex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_0cfup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_u65h6")
+}],
+"loop": 1,
+"name": &"walk_front_right",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("65_ri34k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_kgox5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_b71gr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_iddt3")
+}],
+"loop": 1,
+"name": &"walk_left",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("69_ihsd4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_r2rm4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_dkcpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_53npp")
+}],
+"loop": 1,
+"name": &"walk_right",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mi230"]
+radius = 0.48
+height = 2.05
+
+[node name="BaronOfHell" type="CharacterBody3D" unique_id=1310982127]
+script = ExtResource("1_efsup")
+metadata/_custom_type_script = "uid://b35u6fmu300dp"
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=1383370525]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_7bweo")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1290593953]
+shape = SubResource("CapsuleShape3D_mi230")

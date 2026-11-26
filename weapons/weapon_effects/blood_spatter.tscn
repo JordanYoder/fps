@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b3lkdy00f15h"]
 
-[ext_resource type="Texture2D" uid="uid://c63nro0mdg1sh" path="res://assets/sprites/effects/blood/frame_C.png" id="1_tj5xk"]
-[ext_resource type="Texture2D" uid="uid://dx5apcncj3j6u" path="res://assets/sprites/effects/blood/frame_B.png" id="2_cg8in"]
-[ext_resource type="Texture2D" uid="uid://djdm7yw8garn1" path="res://assets/sprites/effects/blood/frame_A.png" id="3_6x2b7"]
+[ext_resource type="Texture2D" uid="uid://c63nro0mdg1sh" path="res://assets/doom/sprites/effects/blood/frame_C.png" id="1_tj5xk"]
+[ext_resource type="Texture2D" uid="uid://dx5apcncj3j6u" path="res://assets/doom/sprites/effects/blood/frame_B.png" id="2_cg8in"]
+[ext_resource type="Texture2D" uid="uid://djdm7yw8garn1" path="res://assets/doom/sprites/effects/blood/frame_A.png" id="3_6x2b7"]
 [ext_resource type="Script" uid="uid://3bw2v3rmhmoj" path="res://weapons/weapon_effects/blood_splatter.gd" id="4_qwfb7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j0n35"]

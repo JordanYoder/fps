@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://4eg1qjoaec2w"]
+
+[ext_resource type="Script" uid="uid://so521phpo1rq" path="res://weapons/weapon_data.gd" id="1_1lhwi"]
+[ext_resource type="AudioStream" uid="uid://ch1qi4h5d4gdv" path="res://assets/doom/sounds/effects/weapons/plasma_rifle_fire.wav" id="1_d4e7a"]
+[ext_resource type="SpriteFrames" uid="uid://dvfyynleqm761" path="res://weapons/doom/plasma_rifle/plasma_rifle_flash_frames.tres" id="2_txl8j"]
+[ext_resource type="PackedScene" uid="uid://b8yq1fpo8ie2b" path="res://enemies/doom/projectiles/plasma_ball.tscn" id="3_ika6n"]
+[ext_resource type="SpriteFrames" uid="uid://c311n22aqs1d" path="res://weapons/doom/plasma_rifle/plasma_rifle_frames.tres" id="5_rc8xt"]
+[ext_resource type="Texture2D" uid="uid://cm04vq1fn1y31" path="res://assets/doom/sprites/weapons/first_person/plasma_rifle/muzzle_flash/frame_A.png" id="fA"]
+[ext_resource type="Texture2D" uid="uid://dsb3g4ukp2d7v" path="res://assets/doom/sprites/weapons/first_person/plasma_rifle/muzzle_flash/frame_B.png" id="fB"]
+[ext_resource type="Texture2D" uid="uid://p2pgaiik4x8j" path="res://assets/doom/sprites/weapons/first_person/plasma_rifle/frames/frame_A.png" id="gA"]
+[ext_resource type="Texture2D" uid="uid://dthw2ggol4dk4" path="res://assets/doom/sprites/weapons/first_person/plasma_rifle/frames/frame_B.png" id="gB"]
+
+[resource]
+script = ExtResource("1_1lhwi")
+weapon_name = "Plasma Rifle"
+ammo_type = 4
+attack_type = 2
+projectile_scene = ExtResource("3_ika6n")
+weapon_frames = ExtResource("5_rc8xt")
+refire_frame = 1
+muzzle_flash_frames = ExtResource("2_txl8j")
+sprite_offsets = Dictionary[Texture2D, Vector2]({
+ExtResource("gA"): Vector2(-123, -107),
+ExtResource("gB"): Vector2(-64, -57),
+ExtResource("fA"): Vector2(-123, -93),
+ExtResource("fB"): Vector2(-122, -95)
+})
+fire_sound = ExtResource("1_d4e7a")
+metadata/_custom_type_script = "uid://so521phpo1rq"

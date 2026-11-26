@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://bk8wn4p16uftc" path="res://enemies/doom/projectiles/bfg_ball.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://enemies/doom/projectiles/bfg_tracer_hit.tscn" id="10_tracer"]
+[ext_resource type="Texture2D" uid="uid://cr707ymhcgqbc" path="res://assets/doom/sprites/projectiles/bfg_ball/frame_A.png" id="2_flyA"]
+[ext_resource type="Texture2D" uid="uid://dr0ibjp40h1tk" path="res://assets/doom/sprites/projectiles/bfg_ball/frame_B.png" id="3_flyB"]
+[ext_resource type="Texture2D" uid="uid://dl4nmc3fikg" path="res://assets/doom/sprites/projectiles/bfg_explosion/frame_A.png" id="4_boomA"]
+[ext_resource type="Texture2D" uid="uid://dbdc5txowsy5h" path="res://assets/doom/sprites/projectiles/bfg_explosion/frame_B.png" id="5_boomB"]
+[ext_resource type="Texture2D" uid="uid://b1rnrnrglo4ig" path="res://assets/doom/sprites/projectiles/bfg_explosion/frame_C.png" id="6_boomC"]
+[ext_resource type="Texture2D" uid="uid://dyd81qdt2on5v" path="res://assets/doom/sprites/projectiles/bfg_explosion/frame_D.png" id="7_boomD"]
+[ext_resource type="Texture2D" uid="uid://dgldyd7pmhwaw" path="res://assets/doom/sprites/projectiles/bfg_explosion/frame_E.png" id="8_boomE"]
+[ext_resource type="Texture2D" uid="uid://cp3s6idh2peh3" path="res://assets/doom/sprites/projectiles/bfg_explosion/frame_F.png" id="9_boomF"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_proj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_flyA")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_flyB")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_boomA")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_boomB")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_boomC")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_boomD")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_boomE")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_boomF")
+}],
+"loop": false,
+"name": &"impact",
+"speed": 4.0
+}]
+
+[node name="BFGBall" type="Node3D"]
+script = ExtResource("1_script")
+speed = 30.0
+damage_min = 100
+damage_max = 800
+radius = 0.3
+tracer_hit_scene = ExtResource("10_tracer")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_proj")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="Glow" type="OmniLight3D" parent="."]
+light_color = Color(0.4, 1, 0.4, 1)
+light_energy = 1.5
+omni_range = 3.0

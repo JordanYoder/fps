@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://deeb318e1w1em"]
+
+[ext_resource type="Script" uid="uid://so521phpo1rq" path="res://weapons/weapon_data.gd" id="1_script"]
+[ext_resource type="SpriteFrames" uid="uid://e7rg3a1vn2va" path="res://weapons/doom/pistol/pistol_frames.tres" id="2_wframes"]
+[ext_resource type="SpriteFrames" uid="uid://d36rsv8c57ac" path="res://weapons/doom/pistol/pistol_flash_frames.tres" id="3_fframes"]
+[ext_resource type="AudioStream" uid="uid://cup71u4pln6sb" path="res://assets/doom/sounds/effects/weapons/pistol_fire.wav" id="4_sound"]
+[ext_resource type="Texture2D" uid="uid://ctmggnl5u26wi" path="res://assets/doom/sprites/weapons/first_person/pistol/muzzle_flash/frame_A.png" id="fA"]
+[ext_resource type="Texture2D" uid="uid://cdh58wjep6ye8" path="res://assets/doom/sprites/weapons/first_person/pistol/frames/frame_A.png" id="gA"]
+[ext_resource type="Texture2D" uid="uid://bf0wvy0hsdd41" path="res://assets/doom/sprites/weapons/first_person/pistol/frames/frame_B.png" id="gB"]
+[ext_resource type="Texture2D" uid="uid://cxg88v3m2mi00" path="res://assets/doom/sprites/weapons/first_person/pistol/frames/frame_C.png" id="gC"]
+
+[resource]
+script = ExtResource("1_script")
+ammo_type = 1
+first_shot_accurate = true
+weapon_frames = ExtResource("2_wframes")
+attack_frames = Array[int]([1])
+refire_frame = 3
+muzzle_flash_frames = ExtResource("3_fframes")
+sprite_offsets = Dictionary[Texture2D, Vector2]({
+ExtResource("gA"): Vector2(-126, -106),
+ExtResource("gB"): Vector2(-104, -86),
+ExtResource("gC"): Vector2(-119, -87),
+ExtResource("fA"): Vector2(-140, -66)
+})
+fire_sound = ExtResource("4_sound")
+metadata/_custom_type_script = "uid://so521phpo1rq"

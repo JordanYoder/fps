@@ -27,8 +27,9 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var max_health: int = 100
 ## The cap for "bonus" healing like Doom's health bonuses and Soulsphere (Doom: 200).
 @export var overheal_max: int = 200
-@export var pain_sound: AudioStream = preload("res://assets/sounds/effects/player/pain.wav")
-@export var death_sound: AudioStream = preload("res://assets/sounds/effects/player/death.wav")
+## Defaults are loaded by UID so they survive file moves (pain.wav / death.wav).
+@export var pain_sound: AudioStream = preload("uid://6j11cv4nixx5")
+@export var death_sound: AudioStream = preload("uid://c8w6sw7sske2s")
 ## Minimum time between pain sounds, so a chaingun doesn't turn it into a buzz.
 @export var pain_sound_cooldown: float = 0.3
 ## How far the camera sinks when you die (Doom drops your view to the floor).

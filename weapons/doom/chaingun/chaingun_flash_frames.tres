@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bdei0oqo5pdpm"]
+
+[ext_resource type="Texture2D" uid="uid://c8jrfg0i4talt" path="res://assets/doom/sprites/weapons/first_person/chaingun/muzzle_flash/frame_A.png" id="1_A"]
+[ext_resource type="Texture2D" uid="uid://rrbyl2wm67ap" path="res://assets/doom/sprites/weapons/first_person/chaingun/muzzle_flash/frame_B.png" id="2_B"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("1_A")
+}],
+"loop": false,
+"name": &"flash_0",
+"speed": 35.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("2_B")
+}],
+"loop": false,
+"name": &"flash_1",
+"speed": 35.0
+}]

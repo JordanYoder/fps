@@ -331,10 +331,11 @@ func _fire_bullet(w: WeaponData, accurate: bool) -> bool:
 
 func _fire_projectile(w: WeaponData) -> void:
 	if not w.projectile_scene:
-		push_warning("%s has no projectile_scene" % w.weapon_name)
+		push_error("%s has no projectile_scene" % w.weapon_name)
 		return
 	var projectile := w.projectile_scene.instantiate()
-	get_tree().current_scene.add_child(projectile)
+	if not Spawner.add_to_level(projectile, self):
+		return
 	var aim := _aim(w, true)
 	# Start a little ahead of the camera so it's not inside the player
 	var from: Vector3 = aim[0] + aim[1] * 0.6
@@ -427,7 +428,8 @@ func _spawn_wall_decal(pos: Vector3, normal: Vector3) -> void:
 	if not wall_decal_scene:
 		return
 	var decal := wall_decal_scene.instantiate() as Node3D
-	get_tree().current_scene.add_child(decal)
+	if not Spawner.add_to_level(decal, self):
+		return
 	decal.global_position = pos
 	if normal.length_squared() > 0.001:
 		# A Decal projects along its local -Y, so point +Y out of the wall
@@ -444,7 +446,8 @@ func _spawn_bullet_puff(pos: Vector3, melee: bool) -> void:
 	if "skip_spark_frames" in puff:
 		puff.skip_spark_frames = melee
 	puff.position = pos # Set before _ready so its jitter applies on top
-	get_tree().current_scene.add_child(puff)
+	if not Spawner.add_to_level(puff, self):
+		return
 
 # Enemies' collision boxes are bigger than their sprites: only bleed when the shot
 # actually crosses a visible pixel, and put the blood on the sprite, not on the box.
@@ -462,5 +465,6 @@ func _spawn_blood(pos: Vector3) -> void:
 	if not blood_splatter_scene:
 		return
 	var blood := blood_splatter_scene.instantiate() as Node3D
-	get_tree().current_scene.add_child(blood)
+	if not Spawner.add_to_level(blood, self):
+		return
 	blood.global_position = pos
